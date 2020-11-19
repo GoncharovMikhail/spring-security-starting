@@ -1,0 +1,23 @@
+/* Styles in this file should be applies to all HTML pages  */
+
+body {
+    text-transform: uppercase;
+    padding: 0;
+    margin: 0;
+    height: 100vh;
+    font: 800 100%/100% 'Montserrat', sans-serif;
+    background: linear-gradient(
+            to right top,
+            rgba(0, 195, 255, 0.9) 0%,
+            rgba(255, 255, 28, 0.75) 100%
+    ) no-repeat center top / cover;
+}
+
+div {
+    box-sizing: border-box;
+}
+
+.container {
+    width: 60%;
+    margin: 0 auto;
+}

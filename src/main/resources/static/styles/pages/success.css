@@ -1,0 +1,148 @@
+.container-table {
+    margin: 0 auto;
+    width: 70%;
+    min-width: 600px;
+    text-align: center;
+}
+
+/* каво */
+select {
+    width: 100%;
+    height: 100%;
+    color: white;
+    border: none;
+    background: transparent;
+    font: 800 220%/220% 'Montserrat', sans-serif;
+}
+
+/* каво */
+option {
+    background-color: transparent;
+}
+
+/* каво */
+input {
+    width: 100%;
+    height: 100%;
+    color: white;
+    background-color: transparent;
+    border: none;
+    text-transform: uppercase;
+    font: 800 220%/220% 'Montserrat', sans-serif;
+}
+
+h1 {
+    /* todo не выукпила про проценты */
+    font: 800 220%/220% 'Montserrat', sans-serif;
+    color: white;
+    cursor: default;
+    margin-top: 5%;
+}
+
+.agenda-table {
+    border-collapse: collapse;
+    font: 800 100%/100% 'Montserrat', sans-serif;
+    width: 100%;
+    min-width: 400px;
+    margin-top: 6%;
+}
+
+.agenda-table thead tr td {
+    background-color: rgba(255, 255, 255, .35);
+    color: white;
+    font: 800 120%/120% 'Montserrat', sans-serif;
+    text-align: left;
+}
+
+.agenda-table tr td {
+    background-color: rgba(255, 255, 255, .2);
+    color: white;
+    text-align: left;
+}
+
+.agenda-table th,
+.agenda-table td {
+    padding: 3% 2%;
+}
+
+/* First column properties */
+.agenda-table thead tr th:nth-child(1),
+.agenda-table tbody tr td:nth-child(1) {
+    width: 20%;
+    min-width: 80px;
+    max-width: 20%;
+    word-break: break-all;
+}
+
+/* Second column properties */
+.agenda-table thead tr th:nth-child(2),
+.agenda-table tbody tr td:nth-child(2) {
+    width: 15%;
+    min-width: 60px;
+    max-width: 15%;
+    word-break: break-all;
+}
+
+/* Third column properties */
+.agenda-table thead tr th:nth-child(3),
+.agenda-table tbody tr td:nth-child(3) {
+    width: 30%;
+    min-width: 120px;
+    max-width: 30%;
+    word-break: break-all;
+}
+
+/* Fourth column properties */
+.agenda-table thead tr th:nth-child(4),
+.agenda-table tbody tr td:nth-child(4) {
+    width: 15%;
+    min-width: 50px;
+    max-width: 15%;
+    word-break: break-all;
+}
+
+.agenda-table tbody tr td:nth-child(5) {
+    background-color: transparent;
+    width: 10%;
+    min-width: 40px;
+
+}
+
+.agenda-table tbody tr td:nth-child(6) {
+    background-color: transparent;
+    width: 10%;
+    min-width: 40px;
+}
+
+button {
+    padding: 0;
+    /* For a nice hover */
+    position: relative;
+    font: 800 120%/120% 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    color: #fff;
+    font-size: 100%;
+
+    background-color: Transparent;
+    background-repeat:no-repeat;
+
+    overflow: hidden;
+    outline:none;
+    border: none;
+}
+
+/* For a nice hover */
+button:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    border-bottom: 3px solid white;
+    transition: 0.4s;
+}
+
+/* For a nice hover */
+button:hover:after {
+    width: 100%;
+}

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!-- Use thymeleaf -->
+<html lang="en" dir="ltr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Your page</title>
+
+    <!-- Montserrat font -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- .css -->
+    <link rel="stylesheet" type="text/css" href="styles/common.css">
+    <link rel="stylesheet" type="text/css" href="styles/pages/success.css">
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <div class="container-table">
+        <h1 th:text="'Hello, ' + ${username}"></h1>
+        <table class="agenda-table">
+            <thead>
+                <tr>
+                    <td>Day of week</td>
+                    <td>Time</td>
+                    <td>Agenda</td>
+                    <td>Private</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="agendaEntity: ${agendas}">
+                    <td name="day" th:text="${agendaEntity.day}"></td>
+                    <td name="time" class="input-time" th:text="${agendaEntity.time}"></td>
+                    <td name="note" th:text="${agendaEntity.note}"></td>
+                    <td name="accessible" th:text="${agendaEntity.accessible}"></td>
+
+                    <!-- Ids to indicate that lower td's should never be contenteditable -->
+                    <td id="update">
+                        <button th:onclick="|updateAgendaById('${agendaEntity.id}', this)|">update</button>
+                    </td>
+                    <td id="delete">
+                        <button th:onclick="|deleteAgenda('${agendaEntity.id}', this)|">delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+<!-- user's .js files should be under the html code-->
+<script type="text/javascript" src="/scripts/success.js"></script>
+
+<!-- 'Cleave' formatter for <input/> elements -->
+<script type="text/javascript" src="/scripts/cleave.js"></script>
+</html>

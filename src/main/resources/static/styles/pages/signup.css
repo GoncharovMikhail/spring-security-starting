@@ -1,0 +1,50 @@
+form {
+    width: 60%;
+    margin: 10% auto;
+    text-align: center;
+}
+
+h1 {
+    font: 800 220%/220% 'Montserrat', sans-serif;
+    color: white;
+    cursor: default;
+}
+
+input[type=text],
+input[type=password] {
+    width: 30%;
+    border: none;
+    outline: none;
+    padding:15px 20px;
+    font: 800 100%/100% 'Montserrat', sans-serif;
+    border-radius:25px;
+    background:rgba(255,255,255,.2);
+    margin-bottom: 2%;
+}
+
+input::placeholder {
+    color: white;
+}
+
+input[type=text],
+input[type=password] :focus {
+    color: white;
+}
+
+input[type=submit] {
+    height: 5vh;
+    width: 30%;
+    background: #fff;
+    border: 1px solid #f2f2f2;
+    border-radius: 25px;
+    color: slategrey;
+    text-transform: uppercase;
+    font: 800 100%/100% 'Montserrat', sans-serif;
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+    font: 800 100%/100% 'Montserrat', sans-serif;
+    color: white;
+}

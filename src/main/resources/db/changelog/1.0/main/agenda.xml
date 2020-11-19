@@ -1,0 +1,44 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd"
+                   objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+
+    <changeSet id="1.0.0" author="LShubina">
+        <createTable tableName="agenda">
+            <column name="id" type="BIGSERIAL">
+                <constraints primaryKey="true"/>
+            </column>
+
+            <column name="created" type="TIMESTAMP" defaultValue="NOW()">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="updated" type="TIMESTAMP" defaultValue="NOW()">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="usersid" type="SERIAL">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="day" type="VARCHAR(9)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="time" type="VARCHAR(5)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="accessible" type="BOOLEAN" defaultValue="FALSE">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="note" type="VARCHAR(256)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+    </changeSet>
+
+</databaseChangeLog>

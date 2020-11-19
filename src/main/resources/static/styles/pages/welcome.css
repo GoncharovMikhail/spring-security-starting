@@ -1,0 +1,53 @@
+.heading {
+    position: sticky;
+    height: 100vh;
+}
+
+nav {
+    float: left;
+    margin-top: 50px;
+}
+
+.menu {
+    padding: 0;
+    margin: 0;
+    display: block;
+    list-style-type: none;
+}
+
+.menu li {
+    float: left;
+    text-decoration: none;
+    margin-right: 50px;
+}
+
+.menu a {
+    /* For a nice hover */
+    position: relative;
+    font: 800 120%/120% 'Montserrat', sans-serif;
+    color: #fff;
+    text-decoration: none;
+    font-size: 100%;
+}
+
+/* For a nice hover */
+.menu a:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    border-bottom: 3px solid white;
+    transition: 0.4s;
+}
+
+/* For a nice hover */
+a:hover:after {
+    width: 100%;
+}
+
+.account_icon {
+    margin-top: 35px;
+    float: right;
+    height: 50px;
+}

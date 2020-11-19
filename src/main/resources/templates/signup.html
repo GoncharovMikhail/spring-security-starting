@@ -1,0 +1,31 @@
+<!DOCTYPE html >
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <title>Log in/sign up</title>
+
+    <!-- .css -->
+    <link rel="stylesheet" type="text/css" href="styles/common.css">
+    <link rel="stylesheet" type="text/css" href="styles/pages/signup.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+    <!-- Execute "/registration" POST request, when user clicks submit-button -->
+    <form action="/registration" method="post">
+        <div class="row">
+            <label for="email">Input email:</label>
+            <input type="text" name="email" id="email" placeholder="Email">
+        </div>
+        <div class="row">
+            <label for="username">Input username:</label>
+            <input type="text" name="username" id="username" placeholder="Username">
+        </div>
+        <div class="row">
+            <label for="password">Input password:</label>
+            <input type="password" name="password" id="password" placeholder="Password">
+        </div>
+        <input type="submit" id="submit"/>
+    </form>
+</body>
+</html>
