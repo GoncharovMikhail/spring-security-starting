@@ -1,6 +1,7 @@
 package com.web.app.config;
 
 import com.web.app.model.SignUpRequestDTO;
+import com.web.app.security.UsersDetails;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,29 +13,30 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  * A configuration class, storing password encoder.
  */
 @Configuration
-/* @PropertySource("...") gets a relative path to a property-file as a parameter
- * to read properties from.
+/* @PropertySource("...") gets a relative path (to the "resources" folder)
+ * to a property-file as a parameter to read properties from.
  *
  * In combination with @Value("${...}"), declared above a field,
- * we can inject a value into the annotated field, read from the property-file. */
+ * we can inject a value into the annotated field, which was read
+ * from the specified property-file. */
 @PropertySource("properties/security/passwordencoder.properties")
 public class PasswordEncoderConfig {
 
     /* Value("${...}") gets a property's name as a parameter, then finds it in the property-file
      * (specified in @PropertySource("...") annotation), and sets it to the annotated field.
-     * If there is no property, having specified name, then nothing will be injected to the field.
+     * If there is no property, having specified name, then nothing will be injected in the field.
      * In this case, we inject number of rounds of encoding(the log rounds to use, between 4 and 31).
      *
      * NOTE: write name of a property  in ${...} - otherwise, property won't be injected to the field. */
     @Value("${password.encoder.strength}")
-    private Integer encoderStrength;
+    private Integer passwordEncoderStrength;
 
     /**
      * A {@link PasswordEncoder} bean to use.
      * <p>
      * {@code PasswordEncoder} is used to encode user's password before saving it in the database
-     * ({@link com.web.app.service.impl.ServiceImpl#saveUserInDatabase(SignUpRequestDTO)}) or
-     * in-memory saving or any other type of persisting user's data.
+     * ({@link com.web.app.service.impl.UsersServiceImpl#saveUserInDatabase(SignUpRequestDTO)}) or
+     * in-memory saving or any other type of persisting user's password.
      * <p>
      * Also, it is used internally by Spring security:
      * whenever user tries to log in, he/she specifies username and password.
@@ -42,15 +44,20 @@ public class PasswordEncoderConfig {
      * Spring security loads user's security data
      * (represented as {@link org.springframework.security.core.userdetails.UserDetails})
      * by specified username.
-     * To do this, we nee to implement {@link org.springframework.security.core.userdetails.UserDetailsService}
+     * <p>
+     * Its necessary to implement {@link org.springframework.security.core.userdetails.UserDetailsService}
      * interface, particularly, the
-     * {@link org.springframework.security.core.userdetails.UserDetailsService#loadUserByUsername(String)} method.
+     * {@link org.springframework.security.core.userdetails.UserDetailsService#loadUserByUsername(String)}
+     * method. As I mentioned before, user's data may be stored in a several ways(in the database,
+     * in-memory, e.t.c), so loading a user by username can be proceeded in a several different ways
+     * as well.
+     * <p>
      * If there is no user with the specified username,
      * the {@link org.springframework.security.core.userdetails.UsernameNotFoundException} is thrown.
      * Otherwise, Spring security loads {@code UserDetails}, which is <strong>never null</strong>.
      * After that, the password from the POST request get encoded, and then, Spring security checks,
-     * if passwords, stored in loaded {@link org.springframework.security.core.userdetails.UserDetails}
-     * and the one from POST request (preliminarily encoded), matches.
+     * if passwords, stored in loaded {@code UserDetails} and the one from POST request encoded as well,
+     * matches.
      * <p>
      * The idea of using {@code PasswordEncoder} makes sense:
      * if the attacker hacked our database and tries to login -
@@ -74,15 +81,12 @@ public class PasswordEncoderConfig {
      * http://docs.spring.io/spring-security/site/docs/3.2.5.RELEASE/apidocs/org/springframework/security/crypto/bcrypt/BCryptPasswordEncoder.html
      * <p>
      *
-     * @see com.web.app.security.CustomUserDetails -  my implementation of the
-     * {@link org.springframework.security.core.userdetails.UserDetailsService} interface.
-     * @see com.web.app.security.BaseUserDetails an abstract class, implementing
-     * {@link org.springframework.security.core.userdetails.UserDetails}.
-     * @see com.web.app.security.CustomUserDetails - an inheritor of {@code BaseUserDetails}.
-     * @see BCryptPasswordEncoder#BCryptPasswordEncoder(int)
+     * @see com.web.app.security.UsersDetailsService - my implementation of the {@code UserDetailsService} interface.
+     * @see UsersDetails - my implementation of the {@code UserDetails} interface.
+     * @see BCryptPasswordEncoder#BCryptPasswordEncoder(int) for more info about the "strength" parameter.
      */
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(encoderStrength);
+        return new BCryptPasswordEncoder(passwordEncoderStrength);
     }
 }

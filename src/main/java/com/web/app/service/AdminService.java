@@ -18,7 +18,7 @@ public interface AdminService {
      * @param username the specified username.
      * @throws WrongUsernameException if no user with a specified name found.
      */
-    void ban(String username) throws WrongUsernameException;
+    void banUserByUsername(String username) throws WrongUsernameException;
 
     /**
      * This method unbans user by specified username.
@@ -26,5 +26,5 @@ public interface AdminService {
      * @param username the specified username.
      * @throws WrongUsernameException if no user with a specified name found.
      */
-    void unBan(String username) throws WrongUsernameException;
+    void unBanUserByUsername(String username) throws WrongUsernameException;
 }

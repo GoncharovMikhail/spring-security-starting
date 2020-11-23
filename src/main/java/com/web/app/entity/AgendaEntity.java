@@ -1,9 +1,7 @@
 package com.web.app.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import javax.persistence.*;
 import java.time.DayOfWeek;
@@ -31,6 +29,7 @@ import java.time.DayOfWeek;
 @AllArgsConstructor
 @Getter
 @Setter
+@ToString
 public class AgendaEntity extends BaseEntity {
 
     /**

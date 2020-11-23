@@ -24,12 +24,12 @@ public interface AgendaRepository extends JpaRepository<AgendaEntity, Long> {
     @Modifying
     @Query("UPDATE AgendaEntity a " +
             "SET " +
-            "a.updated= ?1, " +
-            "a.day= ?2," +
-            "a.time= ?3," +
-            "a.accessible= ?4," +
-            "a.note= ?5 " +
-            "WHERE a.id= ?6"
+            "a.updated = ?1, " +
+            "a.day = ?2," +
+            "a.time = ?3," +
+            "a.accessible = ?4," +
+            "a.note = ?5 " +
+            "WHERE a.id = ?6"
     )
     @Transactional
     void updateAgendaById(@Param("updated") Date updated,

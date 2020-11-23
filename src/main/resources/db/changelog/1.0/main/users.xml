@@ -6,7 +6,7 @@
 
     <changeSet id="1.0.0" author="LShubina">
         <createTable tableName="users">
-            <column name="id" type="SERIAL">
+            <column name="id" type="SERIAL" autoIncrement="true">
                 <constraints primaryKey="true"/>
             </column>
 

@@ -3,11 +3,9 @@ package com.web.app.service.impl;
 import com.web.app.entity.RolesEntity;
 import com.web.app.entity.UsersEntity;
 import com.web.app.model.SignUpRequestDTO;
-import com.web.app.model.UpdateAgendaByItsIdRequestDTO;
-import com.web.app.repository.AgendaRepository;
 import com.web.app.repository.RolesRepository;
 import com.web.app.repository.UsersRepository;
-import com.web.app.service.Service;
+import com.web.app.service.UsersService;
 import com.web.app.service.exceptions.UserAlreadyExistsException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,34 +18,30 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * A {@link Service} implementation. Basically, all methods of this service can be invoked by all users
+ * A {@link UsersService} implementation. Basically, all methods of this service can be invoked by all users
  * (some of them only by authenticated users).
  *
- * @see com.web.app.service.Service
+ * @see UsersService
  */
 @org.springframework.stereotype.Service
 /* @PropertySource("...") is used to specify property-file, which contains necessary properties.*/
 @PropertySource("properties/service/service.properties")
 /* @Slf4j is used for logging */
 @Slf4j
-public class ServiceImpl implements Service {
+public class UsersServiceImpl implements UsersService {
 
     private final UsersRepository usersRepository;
 
     private final RolesRepository rolesRepository;
 
-    private final AgendaRepository agendaRepository;
-
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public ServiceImpl(UsersRepository usersRepository,
-                       RolesRepository rolesRepository,
-                       AgendaRepository agendaRepository,
-                       PasswordEncoder passwordEncoder) {
+    public UsersServiceImpl(UsersRepository usersRepository,
+                            RolesRepository rolesRepository,
+                            PasswordEncoder passwordEncoder) {
         this.usersRepository = usersRepository;
         this.rolesRepository = rolesRepository;
-        this.agendaRepository = agendaRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -100,7 +94,7 @@ public class ServiceImpl implements Service {
      * {@link UsersEntity#roles} assigned implicitly to a default role.
      * {@link UsersEntity#agendas} assigned to an empty set.
      *
-     * @see com.web.app.service.Service#saveUserInDatabase(SignUpRequestDTO) for some additional details.
+     * @see UsersService#saveUserInDatabase(SignUpRequestDTO) for some additional details.
      */
     @Override
     public void saveUserInDatabase(SignUpRequestDTO signUpRequest) throws UserAlreadyExistsException {
@@ -119,7 +113,7 @@ public class ServiceImpl implements Service {
             userToSave.setRoles(getDefaultUserRole());
             userToSave.setAgendas(new HashSet<>());
 
-            usersRepository.saveAndFlush(userToSave);
+            usersRepository.save(userToSave);
 
             log.info("IN " + this.getClass()
                             + ", "
@@ -146,34 +140,7 @@ public class ServiceImpl implements Service {
     }
 
     @Override
-    public UsersEntity findByName(String name) {
-        return usersRepository.findByUsername(name);
-    }
-
-    /**
-     * This method updates agenda by specified id.
-     *
-     * @see com.web.app.service.Service#updateAgendaById(UpdateAgendaByItsIdRequestDTO) for additional details.
-     */
-    @Override
-    public void updateAgendaById(UpdateAgendaByItsIdRequestDTO updateAgendaRequest) {
-        agendaRepository.updateAgendaById(
-                new Date(),
-                updateAgendaRequest.getDay(),
-                updateAgendaRequest.getTime(),
-                updateAgendaRequest.isAccessible(),
-                updateAgendaRequest.getNote(),
-                updateAgendaRequest.getId()
-        );
-    }
-
-    /**
-     * This method deletes user's agenda by specified agenda's id.
-     *
-     * @see com.web.app.service.Service#deleteAgendaById(Long)
-     */
-    @Override
-    public void deleteAgendaById(Long agendaId) {
-        agendaRepository.deleteById(agendaId);
+    public UsersEntity loadUserByUsername(String username) {
+        return usersRepository.findByUsername(username);
     }
 }

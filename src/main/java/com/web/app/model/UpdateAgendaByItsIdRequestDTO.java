@@ -7,7 +7,7 @@ import java.time.DayOfWeek;
 /**
  * A wrapper class for updating agenda data.
  *
- * @see com.web.app.rest.CommonTemplatesController#updateAgendaById(UpdateAgendaByItsIdRequestDTO)
+ * @see com.web.app.rest.AgendaManagementController#updateAgendaById(UpdateAgendaByItsIdRequestDTO)
  */
 /* Generates an empty constructor. It is used to deserialize a JSON. */
 @NoArgsConstructor

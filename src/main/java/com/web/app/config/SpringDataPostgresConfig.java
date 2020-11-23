@@ -17,25 +17,29 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import java.util.Properties;
 
 /**
- * Configuration class for connection to PostgreSQL database. Also, provides {@code EntityManager}
- * and {@code TransactionManager}.
+ * Configuration class for connection to PostgreSQL database.
+ * Also, provides {@link javax.persistence.EntityManager} bean to use. It will be created under the hood,
+ * see {@link #localContainerEntityManagerFactoryBean(DriverManagerDataSource, Properties)}).
+ * {@link org.springframework.transaction.TransactionManager} bean is also created and configured in this class.
  */
 @Configuration
 /* @EnableJpaRepositories enables JPA repositories. Basically, makes Spring data work. */
 @EnableJpaRepositories(
-                /* Specify a package where JpaRepositories may be used todo(?) */
-                basePackages = "com.web.app",
-                /* Specify bean definition name for EntityManagerFactory */
-                entityManagerFactoryRef = "localContainerEntityManagerFactoryBean",
-                /* Specify bean definition name for TransactionManager */
-                transactionManagerRef = "jpaTransactionManager"
-        )
+        /* Specify a package where JpaRepositories may be used todo(?) */
+        basePackages = "com.web.app",
+        /* Specify bean definition name for EntityManagerFactory */
+        entityManagerFactoryRef = "localContainerEntityManagerFactoryBean",
+        /* Specify bean definition name for TransactionManager */
+        transactionManagerRef = "jpaTransactionManager"
+)
 /* @EnableTransactionManagement Enables Spring's annotation-driven transaction management capability. */
 @EnableTransactionManagement
-/* The @PropertySource("...") gets a relative path to a property-file to read properties from it.
- * In combination with @Value("${...}"), declared above a field, we can inject value to annotated field,
- * which was read from the property-file.
+/* The @PropertySource("...") gets a relative path (to the "resources" folder)
+ * to a property-file to read properties from it.
  *
+ * In combination with @Value("${...}"), declared above a field,
+ * we can inject a value into the annotated field, which was read
+ * from the specified property-file.
  * NOTE: write name of a property (in the @Value("...") annotation) in ${...} -
  * otherwise, property won't be injected to the field. */
 @PropertySource("properties/db/springdata.properties")
@@ -66,7 +70,7 @@ public class SpringDataPostgresConfig {
     private String enable_lazy_load_no_trans;
 
     /**
-     * Define the {@link DriverManagerDataSource} bean to use -
+     * Define the {@link DriverManagerDataSource} {@link Bean} to use -
      * a Spring's implementation of {@link javax.sql.DataSource}.
      * <p>
      * {@code DataSource} may provide {@link java.sql.Connection} to database,
@@ -75,11 +79,9 @@ public class SpringDataPostgresConfig {
      *     <li>
      *         {@link java.sql.Statement}
      *     </li>
-     *
      *     <li>
      *         {@link java.sql.PreparedStatement}
      *     </li>
-     *
      *     <li>
      *         {@link java.sql.CallableStatement}
      *     </li>
@@ -117,15 +119,23 @@ public class SpringDataPostgresConfig {
     }
 
     /**
-     * Here I configure some of Hibernate settings and make a bean out of it.
-     * You can see more settings to configure in:
-     * {@link org.hibernate.jpa.AvailableSettings} and {@link org.hibernate.cfg.AvailableSettings}.
+     * Here I configure some of Hibernate settings and make a {@link Properties} {@link Bean} out of it.
+     * You can see more settings to configure here:
+     * <ul>
+     *     <li>
+     *         {@link org.hibernate.jpa.AvailableSettings} -
+     *         most are {@link Deprecated}, but some may be used and configured.
+     *     </li>
+     *     <li>
+     *         {@link org.hibernate.cfg.AvailableSettings}.
+     *     </li>
+     * </ul>
      * <p>
      * I set Hibernate's dialect. An article about Hibernate dialects:
      * https://javabydeveloper.com/what-is-dialect-in-hibernate-and-list-of-dialects/
      * <p>
-     * The {@code hibernate.show_sql} defines that SQL queries,
-     * generated automatically by Hibernate, will be displayed.
+     * The {@code hibernate.show_sql} defines that SQL queries, generated automatically by Hibernate,
+     * will be displayed in console.
      * <p>
      * The {@code hibernate.hbm2ddl.auto} property automatically validates or exports schema DDL
      * to the database when the {@code SessionFactory} is created.
@@ -147,7 +157,9 @@ public class SpringDataPostgresConfig {
 
     /**
      * Define and configure the {@link LocalContainerEntityManagerFactoryBean} - the factory bean of
-     * {@link javax.persistence.EntityManagerFactory}. {@code EntityManagerFactory} internally creates
+     * {@link javax.persistence.EntityManagerFactory}, see {@link org.springframework.beans.factory.FactoryBean}
+     * for more details.
+     * {@code EntityManagerFactory} internally creates
      * {@link javax.persistence.EntityManager}, which manages entities.
      * <p>
      *
@@ -156,7 +168,7 @@ public class SpringDataPostgresConfig {
      * <p>
      *
      * <strong>NOTE:</strong> It's not necessary to specify
-     * {@link  javax.persistence.spi.PersistenceProvider} manually when the
+     * {@link  javax.persistence.spi.PersistenceProvider} class manually when the
      * {@link org.springframework.orm.jpa.JpaVendorAdapter} is specified - each implementation of
      * {@code JpaVendorAdapter} has it's own {@code PersistenceProvider} - it is specified here:
      * {@link JpaVendorAdapter#getPersistenceProvider()}.
@@ -167,8 +179,8 @@ public class SpringDataPostgresConfig {
      * but I'd like to use {@code HibernatePersistenceProvider}.
      * //todo почему?(я то видел это в одном энтерпрайзном проекте)
      * <p>
-     * Also, we need to specify Hibernate(JPA) properties
-     * and packages, which contains all {@code Entity} classes.
+     * Also, we specify Hibernate(JPA) properties
+     * and packages, which contains all classes, annotated with {@link javax.persistence.Entity}.
      *
      * @param dataSource the {@code DataSource}, used by {@code EntityManagers}.
      * @param properties Hibernate properties.
@@ -202,6 +214,10 @@ public class SpringDataPostgresConfig {
      * To manage transactions, we should define a {@code TransactionManager}.
      * {@link EnableTransactionManagement} enables annotation-driven transaction management with
      * {@link org.springframework.transaction.annotation.Transactional}.
+     * <p>
+     *
+     * <strong>NOTE:</strong> the {@link Autowired} above methods makes required params of a method
+     * come from the IOC-container.
      *
      * @param localContainerEntityManagerFactoryBean a wrapper for {@link javax.persistence.EntityManagerFactory},
      *                                               needed for {@code TransactionManager}.

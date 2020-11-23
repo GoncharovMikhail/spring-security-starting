@@ -24,12 +24,12 @@ public class AdminServiceImpl implements AdminService {
     }
 
     /**
-     * Method for banning user by specified username.
+     * Method for banning user by username.
      *
-     * @see AdminService#ban(String) for additional details.
+     * @see AdminService#banUserByUsername(String) for additional details.
      */
     @Override
-    public void ban(String username) throws WrongUsernameException {
+    public void banUserByUsername(String username) throws WrongUsernameException {
         UsersEntity userToBan = usersRepository.findByUsername(username);
 
         /* Admin entered wrong username */
@@ -61,10 +61,10 @@ public class AdminServiceImpl implements AdminService {
     /**
      * Method for unbanning user by specified username.
      *
-     * @see AdminService#unBan(String) for additional details.
+     * @see AdminService#unBanUserByUsername(String) for additional details.
      */
     @Override
-    public void unBan(String username) throws WrongUsernameException {
+    public void unBanUserByUsername(String username) throws WrongUsernameException {
         UsersEntity userToUnBan = usersRepository.findByUsername(username);
 
         /* Admin entered wrong username */

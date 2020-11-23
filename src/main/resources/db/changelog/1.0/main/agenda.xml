@@ -6,7 +6,9 @@
 
     <changeSet id="1.0.0" author="LShubina">
         <createTable tableName="agenda">
-            <column name="id" type="BIGSERIAL">
+            <!-- HAVE NO IDEA WHY SHOULD I WRITE autoIncrement="true"
+            WHEN I WROTE BIGSERIAL -->
+            <column name="id" type="BIGSERIAL" autoIncrement="true">
                 <constraints primaryKey="true"/>
             </column>
 

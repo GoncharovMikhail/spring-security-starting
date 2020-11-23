@@ -15,7 +15,11 @@ const BOOLEANS = [
     'false'
 ];
 
+const DAY_SELECT_CLASS_NAME = 'day-select-class-name';
+
 const CLEAVE_INPUT_CLASS_NAME = 'cleave-formatted-input';
+
+const NOTE_INPUT_CLASS_NAME = 'note-input-class-name';
 
 const BOOLEAN_SELECT_CLASS_NAME = 'true-or-false-select';
 
@@ -34,6 +38,7 @@ function configureEditableElement(htmlElement) {
         );
 
         htmlElement.innerHTML = daySelectList.outerHTML;
+        htmlElement.className = DAY_SELECT_CLASS_NAME;
     }
 
     if ($(htmlElement).attr('name') === 'time') {
@@ -60,6 +65,10 @@ function configureEditableElement(htmlElement) {
         /* Set default time value */
         const DEFAULT_TIME_INPUT_VALUE = '08:00';
         $('.' + CLEAVE_INPUT_CLASS_NAME).val(DEFAULT_TIME_INPUT_VALUE);
+    }
+
+    if ($(htmlElement).attr('name') === 'note') {
+        htmlElement.className = NOTE_INPUT_CLASS_NAME;
     }
 
     if ($(htmlElement).attr('name') === 'accessible') {
@@ -106,20 +115,36 @@ function updateAgendaById(agendaId, editButton) {
         $(editButton).text('save');
     } else {
         let rowCorrespondingToAnEditButtonAsObject = getRowAsObjectFromTableCorrespondingToAnElement(editButton);
-        
-        const collectedEditableElements = rowCorrespondingToAnEditButtonAsObject.toArray()
-            .filter(htmlElement => htmlElement.isContentEditable);
+
+        const DAY_TO_UPDATE = $('.' + DAY_SELECT_CLASS_NAME).find(':selected').text();
+        $('.' + DAY_SELECT_CLASS_NAME).html(DAY_TO_UPDATE);
+
+        const TIME_TO_UPDATE = $('.' + CLEAVE_INPUT_CLASS_NAME).val();
+        $('.' + CLEAVE_INPUT_CLASS_NAME).html(TIME_TO_UPDATE);
+
+        const AGENDA_TO_UPDATE = $('.' + NOTE_INPUT_CLASS_NAME).text();
+        $('.' + NOTE_INPUT_CLASS_NAME).html(AGENDA_TO_UPDATE);
+
+        <!-- ONLY lowercase 'true' or 'false' can be mapped from json to boolean in java -->
+        const ACCESSIBLE_TO_UPDATE = $('.' + BOOLEAN_SELECT_CLASS_NAME).find(':selected').text().toLowerCase();
+        $('.' + BOOLEAN_SELECT_CLASS_NAME).html(ACCESSIBLE_TO_UPDATE.toUpperCase());
 
         rowCorrespondingToAnEditButtonAsObject.attr('contenteditable', 'false');
 
         <!-- Set new text to a button -->
         $(editButton).text("update");
 
-        updateAgendaByIdPostRequest(agendaId);
+        updateAgendaByIdPostRequest(
+            agendaId,
+            DAY_TO_UPDATE,
+            TIME_TO_UPDATE,
+            AGENDA_TO_UPDATE,
+            ACCESSIBLE_TO_UPDATE
+        );
     }
 }
 
-function updateAgendaByIdPostRequest(agendaId, rowElements) {
+function updateAgendaByIdPostRequest(agendaId, day, time, agenda, accessible) {
     $.post(
         {
             url: '/updateAgendaById',
@@ -129,11 +154,10 @@ function updateAgendaByIdPostRequest(agendaId, rowElements) {
             data: JSON.stringify(
                 {
                     "id": agendaId,
-                    "day": rowElements[0].options[rowElements[0].selectedIndex].innerText.toUpperCase(),
-                    "time": rowElements[1].innerText,
-                    "note": rowElements[2].innerText,
-                    <!-- ONLY lowercase 'true' or 'false' can be mapped from json to boolean in java -->
-                    "accessible": rowElements[3].innerText.toLowerCase()
+                    "day": day,
+                    "time": time,
+                    "note": agenda,
+                    "accessible": accessible
                 }
             ),
             success: function () {
@@ -146,6 +170,29 @@ function updateAgendaByIdPostRequest(agendaId, rowElements) {
             }
         }
     );
+}
+
+function addAgenda() {
+    $('.agenda-table > tbody:last-child').append(
+        '<tr>' +
+            '<td name="day"></td>' +
+            '<td name = "time"></td>' +
+            '<td name="note"></td>' +
+            '<td name = "accessible"></td>' +
+            //как правильно написать?
+            '<td id="save">' +
+                '<button onclick="saveAgendaPostRequest(this)">update</button>' +
+            '</td>' +
+            '<td id = "delete row"><button onclick = "deleteRow()">delete</button></td>' +
+        '</tr>'
+    );
+}
+
+function saveAgendaPostRequest() {}
+
+function deleteRow() {
+    let table = $(".agenda-table");
+    table.deleteRow(table.rows.length - 1);
 }
 
 

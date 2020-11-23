@@ -1,5 +1,6 @@
 package com.web.app.security;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
@@ -9,37 +10,13 @@ import java.util.Date;
 import java.util.Set;
 
 /**
- * A simple implementation of {@link UserDetails}, containing only SpringSecurity info.
- * <p>
- * The idea of writing this class was to indicate that in my application:
- * <ul>
- *     <li>
- *         Accounts can't be expired ({@link #isCredentialsNonExpired()}),
- *     </li>
- *     <li>
- *         Accounts can't be locked ({@link #isAccountNonLocked()})
- *     </li>
- *     <li>
- *         credentials can't be expired ({@link #isCredentialsNonExpired()})
- *     </li>
- * </ul>
+ * An implementation of {@link UserDetails}, containing <strong>only</strong> Spring Security info.
  */
+@AllArgsConstructor
 @Setter
-public abstract class BaseUserDetails implements UserDetails {
-
-    @Getter
-    private Integer id;
-
-    @Getter
-    private Date created;
-
-    @Getter
-    private Date updated;
+public class UsersDetails implements UserDetails {
 
     private boolean enabled;
-
-    @Getter
-    private String email;
 
     private String username;
 

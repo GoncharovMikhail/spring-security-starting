@@ -23,7 +23,7 @@ public class AdminController {
     @PostMapping("/ban")
     public ResponseEntity<?> ban(@RequestParam String username) {
         try {
-            adminService.ban(username);
+            adminService.banUserByUsername(username);
         } catch (WrongUsernameException e) {
             e.printStackTrace();
         }
@@ -34,11 +34,10 @@ public class AdminController {
     @PostMapping("/unBan")
     public ResponseEntity<?> unBan(@RequestParam String username) {
         try {
-            adminService.unBan(username);
+            adminService.unBanUserByUsername(username);
         } catch (WrongUsernameException e) {
             e.printStackTrace();
         }
         return new ResponseEntity(HttpStatus.OK);
     }
-
 }
