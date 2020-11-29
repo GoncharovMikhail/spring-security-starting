@@ -21,6 +21,9 @@ import java.util.Properties;
  * Also, provides {@link javax.persistence.EntityManager} bean to use. It will be created under the hood,
  * see {@link #localContainerEntityManagerFactoryBean(DriverManagerDataSource, Properties)}).
  * {@link org.springframework.transaction.TransactionManager} bean is also created and configured in this class.
+ * <p>
+ * A documentation of {@link Configuration} annotation:
+ * https://docs.spring.io/spring-framework/docs/4.0.4.RELEASE/javadoc-api/org/springframework/context/annotation/Configuration.html
  */
 @Configuration
 /* @EnableJpaRepositories enables JPA repositories. Basically, makes Spring data work. */
@@ -74,7 +77,7 @@ public class SpringDataPostgresConfig {
      * a Spring's implementation of {@link javax.sql.DataSource}.
      * <p>
      * {@code DataSource} may provide {@link java.sql.Connection} to database,
-     * then we can create different statements (SQL queries, mostly) on this connection:
+     * then we can create different statements (SQL(HQL/JPQL) queries, mostly) on this connection:
      * <ul>
      *     <li>
      *         {@link java.sql.Statement}

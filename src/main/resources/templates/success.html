@@ -23,7 +23,7 @@
                 <tr>
                     <td>Day of week</td>
                     <td>Time</td>
-                    <td>Agenda</td>
+                    <td>Note</td>
                     <td>Private</td>
                 </tr>
             </thead>
@@ -35,21 +35,21 @@
                     <td name="accessible" th:text="${agendaEntity.accessible}"></td>
 
                     <!-- Ids to indicate that lower td's should never be contenteditable -->
-                    <td id="update">
-                        <button th:onclick="|updateAgendaById('${agendaEntity.id}', this)|">update</button>
+                    <td id="edit">
+                        <button th:onclick="|onEditButtonClicked('${agendaEntity.id}', this)|">edit</button>
                     </td>
                     <td id="delete">
-                        <button th:onclick="|deleteAgenda('${agendaEntity.id}', this)|">delete</button>
+                        <button th:onclick="|onDeleteButtonClicked('${agendaEntity.id}', this)|">delete</button>
                     </td>
                 </tr>
             </tbody>
         </table>
-        <button th:onclick="|addAgenda()|">add agenda</button>
+        <button th:onclick="|onAddAgendaButtonClicked()|">add agenda</button>
     </div>
 </body>
 
 <!-- user's .js files should be under the html code-->
-<script type="text/javascript" src="/scripts/success.js"></script>
+<script type="module" src="/scripts/success/success.js"></script>
 
 <!-- 'Cleave' formatter for <input/> elements -->
 <script type="text/javascript" src="/scripts/cleave.js"></script>

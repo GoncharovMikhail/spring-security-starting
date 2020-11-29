@@ -1,15 +1,17 @@
 package com.web.app.config;
 
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 /**
  * A configuration class, storing security configurations.
+ * <p>
+ *
+ * <strong>NOTE:</strong> this class isn't annotated with {@link org.springframework.context.annotation.Configuration}
+ * annotation, because {@link EnableWebSecurity} contains it.
  */
 @EnableWebSecurity
-@Slf4j
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override

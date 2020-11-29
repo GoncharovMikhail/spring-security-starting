@@ -19,7 +19,7 @@ import lombok.Setter;
  *     </li>
  * </ul>
  *
- * @see com.web.app.rest.CommonTemplatesController#registration(SignUpRequestDTO)
+ * @see com.web.app.rest.UsersManagementController#registration(SignUpRequestDTO)
  */
 /* Generates an empty constructor. It is used to deserialize a JSON. */
 @NoArgsConstructor

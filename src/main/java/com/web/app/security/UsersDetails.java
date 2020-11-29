@@ -10,7 +10,13 @@ import java.util.Date;
 import java.util.Set;
 
 /**
- * An implementation of {@link UserDetails}, containing <strong>only</strong> Spring Security info.
+ * An implementation of {@link UserDetails}, containing <strong>only</strong> Spring Security info,
+ * thus I follow the <strong>SINGLE-RESPONSIBILITY PRINCIPLE</strong>
+ *
+ * @see org.springframework.security.core.userdetails.UserDetails
+ * @see org.springframework.security.core.userdetails.UserDetailsService#loadUserByUsername(String)
+ * and also, an implementation of {@code UserDetailsService}:
+ * @see com.web.app.security.UsersDetailsService
  */
 @AllArgsConstructor
 @Setter

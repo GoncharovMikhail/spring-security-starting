@@ -4,6 +4,7 @@ import lombok.*;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.DayOfWeek;
 
 /**

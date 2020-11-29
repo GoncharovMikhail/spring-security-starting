@@ -1,5 +1,6 @@
 package com.web.app.rest;
 
+import com.web.app.model.SaveAgendaRequestDTO;
 import com.web.app.model.UpdateAgendaByItsIdRequestDTO;
 import com.web.app.service.AgendaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +18,15 @@ public class AgendaManagementController {
         this.agendaService = agendaService;
     }
 
-    @PostMapping("/updateAgendaById")
+    @PostMapping("/saveAgenda")
+    public void saveAgenda(SaveAgendaRequestDTO saveAgendaRequest) {
+        agendaService.saveAgenda(saveAgendaRequest);
+    }
+
+    @PostMapping("/updateAgendaByItsId")
     @ResponseStatus(HttpStatus.OK)
     public void updateAgendaById(@RequestBody UpdateAgendaByItsIdRequestDTO updateAgendaRequest) {
-        agendaService.updateAgendaById(updateAgendaRequest);
+        agendaService.updateAgendaByItsId(updateAgendaRequest);
     }
 
     @DeleteMapping("/deleteAgendaById/{agendaId}")

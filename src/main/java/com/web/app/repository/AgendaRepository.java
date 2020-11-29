@@ -32,7 +32,7 @@ public interface AgendaRepository extends JpaRepository<AgendaEntity, Long> {
             "WHERE a.id = ?6"
     )
     @Transactional
-    void updateAgendaById(@Param("updated") Date updated,
+    void updateAgendaByItsId(@Param("updated") Date updated,
                           @Param("day") DayOfWeek dayOfWeek,
                           @Param("time") String time,
                           @Param("accessible") boolean accessible,

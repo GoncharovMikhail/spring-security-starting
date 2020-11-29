@@ -9,13 +9,17 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * An util class, used to convert(map) {@link UsersEntity} to {@link UsersDetails}
+ * with the {@link #mapEntityToUsersDetails(UsersEntity)}
+ */
 public final class UsersStaticFactory {
 
     private UsersStaticFactory() {
         throw new AssertionError(this.getClass() + "can't be instantiated");
     }
 
-    public static UsersDetails entityToUsersDetails(UsersEntity usersEntity) {
+    public static UsersDetails mapEntityToUsersDetails(UsersEntity usersEntity) {
         return new UsersDetails(
                 usersEntity.isEnabled(),
                 usersEntity.getUsername(),

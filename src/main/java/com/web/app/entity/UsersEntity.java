@@ -73,8 +73,8 @@ public class UsersEntity extends BaseEntity {
      * </ul>
      * <p>
      *
-     * @see com.web.app.service.AdminService#ban(String),
-     * @see com.web.app.service.AdminService#unBan(String).
+     * @see com.web.app.service.AdminService#banUserByUsername(String),
+     * @see com.web.app.service.AdminService#unBanUserByUsername(String).
      */
     @Basic
     @Column(name = "enabled", nullable = false)

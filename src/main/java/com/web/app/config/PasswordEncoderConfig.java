@@ -10,7 +10,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
- * A configuration class, storing password encoder.
+ * A configuration class, storing password encoder. A documentation of {@link Configuration} annotation:
+ * https://docs.spring.io/spring-framework/docs/4.0.4.RELEASE/javadoc-api/org/springframework/context/annotation/Configuration.html
  */
 @Configuration
 /* @PropertySource("...") gets a relative path (to the "resources" folder)

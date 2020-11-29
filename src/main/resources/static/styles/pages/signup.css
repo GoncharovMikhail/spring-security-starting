@@ -12,7 +12,8 @@ h1 {
 
 input[type=text],
 input[type=password] {
-    width: 30%;
+    text-transform: lowercase;
+    width: 35%;
     border: none;
     outline: none;
     padding:15px 20px;
