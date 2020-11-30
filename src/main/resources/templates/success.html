@@ -16,40 +16,48 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
-    <div class="container-table">
-        <h1 th:text="'Hello, ' + ${username}"></h1>
-        <table class="agenda-table">
-            <thead>
-                <tr>
-                    <td>Day of week</td>
-                    <td>Time</td>
-                    <td>Note</td>
-                    <td>Private</td>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="agendaEntity: ${agendas}">
-                    <td name="day" th:text="${agendaEntity.day}"></td>
-                    <td name="time" class="input-time" th:text="${agendaEntity.time}"></td>
-                    <td name="note" th:text="${agendaEntity.note}"></td>
-                    <td name="accessible" th:text="${agendaEntity.accessible}"></td>
+<div class="container-table">
+    <h1 th:text="'Hello, ' + ${username}"></h1>
+    <table class="agenda-table">
+        <thead>
+        <tr>
+            <td>Day of week</td>
+            <td>Time</td>
+            <td>Note</td>
+            <td>Private</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="agendaEntity: ${agendas}">
+            <td name="day" th:text="${agendaEntity.day}"></td>
+            <td name="time" th:text="${agendaEntity.time}"></td>
+            <td name="note" th:text="${agendaEntity.note}"></td>
+            <td name="accessible" th:text="${agendaEntity.accessible}"></td>
 
-                    <!-- Ids to indicate that lower td's should never be contenteditable -->
-                    <td id="edit">
-                        <button th:onclick="|onEditButtonClicked('${agendaEntity.id}', this)|">edit</button>
-                    </td>
-                    <td id="delete">
-                        <button th:onclick="|onDeleteButtonClicked('${agendaEntity.id}', this)|">delete</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <button th:onclick="|onAddAgendaButtonClicked()|">add agenda</button>
-    </div>
+            <!-- Ids to indicate that lower td's should never be contenteditable -->
+            <td id="edit">
+                <button th:onclick="|onEditButtonClicked('${agendaEntity.id}', this)|">edit</button>
+            </td>
+
+            <td id="delete">
+                <button th:onclick="|onDeleteButtonClicked('${agendaEntity.id}', this)|">delete</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <button th:onclick="|onAddAgendaButtonClicked()|">add agenda</button>
+</div>
 </body>
 
-<!-- user's .js files should be under the html code-->
-<script type="module" src="/scripts/success/success.js"></script>
+<script type="module">
+    import onEditButtonClicked from '/scripts/success/success.js';
+
+    //TODO НИЧЕ НЕ ПОНЯЛ, ЧТО ПРОИСХОДИТ.https://stackoverflow.com/questions/49338193/how-to-use-code-from-script-with-type-module
+    window.onEditButtonClicked = function editButtonClicked(agendaId, editButton) {
+        onEditButtonClicked(agendaId, editButton);
+    }
+</script>
+
 
 <!-- 'Cleave' formatter for <input/> elements -->
 <script type="text/javascript" src="/scripts/cleave.js"></script>

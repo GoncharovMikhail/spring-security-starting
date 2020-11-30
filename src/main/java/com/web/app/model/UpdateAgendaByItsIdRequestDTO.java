@@ -25,7 +25,7 @@ public class UpdateAgendaByItsIdRequestDTO {
 
     private String time;
 
-    private boolean accessible;
-
     private String note;
+
+    private boolean accessible;
 }

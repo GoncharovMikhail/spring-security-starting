@@ -1,6 +1,6 @@
 package com.web.app.security;
 
-import com.web.app.config.PasswordEncoderConfig;
+import com.web.app.config.SpringSecurityConfig;
 import com.web.app.entity.UsersEntity;
 import com.web.app.security.util.UsersStaticFactory;
 import com.web.app.service.UsersService;
@@ -21,7 +21,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
  * to server, then maps it to some of UserDetails implementing class, and only then checks (somewhere under the hood)
  * if entered password and the one from database matches.
  *
- * @see PasswordEncoderConfig#passwordEncoder() documentation - there are some additional details there.
+ * @see SpringSecurityConfig#passwordEncoder() documentation - there are some additional details there.
  */
 @org.springframework.stereotype.Service
 @Slf4j

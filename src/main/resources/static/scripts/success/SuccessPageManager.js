@@ -13,8 +13,7 @@ export default class SuccessPageManager {
 
 
     onEditButtonClicked(agendaId, editButton) {
-        //todo раньше здесь был (editButton.innerText.toLowerCase()
-        if (editButton.text().toLowerCase() === "edit") {
+        if (editButton.innerText.toLowerCase() === "edit") {
             this.successPageConfigurer.configureOnEditButtonClicked(editButton);
         } else {
             this.successPagePostRequestExecutor.executeUpdateAgendaByItsIdPostRequest(agendaId, editButton);

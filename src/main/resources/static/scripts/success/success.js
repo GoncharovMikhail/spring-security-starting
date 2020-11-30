@@ -2,41 +2,13 @@ import SuccessPageManager from "./SuccessPageManager.js";
 
 const successPageManager = new SuccessPageManager();
 
-function onEditButtonClicked(agendaEntityId, editButton) {
+export default function onEditButtonClicked(agendaEntityId, editButton) {
+    alert('qwe');
     successPageManager.onEditButtonClicked(agendaEntityId, editButton);
 }
 
 function onDeleteButtonClicked(agendaId, deleteButton) {
     successPageManager.onDeleteButtonClicked(agendaId, deleteButton);
-}
-
-function onAddAgendaButtonClicked() {
-
-}
-
-
-
-
-
-function getSaveRowInfo(saveButton) {
-
-    let dayToSave;
-    let timeToSave;
-    let noteToSave;
-    let accessibleToSave;
-
-    $(saveButton).text("update");
-
-    let username = 'mihovel';
-    getRowData(saveButton, dayToSave, timeToSave, noteToSave, accessibleToSave);
-
-    saveAgendaPostRequest(
-        username,
-        dayToSave,
-        timeToSave,
-        noteToSave,
-        accessibleToSave
-    );
 }
 
 function saveAgendaPostRequest(username, day, time, note, accessible) {

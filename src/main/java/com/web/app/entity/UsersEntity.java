@@ -1,5 +1,6 @@
 package com.web.app.entity;
 
+import com.web.app.config.SpringSecurityConfig;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -119,7 +120,7 @@ public class UsersEntity extends BaseEntity {
      * <p>
      * {@link Column} ...
      *
-     * @see com.web.app.config.PasswordEncoderConfig
+     * @see SpringSecurityConfig#passwordEncoder() 
      */
     @Basic
     @Column(name = "password", nullable = false)

@@ -8,7 +8,6 @@ export default class SuccessPagePostRequestExecutor {
         this.successPageConfigurer = new SuccessPageConfigurer();
     }
 
-    /*TODO это костыль - мы сразу меняем значения в таблицеБ не дождавшись ответа постреквеста*/
     executeUpdateAgendaByItsIdPostRequest(agendaId, editButton) {
         let day;
         let time;
@@ -16,37 +15,31 @@ export default class SuccessPagePostRequestExecutor {
         let accessible;
 
         $(editButton).closest('tr').find('td')
-            .each(function (column, cell) {
+            .each((column, cell) => {
 
                     if ($(cell).attr('name') === 'day') {
                         day = $(cell).find(':selected').text();
-                        this.successPageConfigurer.setValueToElementAndSetEditability(cell, day, 'false');
                     }
 
                     if ($(cell).attr('name') === 'time') {
                         time = $(cell).find('input:first').val();
-                        this.successPageConfigurer.setValueToElementAndSetEditability(cell, time, 'false');
                     }
 
                     if ($(cell).attr('name') === 'note') {
-                        note = $(cell).val();
-                        this.successPageConfigurer.setValueToElementAndSetEditability(cell, note, 'false');
+                        note = $(cell).text();
                     }
 
                     if ($(cell).attr('name') === 'accessible') {
                         accessible = $(cell).find(':selected').text().toLowerCase();
-                        this.successPageConfigurer.setValueToElementAndSetEditability(cell, accessible, 'false');
                     }
                 }
             );
-
-        this.successPageConfigurer.setValueToElementAndSetEditability(editButton, edit, 'false');
 
         this.#updatePostRequest(agendaId, day, time, note, accessible);
     }
 
 
-    #updatePostRequest(agendaId, day, time, note, accessible) {
+    #updatePostRequest(agendaId, day, time, note, accessible, editButton) {
         $.post(
             {
                 url: '/updateAgendaByItsId',
@@ -62,17 +55,20 @@ export default class SuccessPagePostRequestExecutor {
                         "accessible": accessible
                     }
                 ),
-                success: function (editButton) {
+                success: () => {
                     alert('Successfully updated your agenda');
+                    this.successPageConfigurer.afterEditPostRequest(editButton, day, time, note, accessible);
                 },
-                error: function () {
+                error: () => {
                     //todo нормальные ерроры
                     // с ифом если юзернейм уже есть - провильно обработать
                     alert('An error occurred');
+                    this.successPageConfigurer.afterEditPostRequest(editButton, day, time, note, accessible);
                 }
             }
         );
     }
+
     //todo подумать
     executeDeleteAgendaByItsIdPostRequest(agendaId) {
 
