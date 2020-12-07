@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 
 @Controller
@@ -37,9 +40,13 @@ public class UsersManagementController {
         final String USERNAME = user.getUsername();
         modelAndView.addObject("username", USERNAME);
 
-        //TODO подумать насчет кеша.
-        Set<AgendaEntity> USERZ_AGENDAS = usersService.loadUserByUsername(USERNAME)
-                .getAgendas();
+        Set<AgendaEntity> USERZ_AGENDAS;
+
+        if (usersService.loadUserByUsername(USERNAME).getAgendas() != null) {
+            USERZ_AGENDAS = usersService.loadUserByUsername(USERNAME).getAgendas();
+        } else {
+            USERZ_AGENDAS = new HashSet<>();
+        }
 
         /* Sort agendas before adding it to modelAndView */
         modelAndView.addObject("agendas", AgendaUtil.sortAgendas(USERZ_AGENDAS));

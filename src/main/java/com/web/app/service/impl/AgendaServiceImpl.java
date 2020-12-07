@@ -3,6 +3,7 @@ package com.web.app.service.impl;
 import com.web.app.entity.AgendaEntity;
 import com.web.app.entity.UsersEntity;
 import com.web.app.model.SaveAgendaRequestDTO;
+import com.web.app.model.SaveNewAgendaRequestDTO;
 import com.web.app.model.UpdateAgendaByItsIdRequestDTO;
 import com.web.app.repository.AgendaRepository;
 import com.web.app.service.AgendaService;
@@ -28,20 +29,20 @@ public class AgendaServiceImpl implements AgendaService {
     /**
      * This method saves new agenda to the database
      *
-     * @see AgendaService#saveAgenda(SaveAgendaRequestDTO) for additional details.
+     * @see AgendaService#saveNewAgenda(SaveNewAgendaRequestDTO) for additional details.
      */
     @Override
-    public void saveAgenda(SaveAgendaRequestDTO saveAgendaRequest) {
+    public void saveNewAgenda(SaveNewAgendaRequestDTO saveNewAgendaRequest) {
         AgendaEntity agendaToSave = new AgendaEntity();
 
-        UsersEntity usersEntity = usersService.loadUserByUsername(saveAgendaRequest.getUsername());
+        UsersEntity usersEntity = usersService.loadUserByUsername(saveNewAgendaRequest.getUsername());
 
         agendaToSave.setCreated(new Date());
         agendaToSave.setUpdated(new Date());
         agendaToSave.setUsersid(usersEntity);
-        agendaToSave.setDay(saveAgendaRequest.getDayOfWeek());
-        agendaToSave.setTime(saveAgendaRequest.getTime());
-        agendaToSave.setNote(saveAgendaRequest.getNote());
+        agendaToSave.setDay(saveNewAgendaRequest.getDay());
+        agendaToSave.setTime(saveNewAgendaRequest.getTime());
+        agendaToSave.setNote(saveNewAgendaRequest.getNote());
 
         agendaRepository.save(agendaToSave);
     }

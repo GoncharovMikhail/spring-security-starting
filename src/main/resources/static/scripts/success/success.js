@@ -1,41 +1,22 @@
-import SuccessPageManager from "./SuccessPageManager.js";
+import SuccessPageManager from "./components/SuccessPageManager.js";
 
+/**
+ * A .js file to execute all success.html file functions.
+ * @type {SuccessPageManager} - an operation manager (it manages DOM elements, GET, POST requests,
+ * sent from this page and so on)
+ */
 const successPageManager = new SuccessPageManager();
 
-export default function onEditButtonClicked(agendaEntityId, editButton) {
-    alert('qwe');
+export function onEditButtonClicked(agendaEntityId, editButton) {
     successPageManager.onEditButtonClicked(agendaEntityId, editButton);
 }
 
-function onDeleteButtonClicked(agendaId, deleteButton) {
+export function onDeleteButtonClicked(agendaId, deleteButton) {
     successPageManager.onDeleteButtonClicked(agendaId, deleteButton);
 }
 
-function saveAgendaPostRequest(username, day, time, note, accessible) {
-    $.post(
-        {
-            url: '/saveAgenda',
-            contentType: "application/json; charset=UTF-8",
-            mimeType: "text/html; charset=UTF-8",
-            scriptCharset: "utf-8",
-            data: JSON.stringify(
-                {
-                    "username": username,
-                    "day": day,
-                    "time": time,
-                    "note": note,
-                    "accessible": accessible
-                }
-            ),
-            success: function () {
-                alert('Successfully saved your agenda');
-            },
-            error: function () {
-                //todo нормальные ерроры
-                // с ифом если юзернейм уже есть - провильно обработать
-                alert('An error occurred');
-            }
-        }
-    );
+export function onAddAgendaButtonClicked(username) {
+    successPageManager.onAddAgendaButtonClicked(username);
 }
+
 

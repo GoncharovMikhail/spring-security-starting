@@ -184,6 +184,6 @@ public class UsersEntity extends BaseEntity {
      * Type of this field is {@link Set<AgendaEntity>} -
      * thus we specify relationship between <strong>entities</strong>.
      */
-    @OneToMany(mappedBy = "usersid", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "usersid", fetch = FetchType.EAGER)
     private Set<AgendaEntity> agendas;
 }

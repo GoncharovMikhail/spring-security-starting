@@ -60,13 +60,12 @@ public class AgendaEntity extends BaseEntity {
      * Each user can have <strong>many</strong> agendas,
      * but each agenda corresponds exactly to <strong>one</strong> user.
      * <p>
-     * {@code cascade = CascadeType.ALL} indicates, that <strong>all</strong> operations must be cascaded.
-     * <p>
      * {@link JoinColumn} annotation specifies a column's name for joining an entity.
      * <p>
      * Type of this field is {@link UsersEntity} - thus we specify relationship between <strong>entities</strong>.
      */
-    @ManyToOne(cascade = CascadeType.ALL)
+    //todo должен ли стоять @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "usersid")
     private UsersEntity usersid;
 

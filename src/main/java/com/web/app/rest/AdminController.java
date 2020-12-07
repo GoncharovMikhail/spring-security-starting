@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -20,8 +21,8 @@ public class AdminController {
     }
 
     //todo как это нормально переписать на ResponseEntity<?> ?
-    @PostMapping("/ban")
-    public ResponseEntity<?> ban(@RequestParam String username) {
+    @PostMapping("/ban/{username}")
+    public ResponseEntity<?> ban(@PathVariable("username") String username) {
         try {
             adminService.banUserByUsername(username);
         } catch (WrongUsernameException e) {

@@ -1,6 +1,6 @@
 package com.web.app.service;
 
-import com.web.app.model.SaveAgendaRequestDTO;
+import com.web.app.model.SaveNewAgendaRequestDTO;
 import com.web.app.model.UpdateAgendaByItsIdRequestDTO;
 
 public interface AgendaService {
@@ -8,9 +8,9 @@ public interface AgendaService {
     /**
      * This method saves new agenda to the database
      *
-     * @param saveAgendaRequest wrapper for data, like day, time, note, ...
+     * @param saveNewAgendaRequest wrapper for data, like day, time, note, ...
      */
-    void saveAgenda(SaveAgendaRequestDTO saveAgendaRequest);
+    void saveNewAgenda(SaveNewAgendaRequestDTO saveNewAgendaRequest);
 
     /**
      * This method updates user's agenda by specified agenda's id.

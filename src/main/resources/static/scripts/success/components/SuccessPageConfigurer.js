@@ -1,14 +1,14 @@
-const DAYS_OF_WEEK = [
-    'monday',
-    'tuesday',
-    'wednesday',
-    'thursday',
-    'friday',
-    'saturday',
-    'sunday'
+export const DAYS_OF_WEEK = [
+    'MONDAY',
+    'TUESDAY',
+    'WEDNESDAY',
+    'THURSDAY',
+    'FRIDAY',
+    'SATURDAY',
+    'SUNDAY'
 ];
 
-const BOOLEANS = [
+export const BOOLEANS = [
     'true',
     'false'
 ];
@@ -17,23 +17,19 @@ const CLEAVE_INPUT_CLASS_NAME = 'cleave-formatted-input';
 
 export default class SuccessPageConfigurer {
 
-    constructor() {
-    }
-
     configureOnEditButtonClicked(editButton) {
         this.#configureRow(editButton);
-        $(editButton).text('save');
+        $(editButton).html('save');
     }
 
     #configureRow(editButton) {
         $(editButton).closest('tr').find('td')
-        //todo переписал function на лямбду и все ок. Каво?
             .each((column, cell) => {
                     /* These cells are "special" and shouldn't be configured */
-                    if ($(cell).attr('id') !== 'edit' &&
-                        $(cell).attr('id') !== 'delete' &&
-                        $(cell).attr('id') !== 'save-new-agenda' &&
-                        $(cell).attr('id') !== 'delete-row') {
+                    if ($(cell).attr('name') !== 'edit' &&
+                        $(cell).attr('name') !== 'delete' &&
+                        $(cell).attr('name') !== 'save-new-agenda' &&
+                        $(cell).attr('name') !== 'delete-row') {
 
                         $(cell).attr('contenteditable', 'true');
                         this.#configureEditableElement(cell);
@@ -117,51 +113,54 @@ export default class SuccessPageConfigurer {
         }
     }
 
-    afterEditPostRequest(editButton, day, time, note, accessible) {
-        $(editButton).closest('tr').find('td')
+    setRowData(specificButton, verifiedData) {
+        $(specificButton).closest('tr').find('td')
             .each((column, cell) => {
 
+                    $(cell).attr('contenteditable', 'false');
+
                     if ($(cell).attr('name') === 'day') {
-                        $(cell).html(day);
+                        $(cell).html(verifiedData.getDay());
                     }
 
                     if ($(cell).attr('name') === 'time') {
-                        $(cell).html(time);
+                        $(cell).html(verifiedData.getTime());
                     }
 
                     if ($(cell).attr('name') === 'note') {
-                        $(cell).html(note);
+                        $(cell).html(verifiedData.getNote());
                     }
 
                     if ($(cell).attr('name') === 'accessible') {
-                        $(cell).html(accessible);
+                        $(cell).html(verifiedData.isAccessible());
                     }
                 }
             );
+
+        $(specificButton).html('edit');
     }
 
     addRowToTable() {
         $('.agenda-table > tbody:last-child').append(
             '<tr>' +
-            '<td name="day" contenteditable="true"></td>' +
-            '<td name="time" contenteditable="true"></td>' +
-            '<td name="note" contenteditable="true"></td>' +
-            '<td name="accessible" contenteditable="true"></td>' +
-            '<td id="save-new-agenda">' +
-            '<button onclick="getSaveRowInfo(this)">save</button>' +
-            '</td>' +
-            '<td id="delete-row">' +
-            '<button onclick="deleteRow()">delete row</button>' +
-            '</td>' +
+                '<td name="day" contenteditable="true"></td>' +
+                '<td name="time" contenteditable="true"></td>' +
+                '<td name="note" contenteditable="true"></td>' +
+                '<td name="accessible" contenteditable="true"></td>' +
+                '<td name="save-new-agenda">' +
+                    '<button>save</button>' +
+                '</td>' +
+                '<td name ="delete-row">' +
+                    '<button>delete</button>' +
+                '</td>' +
             '</tr>'
         );
-        //todo правильно ли?
-        this.#configureRow($('.agenda-table > tbody:last-child'));
+
+        //todo МАГИЯ НИЧЕ НЕ ПОНЯЛ
+        this.#configureRow($('.agenda-table > tbody:last-child').find('td:last'));
     }
 
-
-    deleteRow() {
-        let table = $(".agenda-table");
-        table.deleteRow(table.rows.length - 1);
+    deleteRowFromTable(deleteButton) {
+        $(deleteButton).closest('tr').remove();
     }
 }

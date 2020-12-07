@@ -16,18 +16,27 @@
     <script type="text/javascript" src="/scripts/login.js"></script>
 </head>
 <body>
-    <div class="container">
-        <!-- Execute Spring Security's "/login" POST request -->
-        <form th:action="@{/login}" method="post">
-            <h1>Log in</h1>
-            <label for="username">Input username:</label>
-            <input type="text" id="username" name="username" placeholder="username" autofocus="autofocus"/>
-            <br/>
-            <label for="password">Input password:</label>
-            <input type="password" id="password" name="password" placeholder="password" autofocus="autofocus"/>
-            <br/>
-            <input type="submit" value="Log in" />
-        </form>
-    </div>
+<div class="container">
+    <!-- Execute Spring Security's "/login" POST request -->
+    <form th:action="@{/login}" method="post">
+        <h1>Log in</h1>
+        <label for="username">Input username:</label>
+        <input type="text" id="username" name="username" placeholder="username" autofocus="autofocus"/>
+        <br/>
+        <label for="password">Input password:</label>
+        <input type="password" id="password" name="password" placeholder="password" autofocus="autofocus"/>
+        <br/>
+        <input type="submit" value="Log in"/>
+    </form>
+</div>
 </body>
+<script th:inline="javascript">
+    window.addEventListener('DOMContentLoaded', function (e) {
+        e.preventDefault();
+            if ([[${error}]] === true) {
+                alert('Wrong username or password');
+            }
+        }
+    );
+</script>
 </html>

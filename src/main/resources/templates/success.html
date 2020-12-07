@@ -35,11 +35,11 @@
             <td name="accessible" th:text="${agendaEntity.accessible}"></td>
 
             <!-- Ids to indicate that lower td's should never be contenteditable -->
-            <td id="edit">
+            <td name="edit">
                 <button th:onclick="|onEditButtonClicked('${agendaEntity.id}', this)|">edit</button>
             </td>
 
-            <td id="delete">
+            <td name="delete">
                 <button th:onclick="|onDeleteButtonClicked('${agendaEntity.id}', this)|">delete</button>
             </td>
         </tr>
@@ -48,13 +48,26 @@
     <button th:onclick="|onAddAgendaButtonClicked()|">add agenda</button>
 </div>
 </body>
+<!--
+ - Attach needed functions to the <pre>window</pre> manually:
+ -
+ - https://stackoverflow.com/questions/49338193/how-to-use-code-from-script-with-type-module
+-->
+<script type="module" th:inline="javascript">
+    import {onEditButtonClicked} from '/scripts/success/success.js';
+    import {onDeleteButtonClicked} from '/scripts/success/success.js';
+    import {onAddAgendaButtonClicked} from '/scripts/success/success.js';
 
-<script type="module">
-    import onEditButtonClicked from '/scripts/success/success.js';
-
-    //TODO НИЧЕ НЕ ПОНЯЛ, ЧТО ПРОИСХОДИТ.https://stackoverflow.com/questions/49338193/how-to-use-code-from-script-with-type-module
     window.onEditButtonClicked = function editButtonClicked(agendaId, editButton) {
         onEditButtonClicked(agendaId, editButton);
+    };
+
+    window.onDeleteButtonClicked = function deleteButtonClicked(agendaId, deleteButton) {
+        onDeleteButtonClicked(agendaId, deleteButton);
+    };
+
+    window.onAddAgendaButtonClicked = function addAgendaButtonClicked() {
+        onAddAgendaButtonClicked([[${username}]]);
     }
 </script>
 

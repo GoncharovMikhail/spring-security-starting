@@ -136,9 +136,14 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 /* @POST api */
                 .antMatchers(
-                        "/registration",
-                        "/updateAgendaById"
+                        "/registration"
                 ).permitAll()
+
+                //todo подумать каким ролям это нужно
+                .antMatchers(
+                        "/onDeleteButtonClicked"
+                )
+                .permitAll()
 
                 .anyRequest().authenticated()
 
