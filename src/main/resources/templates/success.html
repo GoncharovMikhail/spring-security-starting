@@ -58,15 +58,15 @@
     import {onDeleteButtonClicked} from '/scripts/success/success.js';
     import {onAddAgendaButtonClicked} from '/scripts/success/success.js';
 
-    window.onEditButtonClicked = function editButtonClicked(agendaId, editButton) {
+    window.onEditButtonClicked = function(agendaId, editButton) {
         onEditButtonClicked(agendaId, editButton);
     };
 
-    window.onDeleteButtonClicked = function deleteButtonClicked(agendaId, deleteButton) {
+    window.onDeleteButtonClicked = function(agendaId, deleteButton) {
         onDeleteButtonClicked(agendaId, deleteButton);
     };
 
-    window.onAddAgendaButtonClicked = function addAgendaButtonClicked() {
+    window.onAddAgendaButtonClicked = function() {
         onAddAgendaButtonClicked([[${username}]]);
     }
 </script>

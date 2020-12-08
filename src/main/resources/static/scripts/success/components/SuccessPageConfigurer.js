@@ -1,3 +1,5 @@
+import SuccessPageDataResolver from "./SuccessPageDataResolver.js";
+
 export const DAYS_OF_WEEK = [
     'MONDAY',
     'TUESDAY',
@@ -16,6 +18,7 @@ export const BOOLEANS = [
 const CLEAVE_INPUT_CLASS_NAME = 'cleave-formatted-input';
 
 export default class SuccessPageConfigurer {
+    successPageDataResolver = new SuccessPageDataResolver();
 
     configureOnEditButtonClicked(editButton) {
         this.#configureRow(editButton);
@@ -40,6 +43,9 @@ export default class SuccessPageConfigurer {
 
     #configureEditableElement(editableElement) {
         if ($(editableElement).attr('name') === 'day') {
+            /* Read the 'DAY OF WEEK' cell's text, it may be null, if we read it from a new-added row */
+            let dayBeforeUpdate = $(editableElement).text();
+
             /* Create an <select...></select> element */
             let daySelectList = document.createElement('select');
 
@@ -50,10 +56,21 @@ export default class SuccessPageConfigurer {
                     option.value = DAY.toUpperCase();
                     /* Set option's text */
                     option.text = DAY.toUpperCase();
+
+                    /* Set default option selected to the one which was set before,
+                     * NOTE: if we add a new row to the table, there is no value,
+                     * which ws set before, so, we should it's nullability first */
+                    if (dayBeforeUpdate !== null) {
+                        if (option.text === dayBeforeUpdate) {
+                            $(option).attr('selected', 'selected');
+                        }
+                    }
+
                     /* Append this <option.../> element th the <select...></select> element */
                     daySelectList.appendChild(option);
                 }
             );
+
 
             /* Place this <select...></select> element inside the <td...></td> element,
              * having name "day" */
@@ -61,6 +78,8 @@ export default class SuccessPageConfigurer {
         }
 
         if ($(editableElement).attr('name') === 'time') {
+            /* Read the 'TIME' cell's text, it may be null, if we read it from a new-added row */
+            let timeBeforeUpdate = $(editableElement).text();
 
             /* Create an <input/> element and set it the <td/> element */
             let cleaveFormattedInput = document.createElement('input');
@@ -85,13 +104,19 @@ export default class SuccessPageConfigurer {
                 }
             );
 
-            /* create a variable, representing the default time value */
-            let defaultTime = '08:00';
-            /* Set default time value */
-            $('.' + CLEAVE_INPUT_CLASS_NAME).val(defaultTime);
+            /* Set a time value */
+            const DEFAULT_TIME = '09:00';
+            if (timeBeforeUpdate !== "") {
+                $('.' + CLEAVE_INPUT_CLASS_NAME).val(timeBeforeUpdate);
+            } else {
+                $('.' + CLEAVE_INPUT_CLASS_NAME).val(DEFAULT_TIME);
+            }
         }
 
         if ($(editableElement).attr('name') === 'accessible') {
+            /* Read the 'ACCESSIBLE' cell's text, it may be null, if we read it from a new-added row */
+            let accessibleBeforeUpdate = $(editableElement).text();
+
             /* Create an <select...></select> element */
             let trueOrFalseSelect = document.createElement('select');
 
@@ -102,6 +127,16 @@ export default class SuccessPageConfigurer {
                     option.value = boolean.toUpperCase();
                     /* Set an option's text */
                     option.text = boolean.toUpperCase();
+
+                    /* Set default option selected to the one which was set before,
+                     * NOTE: if we add a new row to the table, there is no value,
+                     * which ws set before, so, we should it's nullability first */
+                    if (accessibleBeforeUpdate !== null) {
+                        if (option.text === accessibleBeforeUpdate.toUpperCase()) {
+                            $(option).attr('selected', 'selected');
+                        }
+                    }
+
                     /* Append this <option.../> element th the <select...></select> element */
                     trueOrFalseSelect.appendChild(option);
                 }
@@ -143,24 +178,42 @@ export default class SuccessPageConfigurer {
     addRowToTable() {
         $('.agenda-table > tbody:last-child').append(
             '<tr>' +
-                '<td name="day" contenteditable="true"></td>' +
-                '<td name="time" contenteditable="true"></td>' +
-                '<td name="note" contenteditable="true"></td>' +
-                '<td name="accessible" contenteditable="true"></td>' +
-                '<td name="save-new-agenda">' +
-                    '<button>save</button>' +
-                '</td>' +
-                '<td name ="delete-row">' +
-                    '<button>delete</button>' +
-                '</td>' +
+            '<td name="day"></td>' +
+            '<td name="time"></td>' +
+            '<td name="note"></td>' +
+            '<td name="accessible"></td>' +
+            '<td name="save-new-agenda">' +
+            '<button>save</button>' +
+            '</td>' +
+            '<td name ="delete-row">' +
+            '<button>delete</button>' +
+            '</td>' +
             '</tr>'
         );
 
-        //todo МАГИЯ НИЧЕ НЕ ПОНЯЛ
-        this.#configureRow($('.agenda-table > tbody:last-child').find('td:last'));
+        let deleteButtonInLastRow = $('.agenda-table > tbody:last-child').find('td:last');
+
+        deleteButtonInLastRow.click(() => {
+                this.deleteRowFromTable(deleteButtonInLastRow);
+            }
+        );
+
+        let saveButtonInLastRow = deleteButtonInLastRow.prev('td');
+
+        this.#configureRow(saveButtonInLastRow);
+
+        /* Returns the 'SAVE' button in the last row*/
+        return saveButtonInLastRow;
     }
 
     deleteRowFromTable(deleteButton) {
         $(deleteButton).closest('tr').remove();
+    };
+
+    afterSuccessfullySavingNewAgenda(saveButtonInLastRow) {
+        this.setRowData(saveButtonInLastRow, this.successPageDataResolver.resolveDataFromContentEditableRowCorrespondingToSpecificButton(saveButtonInLastRow));
+        location.reload();
+        return false;
     }
 }
+

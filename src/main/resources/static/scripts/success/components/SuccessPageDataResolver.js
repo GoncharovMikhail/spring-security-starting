@@ -32,7 +32,7 @@ export default class SuccessPageDataResolver {
         return new VerifiedRowData(day, time, note, accessible);
     }
 
-    resolveRowDataFromNonContentEditableRowCorrespondingToSpecificButton(specificButton) {
+    resolveDataFromNonContentEditableRowCorrespondingToSpecificButton(specificButton) {
         let day;
         let time;
         let note;

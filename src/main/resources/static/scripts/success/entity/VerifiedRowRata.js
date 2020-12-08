@@ -21,7 +21,7 @@ export default class VerifiedRowData {
     }
 
     #verifyTime(time) {
-        if (time.length !== 5) {
+        if (time.length < 5) {
             throw new Error('Incorrect time input');
         }
         return time;

@@ -55,18 +55,24 @@ export default class SuccessPagePostRequestExecutor {
 
     executeSaveNewAgendaPostRequest(saveButton, username) {
         const verifiedRowData = this.successPageDataResolver
-            .resolveRowDataFromNonContentEditableRowCorrespondingToSpecificButton(saveButton);
+            .resolveDataFromContentEditableRowCorrespondingToSpecificButton(saveButton);
+
+        alert(username);
+        alert(verifiedRowData.getDay(),
+            verifiedRowData.getTime(),
+            verifiedRowData.getNote(),
+            verifiedRowData.isAccessible());
 
         return this.#saveNewAgendaPostRequest(
             username,
             verifiedRowData.getDay(),
-            verifiedRowData.getDay(),
+            verifiedRowData.getTime(),
             verifiedRowData.getNote(),
             verifiedRowData.isAccessible()
         );
     }
 
-    #saveNewAgendaPostRequest(saveButton, username, day, time, note, accessible) {
+    #saveNewAgendaPostRequest(username, day, time, note, accessible) {
         return $.post(
             {
                 url: '/saveNewAgenda',

@@ -24,7 +24,7 @@ public class AgendaManagementController {
     }
 
     @PostMapping("/saveNewAgenda")
-    public ResponseEntity<String> saveNewAgenda(SaveNewAgendaRequestDTO saveNewAgendaRequest) {
+    public ResponseEntity<String> saveNewAgenda(@RequestBody SaveNewAgendaRequestDTO saveNewAgendaRequest) {
         agendaService.saveNewAgenda(saveNewAgendaRequest);
 
         return new ResponseEntity<>("Successfully saved your agenda!", HttpStatus.OK);

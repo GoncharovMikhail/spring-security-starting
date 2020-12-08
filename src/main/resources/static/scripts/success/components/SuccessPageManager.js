@@ -21,7 +21,7 @@ export default class SuccessPageManager {
 
         if ($(editButton).text().toLowerCase() === "edit") {
             this.dataBeforeUpdate = this.successPageDataResolver
-                .resolveRowDataFromNonContentEditableRowCorrespondingToSpecificButton(editButton);
+                .resolveDataFromNonContentEditableRowCorrespondingToSpecificButton(editButton);
 
             this.successPageConfigurer.configureOnEditButtonClicked(editButton);
         } else {
@@ -66,7 +66,7 @@ export default class SuccessPageManager {
             .done((jqXHR) => {
                     //todo че мы тут писали чтоб выводилось сообщения с бека?
                     alert(jqXHR.responseText);
-                    this.successPageConfigurer.deleteRowFromTable();
+                    this.successPageConfigurer.deleteRowFromTable(deleteButton);
                 }
             )
             .fail((jqXHR) => {
@@ -76,6 +76,20 @@ export default class SuccessPageManager {
     }
 
     onAddAgendaButtonClicked(username) {
-        this.successPageConfigurer.addRowToTable();
+        const saveButtonInLastRow = this.successPageConfigurer.addRowToTable();
+
+        saveButtonInLastRow.click(() => {
+                this.successPagePostRequestExecutor.executeSaveNewAgendaPostRequest(saveButtonInLastRow, username)
+                    .done((jqXHR) => {
+                            alert(jqXHR.responseText);
+                            this.successPageConfigurer.afterSuccessfullySavingNewAgenda(saveButtonInLastRow);
+                        }
+                    )
+                    .fail((jqXHR) => {
+                            alert(jqXHR.responseText);
+                        }
+                    );
+            }
+        )
     }
 }

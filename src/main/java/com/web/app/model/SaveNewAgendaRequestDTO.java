@@ -17,13 +17,13 @@ import java.time.DayOfWeek;
 @Setter
 public class SaveNewAgendaRequestDTO {
 
-    String username;
+    private String username;
 
-    DayOfWeek day;
+    private DayOfWeek day;
 
-    String time;
+    private String time;
 
-    String note;
+    private String note;
 
-    boolean accessible;
+    private boolean accessible;
 }

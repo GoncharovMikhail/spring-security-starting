@@ -24,11 +24,11 @@ public class SaveAgendaRequestDTO {
 
     private String username;
 
-    private DayOfWeek dayOfWeek;
+    private DayOfWeek day;
 
     private String time;
 
-    private boolean accessible;
-
     private String note;
+
+    private boolean accessible;
 }

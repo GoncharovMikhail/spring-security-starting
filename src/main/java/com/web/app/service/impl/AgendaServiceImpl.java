@@ -35,11 +35,11 @@ public class AgendaServiceImpl implements AgendaService {
     public void saveNewAgenda(SaveNewAgendaRequestDTO saveNewAgendaRequest) {
         AgendaEntity agendaToSave = new AgendaEntity();
 
-        UsersEntity usersEntity = usersService.loadUserByUsername(saveNewAgendaRequest.getUsername());
+        UsersEntity usersid = usersService.loadUserByUsername(saveNewAgendaRequest.getUsername());
 
         agendaToSave.setCreated(new Date());
         agendaToSave.setUpdated(new Date());
-        agendaToSave.setUsersid(usersEntity);
+        agendaToSave.setUsersid(usersid);
         agendaToSave.setDay(saveNewAgendaRequest.getDay());
         agendaToSave.setTime(saveNewAgendaRequest.getTime());
         agendaToSave.setNote(saveNewAgendaRequest.getNote());
