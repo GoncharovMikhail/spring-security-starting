@@ -12,29 +12,49 @@
     <link rel="stylesheet" type="text/css" href="/styles/common.css">
     <link rel="stylesheet" type="text/css" href="/styles/pages/welcome.css">
 
-    <!-- .js -->
-    <script type="text/javascript" src="/scripts/welcome.js"></script>
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <div class="heading">
-                <nav>
-                    <ul class="menu">
-                        <li>
-                            <a id="sign_up" href="/signup">sign up</a>
-                        </li>
-                        <li>
-                            <a id="sign_in" href="/login">sign in</a>
-                        </li>
-                        <li>
-                            <a id="about" href="/about">about</a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
+<header>
+    <div class="container">
+        <div class="heading">
+            <nav>
+                <ul class="menu">
+                    <li>
+                        <a id="sign_up" href="/signup">sign up</a>
+                    </li>
+                    <li>
+                        <a id="sign_in" href="/login">sign in</a>
+                    </li>
+                    <li>
+                        <a id="about" href="/about">about</a>
+                    </li>
+                    <li>
+                        <input id="input-search" placeholder="search someone's agenda"/>
+                        <button onclick="onSearchButtonClicked($('#input-search').val())">Search</button>
+                    </li>
+                </ul>
+
+            </nav>
         </div>
-    </header>
+    </div>
+</header>
 </body>
+<!-- .js -->
+<script type="module">
+    import CommonGetRequestsExecutor from "/scripts/CommonGetRequestsExecutor.js";
+
+    window.onSearchButtonClicked = function (username) {
+        alert(username);
+        const commonGetRequestsExecutor = new CommonGetRequestsExecutor();
+        const usernameRegExp = /^\w{6,32}$/i;
+        if (usernameRegExp.test(String(username).toLowerCase())) {
+            commonGetRequestsExecutor.onSearchButtonClicked(username);
+        } else {
+            alert('Incorrect username input - username should have 6 to 36 symbols');
+        }
+    };
+</script>
 
 </html>

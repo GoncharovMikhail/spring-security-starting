@@ -18,8 +18,14 @@
     <br>
     <input type="password" id="password" placeholder="Password">
     <br>
-    <input type="submit" id="submit"/>
+    <input type="submit" onclick="onSignUpButtonClicked()" value="Sign up"/>
 </form>
 </body>
-<script type="text/javascript" src="/scripts/signup.js"></script>
+<script type="module">
+    import {onSignUpButtonClicked} from "/scripts/signup/signup.js";
+
+    window.onSignUpButtonClicked = function () {
+        onSignUpButtonClicked();
+    }
+</script>
 </html>

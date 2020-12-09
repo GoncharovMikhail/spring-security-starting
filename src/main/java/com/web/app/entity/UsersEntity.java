@@ -120,7 +120,7 @@ public class UsersEntity extends BaseEntity {
      * <p>
      * {@link Column} ...
      *
-     * @see SpringSecurityConfig#passwordEncoder() 
+     * @see SpringSecurityConfig#passwordEncoder()
      */
     @Basic
     @Column(name = "password", nullable = false)
@@ -176,8 +176,6 @@ public class UsersEntity extends BaseEntity {
      * {@link OneToMany} annotation indicates <strong>One-to-many</strong> relationship between entities,
      * meaning, that a user may have <strong>many</strong> agendas,
      * but each agenda corresponds exactly to <strong>one</strong> user.
-     * <p>
-     * {@code cascade = CascadeType.ALL} indicates, that <strong>all</strong> operations must be cascaded.
      * <p>
      * {@code fetch = FetchType.EAGER} todo
      * <p>

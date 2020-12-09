@@ -2,7 +2,6 @@ package com.web.app.service.impl;
 
 import com.web.app.entity.AgendaEntity;
 import com.web.app.entity.UsersEntity;
-import com.web.app.model.SaveAgendaRequestDTO;
 import com.web.app.model.SaveNewAgendaRequestDTO;
 import com.web.app.model.UpdateAgendaByItsIdRequestDTO;
 import com.web.app.repository.AgendaRepository;
@@ -67,7 +66,7 @@ public class AgendaServiceImpl implements AgendaService {
     /**
      * This method deletes user's agenda by specified agenda's id.
      *
-     * @see AgendaService#deleteAgendaById(Long)
+     * @see AgendaService#deleteAgendaById(Long) for additional details.
      */
     @Override
     public void deleteAgendaById(Long agendaId) {

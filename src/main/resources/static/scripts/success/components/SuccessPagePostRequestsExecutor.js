@@ -1,6 +1,6 @@
 import SuccessPageDataResolver from "./SuccessPageDataResolver.js";
 
-export default class SuccessPagePostRequestExecutor {
+export default class SuccessPagePostRequestsExecutor {
 
     successPageDataResolver = new SuccessPageDataResolver();
 
@@ -56,12 +56,6 @@ export default class SuccessPagePostRequestExecutor {
     executeSaveNewAgendaPostRequest(saveButton, username) {
         const verifiedRowData = this.successPageDataResolver
             .resolveDataFromContentEditableRowCorrespondingToSpecificButton(saveButton);
-
-        alert(username);
-        alert(verifiedRowData.getDay(),
-            verifiedRowData.getTime(),
-            verifiedRowData.getNote(),
-            verifiedRowData.isAccessible());
 
         return this.#saveNewAgendaPostRequest(
             username,

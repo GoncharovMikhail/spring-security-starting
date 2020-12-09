@@ -1,11 +1,14 @@
-/* Styles in this file should be applies to all HTML pages  */
+/**
+ * Styles in this file should be applies to all HTML pages.
+ */
 
 body {
     text-transform: uppercase;
     padding: 0;
     margin: 0;
-    height: 100vh;
-    font: 800 100%/100% 'Montserrat', sans-serif;
+    min-height: 100vh;
+    height: 100%;
+    font: 800 16px/16px 'Montserrat', sans-serif;
     background: linear-gradient(
             to right top,
             rgba(0, 195, 255, 0.9) 0%,

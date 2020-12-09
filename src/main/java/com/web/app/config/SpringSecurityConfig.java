@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -16,7 +17,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  * <p>
  *
  * <strong>NOTE:</strong> this class isn't annotated with {@link org.springframework.context.annotation.Configuration}
- * annotation, because {@link EnableWebSecurity} contains it.
+ * annotation, because {@link EnableWebSecurity} contains it. Better read documentation of this annotation here:
+ * https://docs.spring.io/spring-security/site/docs/4.2.x/apidocs/org/springframework/security/config/annotation/web/configuration/EnableWebSecurity.html
  */
 @EnableWebSecurity
 /* @PropertySource("...") gets a relative path (to the "resources" folder)
@@ -99,23 +101,32 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     /**
      * This method does lots of security stuff. Better explain step-by-step in the code.
      *
-     * @param httpSecurity
+     * @param httpSecurity http to configure.
      * @throws Exception
      */
     @Override
     public void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
+
                 /* We can configure 3 types of user's authentication:
-                   1. Basic authentication.
-                   2. Form-based authentication
-                   3. Token authentication(for example, JWT)
-                 */
+                 *  1. Basic authentication.
+                 *  2. Form-based authentication
+                 *  3. Token authentication(for example, JWT)
+                 * We'll use Form-based authentication because it's easy enough and most-commonly used. */
                 .httpBasic().disable()
+
+                /* Disable csrf:
+                 * https://docs.spring.io/spring-security/site/docs/4.1.x/reference/html/csrf.html */
                 .csrf().disable()
 
+                /* Allows restricting access based upon the requests via URL patterns*/
                 .authorizeRequests()
 
-                /* TODO ПРОВЕРИТЬ ** */
+                /*@GET api, available only to admins */
+                .antMatchers(
+                        "/management"
+                ).hasRole("ADMIN")
+
                 /* @POST api, available only to admins */
                 .antMatchers(
                         "/ban/**",
@@ -131,19 +142,14 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 /* @GET api */
                 .antMatchers(
                         "/welcome",
-                        "/signup"
+                        "/signup",
+                        "/search"
                 ).permitAll()
 
                 /* @POST api */
                 .antMatchers(
                         "/registration"
                 ).permitAll()
-
-                //todo подумать каким ролям это нужно
-                .antMatchers(
-                        "/onDeleteButtonClicked"
-                )
-                .permitAll()
 
                 .anyRequest().authenticated()
 
@@ -152,6 +158,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .defaultSuccessUrl("/success", true)
 
                 .and()
-                .logout().logoutSuccessUrl("/logout");
+                .logout().logoutSuccessUrl("/logout").permitAll();
     }
 }

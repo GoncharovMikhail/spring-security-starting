@@ -56,7 +56,7 @@ public class AgendaEntity extends BaseEntity {
     /**
      * This field represents the "usersid" column in the table.
      * <p>
-     * {@link ManyToMany} annotation indicates <strong>Many-to-one</strong> relationship between entities
+     * {@link ManyToOne} annotation indicates <strong>Many-to-one</strong> relationship between entities
      * Each user can have <strong>many</strong> agendas,
      * but each agenda corresponds exactly to <strong>one</strong> user.
      * <p>
@@ -64,7 +64,6 @@ public class AgendaEntity extends BaseEntity {
      * <p>
      * Type of this field is {@link UsersEntity} - thus we specify relationship between <strong>entities</strong>.
      */
-    //todo должен ли стоять @ManyToOne(cascade = CascadeType.ALL)
     @ManyToOne
     @JoinColumn(name = "usersid")
     private UsersEntity usersid;

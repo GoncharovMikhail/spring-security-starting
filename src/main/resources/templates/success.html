@@ -18,6 +18,13 @@
 <body>
 <div class="container-table">
     <h1 th:text="'Hello, ' + ${username}"></h1>
+
+    <input id="search-someones-agenda-input" placeholder="Search for someone's agenda"/>
+    <button onclick="onSearchButtonClicked()">Search!</button>
+
+    <a sec:authorize="hasRole('ADMIN')" href="/management">Go to managing users page</a>
+
+    <h1>Your agendas:</h1>
     <table class="agenda-table">
         <thead>
         <tr>
@@ -57,20 +64,25 @@
     import {onEditButtonClicked} from '/scripts/success/success.js';
     import {onDeleteButtonClicked} from '/scripts/success/success.js';
     import {onAddAgendaButtonClicked} from '/scripts/success/success.js';
+    import {onSearchButtonClicked} from '/scripts/success/success.js';
 
-    window.onEditButtonClicked = function(agendaId, editButton) {
+    window.onEditButtonClicked = function (agendaId, editButton) {
         onEditButtonClicked(agendaId, editButton);
     };
 
-    window.onDeleteButtonClicked = function(agendaId, deleteButton) {
+    window.onDeleteButtonClicked = function (agendaId, deleteButton) {
         onDeleteButtonClicked(agendaId, deleteButton);
     };
 
-    window.onAddAgendaButtonClicked = function() {
+    window.onAddAgendaButtonClicked = function () {
         onAddAgendaButtonClicked([[${username}]]);
-    }
-</script>
+    };
 
+    window.onSearchButtonClicked = function () {
+        const username = $('#search-someones-agenda-input').val();
+        onSearchButtonClicked(username);
+    };
+</script>
 
 <!-- 'Cleave' formatter for <input/> elements -->
 <script type="text/javascript" src="/scripts/cleave.js"></script>

@@ -12,15 +12,53 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.DayOfWeek;
 import java.util.*;
 
+/**
+ * A {@code Repository} component, to interact with data in the "agenda" table.
+ * <p>
+ * <strong>NOTE:</strong> no implementation for this interface needed, a proxy over
+ * {@link org.springframework.data.jpa.repository.support.SimpleJpaRepository} will be created,
+ * including automatically generation of implementations of methods we wrote in this interface
+ * (Spring Data understand what kind of HQL query is needed by method's name)
+ * <p>
+ * Also note, that, by default, all methods in this interface and methods in
+ * {@code SimpleJpaRepository} will be transactional, so, no need to annotate them with {@link Transactional}.
+ * <strong>BUT!</strong> it's good practice to make methods, annotated with {@link Modifying} annotation
+ * transactional. See 6.7.1: https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#transactions
+ */
 @Repository
 public interface AgendaRepository extends JpaRepository<AgendaEntity, Long> {
 
+    /**
+     * This method deletes agenda by <strong>it's</strong> id.
+     *
+     * @param id agenda's id.
+     */
     void deleteById(Long id);
 
+    /**
+     * This method finds agenda by <strong>it's</strong> id.
+     *
+     * @param id agenda's id.
+     */
     Optional<AgendaEntity> findById(Long id);
 
+    /**
+     * This method finds all user's agenda.
+     *
+     * @param usersEntity user
+     * @return all user's agenda
+     */
     Set<AgendaEntity> findByUsersid(UsersEntity usersEntity);
 
+    /**
+     * This method updates agenda by <strong>it's</strong> id
+     * @param updated when agenda was lastly updated(at the moment we evoked this method)
+     * @param dayOfWeek day
+     * @param time time
+     * @param accessible accessible
+     * @param note note
+     * @param id <strong>agenda's id</strong>
+     */
     @Modifying
     @Query("UPDATE AgendaEntity a " +
             "SET " +
@@ -33,9 +71,9 @@ public interface AgendaRepository extends JpaRepository<AgendaEntity, Long> {
     )
     @Transactional
     void updateAgendaByItsId(@Param("updated") Date updated,
-                          @Param("day") DayOfWeek dayOfWeek,
-                          @Param("time") String time,
-                          @Param("accessible") boolean accessible,
-                          @Param("note") String note,
-                          @Param("id") Long id);
+                             @Param("day") DayOfWeek dayOfWeek,
+                             @Param("time") String time,
+                             @Param("accessible") boolean accessible,
+                             @Param("note") String note,
+                             @Param("id") Long id);
 }

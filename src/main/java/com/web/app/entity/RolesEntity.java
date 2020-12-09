@@ -88,7 +88,7 @@ public class RolesEntity extends BaseEntity {
      *     </li>
      * </ul>
      * {@link ManyToMany} annotation indicates this relationship, and the {@code mappedBy = "roles"} shows that
-     * "roles" todo а что оно делает-то? Я этот пример на стаковерфлоу нашел.
+     * "roles" defines the "owner" of a relationship.
      */
     @ManyToMany(mappedBy = "roles")
     private Set<UsersEntity> users;

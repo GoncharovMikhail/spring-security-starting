@@ -211,7 +211,8 @@ export default class SuccessPageConfigurer {
     };
 
     afterSuccessfullySavingNewAgenda(saveButtonInLastRow) {
-        this.setRowData(saveButtonInLastRow, this.successPageDataResolver.resolveDataFromContentEditableRowCorrespondingToSpecificButton(saveButtonInLastRow));
+        this.setRowData(saveButtonInLastRow, this.successPageDataResolver
+            .resolveDataFromContentEditableRowCorrespondingToSpecificButton(saveButtonInLastRow));
         location.reload();
         return false;
     }

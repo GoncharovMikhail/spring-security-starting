@@ -3,6 +3,10 @@ package com.web.app.service;
 import com.web.app.model.SaveNewAgendaRequestDTO;
 import com.web.app.model.UpdateAgendaByItsIdRequestDTO;
 
+/**
+ * An interface, representing agenda-management operations,
+ * like save, update, delete...
+ */
 public interface AgendaService {
 
     /**

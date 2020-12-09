@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Your page</title>
+
+    <!-- Montserrat font -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- .css -->
+    <link rel="stylesheet" type="text/css" href="styles/common.css">
+    <link rel="stylesheet" type="text/css" href="styles/pages/success.css">
+</head>
+<body>
+<div class="container-table">
+    <h1 th:text="'Here are ' + ${username} + '\'s agendas'"></h1>
+    <table class="agenda-table">
+        <thead>
+        <tr>
+            <td>Day of week</td>
+            <td>Time</td>
+            <td>Note</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="agendaEntity: ${accessibleAgendas}">
+            <td name="day" th:text="${agendaEntity.day}"></td>
+            <td name="time" th:text="${agendaEntity.time}"></td>
+            <td name="note" th:text="${agendaEntity.note}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

@@ -1,20 +1,23 @@
 import SuccessPageConfigurer from "./SuccessPageConfigurer.js";
-import SuccessPagePostRequestExecutor from "./SuccessPagePostRequestExecutor.js";
+import SuccessPagePostRequestsExecutor from "./SuccessPagePostRequestsExecutor.js";
 import SuccessPageDataResolver from "./SuccessPageDataResolver.js";
+import CommonGetRequestsExecutor from "../../CommonGetRequestsExecutor.js";
 
 export default class SuccessPageManager {
 
     successPageConfigurer;
     successPagePostRequestExecutor;
     successPageDataResolver;
+    commonGetRequestsExecutor;
 
     constructor() {
         this.successPageConfigurer = new SuccessPageConfigurer();
-        this.successPagePostRequestExecutor = new SuccessPagePostRequestExecutor();
+        this.successPagePostRequestExecutor = new SuccessPagePostRequestsExecutor();
         this.successPageDataResolver = new SuccessPageDataResolver();
+        this.commonGetRequestsExecutor = new CommonGetRequestsExecutor();
     }
 
-    //todo ТЕСТИТЬ. Я В ШОКЕ
+    /* A row's state before updating it */
     dataBeforeUpdate;
 
     onEditButtonClicked(agendaId, editButton) {
@@ -54,7 +57,7 @@ export default class SuccessPageManager {
                 .fail((jqXHR) => {
                         //todo че мы тут писали чтоб выводилось сообщения с бека?
                         alert(jqXHR.responseText);
-                        this.successPageConfigurer.setRowData(editButton, dataBeforeUpdate);
+                        this.successPageConfigurer.setRowData(editButton, this.dataBeforeUpdate);
                     }
                 )
         }
@@ -91,5 +94,9 @@ export default class SuccessPageManager {
                     );
             }
         )
+    }
+
+    onSearchButtonClicked(username) {
+        this.commonGetRequestsExecutor.executeSearchSomeOnesAgendaGetRequest(username);
     }
 }

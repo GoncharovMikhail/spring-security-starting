@@ -46,8 +46,29 @@ a:hover:after {
     width: 100%;
 }
 
-.account_icon {
-    margin-top: 35px;
-    float: right;
-    height: 50px;
+input {
+    background: transparent;
+    border: none;
+    outline:none;
+    color: white;
+    font: 800 120%/120% 'Montserrat', sans-serif;
+    font-size: 100%;
+}
+input:focus {
+    text-transform: lowercase;
+    text-decoration: underline white;
+}
+
+input::placeholder {
+    color: white;
+    font-size: 100%;
+}
+
+button {
+    background: rgba(255, 255, 255, .4);
+    color: white;
+    border: none;
+    outline: none;
+    font: 800 120%/120% 'Montserrat', sans-serif;
+    font-size: 100%;
 }

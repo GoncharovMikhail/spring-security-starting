@@ -1,57 +1,12 @@
-$('#submit').click(function () {
-        let registration = new Registration(
-            $("#email").val(),
-            $("#username").val(),
-            $("#password").val()
-        );
-
-        if (
-            registration.getEmail() != null &&
-            registration.getUsername() != null &&
-            registration.getPassword() != null
-        ) {
-            registrationPostRequest(
-                registration.getEmail(),
-                registration.getUsername(),
-                registration.getPassword()
-            );
-        }
-    }
-);
-
-function registrationPostRequest(email, username, password) {
-    $.post(
-        {
-            url: '/registration',
-            contentType: "application/json; charset=UTF-8",
-            mimeType: "text/html; charset=UTF-8",
-            scriptCharset: "utf-8",
-            data: JSON.stringify(
-                {
-                    "email": email,
-                    "username": username,
-                    "password": password
-                }
-            ),
-            success: function () {
-                alert('Successfully signed up');
-                window.location.href = '/login';
-            },
-            error: function () {
-                alert('An error occurred');
-            }
-        }
-    );
-}
-
-/*
+/**
  * A wrapper class, containing private fields:
  *  email,
  *  username,
  *  password.
  *
+ * Either all fields are verified, or Error is thrown
  */
-class Registration {
+export default class VerifiedRegistrationData {
 
     #email;
     #username;
@@ -69,7 +24,7 @@ class Registration {
             return email;
         } else {
             alert('Incorrect email input');
-            return null;
+            throw new Error('Incorrect email input')
         }
     }
 
@@ -79,7 +34,7 @@ class Registration {
             return username.toLowerCase();
         } else {
             alert('Incorrect username input - username should have 6 to 36 symbols');
-            return null;
+            throw new Error('Incorrect username input')
         }
     }
 
@@ -89,7 +44,7 @@ class Registration {
             return password;
         } else {
             alert('Incorrect password input - username should have 6 to 36 symbols');
-            return null;
+            throw new Error('Incorrect password input');
         }
     }
 

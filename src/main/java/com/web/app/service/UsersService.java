@@ -5,8 +5,8 @@ import com.web.app.model.SignUpRequestDTO;
 import com.web.app.service.exceptions.UserAlreadyExistsException;
 
 /**
- * An interface, representing all necessary methods each {@code Service} implementation should implement
- * to manage user's data.
+ * An interface, representing users data management operations,
+ * like save new user in the database, load user by username...
  */
 public interface UsersService {
 

@@ -19,4 +19,8 @@ export function onAddAgendaButtonClicked(username) {
     successPageManager.onAddAgendaButtonClicked(username);
 }
 
+export function onSearchButtonClicked() {
+    successPageManager.onSearchButtonClicked();
+}
+
 

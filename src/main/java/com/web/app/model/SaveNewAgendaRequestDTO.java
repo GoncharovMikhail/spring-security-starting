@@ -7,6 +7,11 @@ import lombok.Setter;
 
 import java.time.DayOfWeek;
 
+/**
+ * A wrapper class for saving new agenda.
+ *
+ * @see com.web.app.rest.AgendaManagementController#saveNewAgenda(SaveNewAgendaRequestDTO)
+ */
 /* Generates an empty constructor. It is used to deserialize a JSON. */
 @NoArgsConstructor
 /* Generates a constructor for all fields of a class. */
