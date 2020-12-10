@@ -32,11 +32,12 @@ input {
 }
 
 h1 {
-    /* todo не выукпила про проценты */
     font: 800 220%/220% 'Montserrat', sans-serif;
     color: white;
     cursor: default;
     margin-top: 5%;
+    margin-bottom: 0;
+    padding-bottom: 0;
 }
 
 .agenda-table {
@@ -44,7 +45,7 @@ h1 {
     font: 800 100%/100% 'Montserrat', sans-serif;
     width: 100%;
     min-width: 400px;
-    margin-top: 6%;
+    margin-top: 0;
 }
 
 .agenda-table thead tr td {
@@ -145,4 +146,20 @@ button:after {
 /* For a nice hover */
 button:hover:after {
     width: 100%;
+}
+
+.search-someones-agenda-input, .admin-secured-input {
+    width: 400px;
+    height: 50px;
+    border: 1px white;
+}
+
+.search-someones-agenda-input::placeholder, .admin-secured-input::placeholder {
+    color: white;
+    font: 800 20px/20px'Montserrat', sans-serif;
+}
+
+.search-someones-agenda-input:focus, .admin-secured-input:focus {
+    color: white;
+    font: 800 20px/20px'Montserrat', sans-serif;
 }

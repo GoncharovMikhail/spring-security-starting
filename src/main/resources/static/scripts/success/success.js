@@ -19,8 +19,16 @@ export function onAddAgendaButtonClicked(username) {
     successPageManager.onAddAgendaButtonClicked(username);
 }
 
-export function onSearchButtonClicked() {
-    successPageManager.onSearchButtonClicked();
+export function onSearchButtonClicked(username) {
+    successPageManager.onSearchButtonClicked(username);
+}
+
+export function onAdminBanButtonClicked(username) {
+    successPageManager.onAdminBanButtonClicked(username);
+}
+
+export function onAdminUnbanButtonClicked(username) {
+    successPageManager.onAdminUnbanButtonClicked(username)
 }
 
 

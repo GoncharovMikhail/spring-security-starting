@@ -2,6 +2,7 @@ import SuccessPageConfigurer from "./SuccessPageConfigurer.js";
 import SuccessPagePostRequestsExecutor from "./SuccessPagePostRequestsExecutor.js";
 import SuccessPageDataResolver from "./SuccessPageDataResolver.js";
 import CommonGetRequestsExecutor from "../../CommonGetRequestsExecutor.js";
+import SuccessPageAdminPostRequestsExecutor from "./SuccessPageAdminPostRequestsExecutor.js";
 
 export default class SuccessPageManager {
 
@@ -9,12 +10,14 @@ export default class SuccessPageManager {
     successPagePostRequestExecutor;
     successPageDataResolver;
     commonGetRequestsExecutor;
+    successPageAdminPostRequestExecutor;
 
     constructor() {
         this.successPageConfigurer = new SuccessPageConfigurer();
         this.successPagePostRequestExecutor = new SuccessPagePostRequestsExecutor();
         this.successPageDataResolver = new SuccessPageDataResolver();
         this.commonGetRequestsExecutor = new CommonGetRequestsExecutor();
+        this.successPageAdminPostRequestExecutor = new SuccessPageAdminPostRequestsExecutor();
     }
 
     /* A row's state before updating it */
@@ -82,7 +85,8 @@ export default class SuccessPageManager {
         const saveButtonInLastRow = this.successPageConfigurer.addRowToTable();
 
         saveButtonInLastRow.click(() => {
-                this.successPagePostRequestExecutor.executeSaveNewAgendaPostRequest(saveButtonInLastRow, username)
+                this.successPagePostRequestExecutor
+                    .executeSaveNewAgendaPostRequest(saveButtonInLastRow, username)
                     .done((jqXHR) => {
                             alert(jqXHR.responseText);
                             this.successPageConfigurer.afterSuccessfullySavingNewAgenda(saveButtonInLastRow);
@@ -98,5 +102,23 @@ export default class SuccessPageManager {
 
     onSearchButtonClicked(username) {
         this.commonGetRequestsExecutor.executeSearchSomeOnesAgendaGetRequest(username);
+    }
+
+    onAdminBanButtonClicked(username) {
+        this.successPageAdminPostRequestExecutor
+            .executeBanUserPostRequest(username)
+            .always((jqXHR) => {
+                    alert(jqXHR.responseText);
+                }
+            );
+    }
+
+    onAdminUnbanButtonClicked(username) {
+        this.successPageAdminPostRequestExecutor
+            .executeUnbanUserPostRequest(username)
+            .always((jqXHR) => {
+                    alert(jqXHR.responseText);
+                }
+            );
     }
 }

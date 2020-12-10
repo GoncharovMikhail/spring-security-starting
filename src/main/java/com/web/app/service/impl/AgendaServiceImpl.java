@@ -26,7 +26,7 @@ public class AgendaServiceImpl implements AgendaService {
     }
 
     /**
-     * This method saves new agenda to the database
+     * This method saves new agenda to the database.
      *
      * @see AgendaService#saveNewAgenda(SaveNewAgendaRequestDTO) for additional details.
      */

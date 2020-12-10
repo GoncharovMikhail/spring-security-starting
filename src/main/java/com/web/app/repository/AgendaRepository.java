@@ -13,7 +13,7 @@ import java.time.DayOfWeek;
 import java.util.*;
 
 /**
- * A {@code Repository} component, to interact with data in the "agenda" table.
+ * A {@link Repository} component, to interact with data in the "agenda" table.
  * <p>
  * <strong>NOTE:</strong> no implementation for this interface needed, a proxy over
  * {@link org.springframework.data.jpa.repository.support.SimpleJpaRepository} will be created,

@@ -40,8 +40,7 @@ public class AdminServiceImpl implements AdminService {
         /* User, having specified name, was banned before */
         if (!userToBan.isEnabled()) {
             log.info("IN " + this.getClass()
-                            + ", "
-                            + this.getClass().getEnclosingMethod().getName()
+                            + ", banUserByUsername(String username) method"
                             + " - user '{}' was already banned",
                     userToBan.getUsername());
             /* Nothing to do then - just exit */
@@ -52,8 +51,7 @@ public class AdminServiceImpl implements AdminService {
         usersRepository.enableOrDisableUser(false, username);
 
         log.info("IN " + this.getClass()
-                        + ", "
-                        + this.getClass().getEnclosingMethod().getName()
+                        + ", banUserByUsername(String username) method"
                         + " - user '{}' was banned",
                 userToBan.getUsername());
     }
@@ -75,8 +73,7 @@ public class AdminServiceImpl implements AdminService {
         /* User, having specified name, is enabled at the moment */
         if (userToUnBan.isEnabled()) {
             log.info("IN " + this.getClass()
-                            + ", "
-                            + this.getClass().getEnclosingMethod().getName()
+                            + ", unBanUserByUsername(String username) method"
                             + " - user '{}' wasn't yet banned",
                     userToUnBan.getUsername());
 
@@ -89,7 +86,7 @@ public class AdminServiceImpl implements AdminService {
 
         log.info("IN " + this.getClass()
                         + ", "
-                        + this.getClass().getEnclosingMethod().getName()
+                        + ", unBanUserByUsername(String username) method"
                         + " - user '{}' was unbanned",
                 userToUnBan.getUsername());
     }

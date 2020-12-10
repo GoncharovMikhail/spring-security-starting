@@ -72,8 +72,8 @@ public class UsersManagementController {
         ModelAndView modelAndView = new ModelAndView("search");
 
         UsersEntity user = usersService.loadUserByUsername(username);
-        if (user == null) {
-            throw new WrongUsernameException();
+        if (user == null || !user.isEnabled()) {
+            throw new WrongUsernameException(username + "not found");
         }
 
         Set<AgendaEntity> agendas = user.getAgendas();

@@ -10,6 +10,17 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
+/**
+ * A {@link Repository} component, to interact with data in the "agenda" table.
+ * <p>
+ * <strong>NOTE:</strong> no implementation for this interface needed, a proxy over
+ * {@link org.springframework.data.jpa.repository.support.SimpleJpaRepository} will be created,
+ * including automatically generation of implementations of methods we wrote in this interface
+ * (Spring Data understand what kind of HQL query is needed by method's name)
+ * <p>
+ * Also note, that, by default, all methods in this interface and methods in
+ * {@code SimpleJpaRepository} will be transactional, so, no need to annotate them with {@link Transactional}.
+ */
 @Repository
 public interface UsersRepository extends JpaRepository<UsersEntity, Integer> {
 

@@ -28,9 +28,6 @@
                         <a id="sign_in" href="/login">sign in</a>
                     </li>
                     <li>
-                        <a id="about" href="/about">about</a>
-                    </li>
-                    <li>
                         <input id="input-search" placeholder="search someone's agenda"/>
                         <button onclick="onSearchButtonClicked($('#input-search').val())">Search</button>
                     </li>
@@ -43,17 +40,10 @@
 </body>
 <!-- .js -->
 <script type="module">
-    import CommonGetRequestsExecutor from "/scripts/CommonGetRequestsExecutor.js";
+    import {onSearchButtonClicked} from '/scripts/success/success.js';
 
-    window.onSearchButtonClicked = function (username) {
-        alert(username);
-        const commonGetRequestsExecutor = new CommonGetRequestsExecutor();
-        const usernameRegExp = /^\w{6,32}$/i;
-        if (usernameRegExp.test(String(username).toLowerCase())) {
-            commonGetRequestsExecutor.onSearchButtonClicked(username);
-        } else {
-            alert('Incorrect username input - username should have 6 to 36 symbols');
-        }
+    window.onSearchButtonClicked = function(username) {
+        onSearchButtonClicked(username);
     };
 </script>
 

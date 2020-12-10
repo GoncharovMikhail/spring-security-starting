@@ -122,15 +122,10 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 /* Allows restricting access based upon the requests via URL patterns*/
                 .authorizeRequests()
 
-                /*@GET api, available only to admins */
-                .antMatchers(
-                        "/management"
-                ).hasRole("ADMIN")
-
                 /* @POST api, available only to admins */
                 .antMatchers(
-                        "/ban/**",
-                        "/unBan/**"
+                        "/ban",
+                        "/unban"
                 ).hasRole("ADMIN")
 
                 /* resources */
