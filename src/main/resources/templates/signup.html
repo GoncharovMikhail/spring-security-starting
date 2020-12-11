@@ -7,20 +7,30 @@
     <!-- .css -->
     <link rel="stylesheet" type="text/css" href="styles/common.css">
     <link rel="stylesheet" type="text/css" href="styles/pages/signup.css">
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
 <form>
+    <label for="email">Input email</label>
     <input type="text" id="email" placeholder="Email">
     <br>
+    <label for="username">Input username</label>
     <input type="text" id="username" placeholder="Username">
     <br>
+    <label for="password">Input password</label>
     <input type="password" id="password" placeholder="Password">
     <br>
     <input type="submit" onclick="onSignUpButtonClicked()" value="Sign up"/>
 </form>
 </body>
+
+<!-- jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!--
+ - Attach needed functions to the <pre> window </pre> manually:
+ -
+ - https://stackoverflow.com/questions/49338193/how-to-use-code-from-script-with-type-module
+-->
 <script type="module">
     import {onSignUpButtonClicked} from "/scripts/signup/signup.js";
 

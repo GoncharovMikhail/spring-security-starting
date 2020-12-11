@@ -1,9 +1,20 @@
-/**
- * An entity class, representing row table's data: day, time, note and accessible.
- * Also proceed some verifications.
+/** A wrapper class, containing private fields:
+ * <ul>
+ *     <li>
+ *         day
+ *     </li>
+ *     <li>
+ *         time
+ *     </li>
+ *     <li>
+ *         note
+ *     </li>
+ *     <li>
+ *         accessible
+ *     </li>
+ * </ul>
  */
-
-export default class VerifiedRowData {
+export default class RowData {
 
     #day;
 
@@ -15,23 +26,9 @@ export default class VerifiedRowData {
 
     constructor(day, time, note, accessible) {
         this.#day = day;
-        this.#time = this.#verifyTime(time);
-        this.#note = this.#verifyNote(note);
+        this.#time = time;
+        this.#note = note;
         this.#accessible = accessible;
-    }
-
-    #verifyTime(time) {
-        if (time.length < 5) {
-            throw new Error('Incorrect time input');
-        }
-        return time;
-    }
-
-    #verifyNote(note) {
-        if (note.length === 0) {
-            throw new Error('Incorrect note input');
-        }
-        return note;
     }
 
     getDay() {
@@ -51,7 +48,7 @@ export default class VerifiedRowData {
     }
 
     equals(otherData) {
-        if (!(otherData instanceof VerifiedRowData)) {
+        if (!(otherData instanceof RowData)) {
             return false;
         } else {
             if (this.getDay() === otherData.getDay() &&

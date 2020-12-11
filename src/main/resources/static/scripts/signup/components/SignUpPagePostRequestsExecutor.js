@@ -1,7 +1,15 @@
 export default class SignUpPagePostRequestsExecutor {
 
-    executeRegistrationPostRequest(email, username, password) {
-        $.post(
+    executeRegistrationPostRequest(verifiedRegistrationData) {
+        return this.#registrationPostRequest(
+            verifiedRegistrationData.getEmail(),
+            verifiedRegistrationData.getUsername(),
+            verifiedRegistrationData.getPassword()
+        )
+    }
+
+    #registrationPostRequest(email, username, password) {
+        return $.post(
             {
                 url: '/registration',
                 contentType: "application/json; charset=UTF-8",

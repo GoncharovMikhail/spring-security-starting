@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -122,17 +121,18 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 /* Allows restricting access based upon the requests via URL patterns*/
                 .authorizeRequests()
 
+                /* Allow resources for everyone */
+                .antMatchers(
+                        "/styles/**",
+                        "/scripts/**"
+                ).permitAll()
+
                 /* @POST api, available only to admins */
                 .antMatchers(
                         "/ban",
                         "/unban"
                 ).hasRole("ADMIN")
 
-                /* resources */
-                .antMatchers(
-                        "/styles/**",
-                        "/scripts/**"
-                ).permitAll()
 
                 /* @GET api */
                 .antMatchers(

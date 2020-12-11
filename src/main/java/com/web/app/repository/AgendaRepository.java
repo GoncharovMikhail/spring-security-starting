@@ -10,7 +10,9 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.DayOfWeek;
-import java.util.*;
+import java.util.Date;
+import java.util.Optional;
+import java.util.Set;
 
 /**
  * A {@link Repository} component, to interact with data in the "agenda" table.
@@ -22,8 +24,8 @@ import java.util.*;
  * <p>
  * Also note, that, by default, all methods in this interface and methods in
  * {@code SimpleJpaRepository} will be transactional, so, no need to annotate them with {@link Transactional}.
- * <strong>BUT!</strong> it's good practice to make methods, annotated with {@link Modifying} annotation
- * transactional. See 6.7.1: https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#transactions
+ *
+ * @see org.springframework.data.jpa.repository.JpaRepository
  */
 @Repository
 public interface AgendaRepository extends JpaRepository<AgendaEntity, Long> {
@@ -39,25 +41,22 @@ public interface AgendaRepository extends JpaRepository<AgendaEntity, Long> {
      * This method finds agenda by <strong>it's</strong> id.
      *
      * @param id agenda's id.
+     * @return an {@link Optional<AgendaEntity>} - a non-null wrapper of agenda.
      */
     Optional<AgendaEntity> findById(Long id);
 
     /**
-     * This method finds all user's agenda.
+     * This method updates agenda by <strong>it's</strong> id.
+     * <p>
+     * <strong>NOTE!</strong> it's good practice to make methods, annotated with {@link Modifying} annotation
+     * transactional. See 6.7.1: https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#transactions
      *
-     * @param usersEntity user
-     * @return all user's agenda
-     */
-    Set<AgendaEntity> findByUsersid(UsersEntity usersEntity);
-
-    /**
-     * This method updates agenda by <strong>it's</strong> id
-     * @param updated when agenda was lastly updated(at the moment we evoked this method)
-     * @param dayOfWeek day
-     * @param time time
+     * @param updated    when agenda was lastly updated(at the moment we evoked this method)
+     * @param dayOfWeek  day
+     * @param time       time
      * @param accessible accessible
-     * @param note note
-     * @param id <strong>agenda's id</strong>
+     * @param note       note
+     * @param id         <strong>agenda's id</strong>
      */
     @Modifying
     @Query("UPDATE AgendaEntity a " +

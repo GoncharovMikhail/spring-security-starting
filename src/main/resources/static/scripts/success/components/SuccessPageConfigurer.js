@@ -1,5 +1,3 @@
-import SuccessPageDataResolver from "./SuccessPageDataResolver.js";
-
 export const DAYS_OF_WEEK = [
     'MONDAY',
     'TUESDAY',
@@ -18,10 +16,10 @@ export const BOOLEANS = [
 const CLEAVE_INPUT_CLASS_NAME = 'cleave-formatted-input';
 
 export default class SuccessPageConfigurer {
-    successPageDataResolver = new SuccessPageDataResolver();
 
     configureOnEditButtonClicked(editButton) {
         this.#configureRow(editButton);
+        /* Set <pre> "save" </pre> text to specified button */
         $(editButton).html('save');
     }
 
@@ -46,11 +44,11 @@ export default class SuccessPageConfigurer {
             /* Read the 'DAY OF WEEK' cell's text, it may be null, if we read it from a new-added row */
             let dayBeforeUpdate = $(editableElement).text();
 
-            /* Create an <select...></select> element */
+            /* Create an <pre> <select...></select> </pre> element */
             let daySelectList = document.createElement('select');
 
             DAYS_OF_WEEK.forEach(DAY => {
-                    /* Create an <option...></option> element */
+                    /* Create an <pre> <option...></option> </pre> element */
                     let option = document.createElement('option');
                     /* Set an option's value */
                     option.value = DAY.toUpperCase();
@@ -66,13 +64,15 @@ export default class SuccessPageConfigurer {
                         }
                     }
 
-                    /* Append this <option.../> element th the <select...></select> element */
+                    /* Append this <pre> <option...></option> </pre> element to the
+                     * <pre> <select...></select> </pre> element */
                     daySelectList.appendChild(option);
                 }
             );
 
 
-            /* Place this <select...></select> element inside the <td...></td> element,
+            /* Place this <pre> <select...></select> </pre> element inside the
+             * <pre> <td...></td> </pre> element,
              * having name "day" */
             editableElement.innerHTML = daySelectList.outerHTML;
         }
@@ -81,22 +81,23 @@ export default class SuccessPageConfigurer {
             /* Read the 'TIME' cell's text, it may be null, if we read it from a new-added row */
             let timeBeforeUpdate = $(editableElement).text();
 
-            /* Create an <input/> element and set it the <td/> element */
+            /* Create an <pre> <input...></input> </pre> element and set it the
+             * <pre> <td...></td> </pre> element */
             let cleaveFormattedInput = document.createElement('input');
 
             /* Set a class name to this input (thus it can by styled with .css) */
             cleaveFormattedInput.className = CLEAVE_INPUT_CLASS_NAME;
-            /* Place this <input...></input> element inside the <td...></td> element,
-             * having name "time" */
+            /* Place this<pre> <input...></input> </pre> element inside the
+             * <pre> <td...></td> </pre> element,
+             * having name <pre> "time" </pre> */
             editableElement.innerHTML = cleaveFormattedInput.outerHTML;
 
             /* Cleave formats the input.
-             * NOTE: we format input AFTER setting created <input/> to html document.
-             * Cleave works ONLY AFTER ALL DOM ELEMENTS WERE LOADED.
+             * NOTE: we format input AFTER setting created <pre> <input...></input> </pre>
+             * to html document. Cleave works ONLY AFTER ALL DOM ELEMENTS WERE LOADED.
              *
              * Also, set '.' before className - thus we indicate that we select
              * an element by it's class name */
-            //todo а клив первым параметром принимает jQuery селектор что ли? Сам объект он не принимает?
             new Cleave('.' + CLEAVE_INPUT_CLASS_NAME,
                 {
                     time: true,
@@ -114,14 +115,15 @@ export default class SuccessPageConfigurer {
         }
 
         if ($(editableElement).attr('name') === 'accessible') {
-            /* Read the 'ACCESSIBLE' cell's text, it may be null, if we read it from a new-added row */
+            /* Read the <pre> "accessible" </pre> cell's text.
+             * It may be null, if we read it from a new-added row */
             let accessibleBeforeUpdate = $(editableElement).text();
 
-            /* Create an <select...></select> element */
+            /* Create a <pre> <select...></select> </pre> element */
             let trueOrFalseSelect = document.createElement('select');
 
             BOOLEANS.forEach(boolean => {
-                    /* Create an <option...></option> element */
+                    /* Create an <pre> <option...></option> </pre> element */
                     let option = document.createElement('option');
                     /* Set an option's value */
                     option.value = boolean.toUpperCase();
@@ -137,13 +139,14 @@ export default class SuccessPageConfigurer {
                         }
                     }
 
-                    /* Append this <option.../> element th the <select...></select> element */
+                    /* Append this <pre> <option...></option> </pre> element to the
+                     * <pre> <select...></select> </pre> element */
                     trueOrFalseSelect.appendChild(option);
                 }
             );
 
-            /* Place this <select...></select> element inside the <td...></td> element,
-             * having name "accessible" */
+            /* Place this <pre> <select...></select> </pre> element inside the
+             * <pre> <td...></td> </pre> element, having name <pre> "accessible" </pre> */
             editableElement.innerHTML = trueOrFalseSelect.outerHTML;
         }
     }
@@ -152,8 +155,10 @@ export default class SuccessPageConfigurer {
         $(specificButton).closest('tr').find('td')
             .each((column, cell) => {
 
+                    /* Each cell shouldn't be content editable now */
                     $(cell).attr('contenteditable', 'false');
 
+                    /* Set all cell's values */
                     if ($(cell).attr('name') === 'day') {
                         $(cell).html(verifiedData.getDay());
                     }
@@ -172,10 +177,12 @@ export default class SuccessPageConfigurer {
                 }
             );
 
+        /* Set <pre> specificButton's </pre> text to <pre> "edit" </pre>*/
         $(specificButton).html('edit');
     }
 
     addRowToTable() {
+        /* Add a new row to the end of the table. */
         $('.agenda-table > tbody:last-child').append(
             '<tr>' +
             '<td name="day"></td>' +
@@ -191,28 +198,36 @@ export default class SuccessPageConfigurer {
             '</tr>'
         );
 
+        /* Get the <pre> "delete" </pre> button in the last row (it is the last in this row). */
         let deleteButtonInLastRow = $('.agenda-table > tbody:last-child').find('td:last');
 
+        /* Set <pre> "delete" </pre> button <pre> click </pre> function. */
         deleteButtonInLastRow.click(() => {
                 this.deleteRowFromTable(deleteButtonInLastRow);
             }
         );
 
+        /* Get the <pre> "save" </pre> button in the last row
+         * (it goes before the <pre> "delete" </pre> button). */
         let saveButtonInLastRow = deleteButtonInLastRow.prev('td');
 
         this.#configureRow(saveButtonInLastRow);
 
-        /* Returns the 'SAVE' button in the last row*/
+        /* Returns the <pre> "save" </pre> button in the last row.
+         * It will be configured by the <pre> SuccessPageManager </pre>. */
         return saveButtonInLastRow;
     }
 
     deleteRowFromTable(deleteButton) {
+        /* Delete a row, corresponding to the <pre> "delete" </pre> button. */
         $(deleteButton).closest('tr').remove();
     };
 
-    afterSuccessfullySavingNewAgenda(saveButtonInLastRow) {
-        this.setRowData(saveButtonInLastRow, this.successPageDataResolver
-            .resolveDataFromContentEditableRowCorrespondingToSpecificButton(saveButtonInLastRow));
+    afterSuccessfullySavingNewAgenda(saveButtonInLastRow, justSavedRowDataInTheDatabase) {
+        this.setRowData(saveButtonInLastRow, justSavedRowDataInTheDatabase);
+        //todo Чето сложно - агенда теперь менеджится сервером (ей присваивается айдишник и тд и тп
+        // + у меня таблица должна быть отсортирована - а сортировать джаваскритом как-то не в кайф),
+        // да и onDelete должен быть переопределен. Сложна
         location.reload();
         return false;
     }

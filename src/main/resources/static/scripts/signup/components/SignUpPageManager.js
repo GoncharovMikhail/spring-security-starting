@@ -1,5 +1,6 @@
 import SignUpPagePostRequestsExecutor from "./SignUpPagePostRequestsExecutor.js";
 import SignUpPageDataResolver from "./SignUpPageDataResolver.js";
+import Verifier from "../../common/Verifier.js";
 
 
 export default class SignUpPageManager {
@@ -13,14 +14,17 @@ export default class SignUpPageManager {
     }
 
     onSignUpButtonClicked() {
-        const verifiedRegistrationData = this.signUpPageDataResolver
+        const registrationData = this.signUpPageDataResolver
             .resolveRegistrationData();
 
+        try {
+            Verifier.verifyRegistrationData(registrationData)
+        } catch (e) {
+            alert('Wrong input');
+            return;
+        }
+
         this.signUpPagePostRequestsExecutor
-            .executeRegistrationPostRequest(
-                verifiedRegistrationData.getEmail(),
-                verifiedRegistrationData.getUsername(),
-                verifiedRegistrationData.getPassword()
-            );
+            .executeRegistrationPostRequest(registrationData);
     }
 }

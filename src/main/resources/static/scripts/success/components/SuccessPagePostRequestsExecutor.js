@@ -1,12 +1,6 @@
-import SuccessPageDataResolver from "./SuccessPageDataResolver.js";
-
 export default class SuccessPagePostRequestsExecutor {
 
-    successPageDataResolver = new SuccessPageDataResolver();
-
-    executeUpdateAgendaByItsIdPostRequest(agendaId, editButton) {
-        const verifiedRowDataToUpdate = this.successPageDataResolver
-            .resolveDataFromContentEditableRowCorrespondingToSpecificButton(editButton);
+    executeUpdateAgendaByItsIdPostRequest(agendaId, verifiedRowDataToUpdate) {
 
         return this.#updateAgendaByItsIdPostRequest(
             agendaId,
@@ -53,10 +47,7 @@ export default class SuccessPagePostRequestsExecutor {
         );
     }
 
-    executeSaveNewAgendaPostRequest(saveButton, username) {
-        const verifiedRowData = this.successPageDataResolver
-            .resolveDataFromContentEditableRowCorrespondingToSpecificButton(saveButton);
-
+    executeSaveNewAgendaPostRequest(username, verifiedRowData) {
         return this.#saveNewAgendaPostRequest(
             username,
             verifiedRowData.getDay(),

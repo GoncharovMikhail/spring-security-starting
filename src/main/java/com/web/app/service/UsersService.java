@@ -3,6 +3,7 @@ package com.web.app.service;
 import com.web.app.entity.UsersEntity;
 import com.web.app.model.SignUpRequestDTO;
 import com.web.app.service.exceptions.UserAlreadyExistsException;
+import org.springframework.data.repository.query.Param;
 
 /**
  * An interface, representing users data management operations,
@@ -14,7 +15,7 @@ public interface UsersService {
      * This Method saves user in database by email, username and password, which are wrapped by signUpRequest.
      *
      * @param signUpRequest the wrapper for email, username and password.
-     * @throws UserAlreadyExistsException iff there is the same username/password/username and password in database.
+     * @throws UserAlreadyExistsException iff there is the same email/username in database.
      */
     void saveUserInDatabase(SignUpRequestDTO signUpRequest) throws UserAlreadyExistsException;
 
@@ -24,7 +25,13 @@ public interface UsersService {
      *
      * @param username the specified username.
      * @return all user's data, represented as entity.
+     * @see com.web.app.repository.UsersRepository#findByUsername(String)
      * @see com.web.app.security.UsersDetailsService#loadUserByUsername(String)
      */
     UsersEntity loadUserByUsername(String username);
+
+    /**
+     * @see com.web.app.repository.UsersRepository#enableOrDisableUser(boolean, String)
+     */
+    void enableOrDisableUser(boolean toEnable, String username);
 }

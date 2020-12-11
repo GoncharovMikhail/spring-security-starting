@@ -11,9 +11,6 @@
     <!-- .css -->
     <link rel="stylesheet" type="text/css" href="/styles/common.css">
     <link rel="stylesheet" type="text/css" href="/styles/pages/welcome.css">
-
-    <!-- jQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
 <header>
@@ -28,8 +25,8 @@
                         <a id="sign_in" href="/login">sign in</a>
                     </li>
                     <li>
-                        <input id="input-search" placeholder="search someone's agenda"/>
-                        <button onclick="onSearchButtonClicked($('#input-search').val())">Search</button>
+                        <input name="search-someones-agenda" placeholder="search someone's agenda"/>
+                        <button onclick="onSearchButtonClicked()">Search</button>
                     </li>
                 </ul>
 
@@ -38,12 +35,20 @@
     </div>
 </header>
 </body>
-<!-- .js -->
-<script type="module">
-    import {onSearchButtonClicked} from '/scripts/success/success.js';
 
-    window.onSearchButtonClicked = function(username) {
-        onSearchButtonClicked(username);
+<!-- jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!--
+ - Attach needed functions to the <pre> window </pre> manually:
+ -
+ - https://stackoverflow.com/questions/49338193/how-to-use-code-from-script-with-type-module
+-->
+<script type="module">
+    import {onSearchButtonClicked} from '/scripts/welcome/welcome.js';
+
+    window.onSearchButtonClicked = function() {
+        onSearchButtonClicked();
     };
 </script>
 

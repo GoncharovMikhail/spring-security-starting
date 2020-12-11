@@ -44,12 +44,13 @@ public class AgendaManagementController {
         return new ResponseEntity<>("Successfully deleted your agenda!", HttpStatus.OK);
     }
 
-    @ExceptionHandler(RuntimeException.class)
+    //todo ужас - рантаймов слишком многоБ думаю, надо каждое по отдельности обрабатывать
+/*    @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<String> handle(RuntimeException r) {
         log.error("IN " + this.getClass() + " a RuntimeException occurred: " + r);
         return new ResponseEntity<>(
                 "Server couldn't process the request",
                 HttpStatus.INTERNAL_SERVER_ERROR);
-    }
+    }*/
 
 }

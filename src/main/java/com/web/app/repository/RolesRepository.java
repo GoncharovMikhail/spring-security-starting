@@ -17,6 +17,8 @@ import java.util.List;
  * <p>
  * Also note, that, by default, all methods in this interface and methods in
  * {@code SimpleJpaRepository} will be transactional, so, no need to annotate them with {@link Transactional}.
+ *
+ * @see org.springframework.data.jpa.repository.JpaRepository
  */
 @Repository
 public interface RolesRepository extends JpaRepository<RolesEntity, String> {

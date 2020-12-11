@@ -44,6 +44,11 @@ input[type=submit] {
     cursor: pointer;
 }
 
+label {
+    font: 800 100%/100% 'Montserrat', sans-serif;
+    color: white;
+}
+
 a {
     text-decoration: none;
     font: 800 100%/100% 'Montserrat', sans-serif;

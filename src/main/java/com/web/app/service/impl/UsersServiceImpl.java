@@ -143,4 +143,9 @@ public class UsersServiceImpl implements UsersService {
     public UsersEntity loadUserByUsername(String username) {
         return usersRepository.findByUsername(username);
     }
+
+    @Override
+    public void enableOrDisableUser(boolean toEnable, String username) {
+        usersRepository.enableOrDisableUser(toEnable, username);
+    }
 }

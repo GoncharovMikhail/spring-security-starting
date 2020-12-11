@@ -1,7 +1,6 @@
-package com.web.app.entity.util;
+package com.web.app.rest.util;
 
 import com.web.app.entity.AgendaEntity;
-import sun.misc.Unsafe;
 
 import java.util.Collection;
 import java.util.Comparator;
@@ -13,6 +12,9 @@ import java.util.stream.Collectors;
  */
 public final class AgendaUtil {
 
+    /**
+     * This is an util class - all methods here should be static an this class shouldn't be instantiated.
+     */
     private AgendaUtil() {
         throw new AssertionError(this.getClass() +
                 " can't be instantiated");

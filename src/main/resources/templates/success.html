@@ -11,22 +11,19 @@
     <!-- .css -->
     <link rel="stylesheet" type="text/css" href="styles/common.css">
     <link rel="stylesheet" type="text/css" href="styles/pages/success.css">
-
-    <!-- jQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
 <div class="container-table">
     <h1 th:text="'Hello, ' + ${username}"></h1>
 
-    <input sec:authorize="hasRole('ROLE_ADMIN')" class="admin-secured-input" placeholder="ban a user" id="admin-ban-a-user"/><button onclick="onAdminBanButtonClicked($('#admin-ban-a-user').val().toLowerCase())">Ban</button>
-    <br sec:authorize="hasRole('ROLE_ADMIN')"/>
-    <input sec:authorize="hasRole('ROLE_ADMIN')" class="admin-secured-input" placeholder="unban a user" id="admin-unban-a-user"/><button onclick="onAdminUnbanButtonClicked($('#admin-unban-a-user').val().toLowerCase())">Unban</button>
+    <input sec:authorize="hasRole('ROLE_ADMIN')" class="admin-secured-input" placeholder="Manage a user" id="admin-input"/>
+    <button sec:authorize="hasRole('ROLE_ADMIN')" onclick="onAdminBanButtonClicked()">Ban</button>
+    <button sec:authorize="hasRole('ROLE_ADMIN')" onclick="onAdminUnbanButtonClicked()">Unban</button>
     <br sec:authorize="hasRole('ROLE_ADMIN')"/>
     <br sec:authorize="hasRole('ROLE_ADMIN')"/>
 
     <input class="search-someones-agenda-input" id="search-someones-agenda-input" placeholder="Search for someone's agenda"/>
-    <button onclick="onSearchButtonClicked($('#search-someones-agenda-input').val())">Search!</button>
+    <button onclick="onSearchButtonClicked()">Search!</button>
 
     <h1>Your agendas:</h1>
     <table class="agenda-table">
@@ -56,22 +53,30 @@
         </tr>
         </tbody>
     </table>
-    <button th:onclick="|onAddAgendaButtonClicked()|">add agenda</button>
+    <button th:onclick="|onAddButtonClicked()|">add agenda</button>
 </div>
 </body>
+
+<!-- jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- 'Cleave' formatter for <input/> elements -->
+<script type="text/javascript" src="/scripts/success/additional/cleave.js"></script>
+
 <!--
- - Attach needed functions to the <pre>window</pre> manually:
+ - Attach needed functions to the <pre> window </pre> manually:
  -
  - https://stackoverflow.com/questions/49338193/how-to-use-code-from-script-with-type-module
 -->
 <script type="module" th:inline="javascript">
     import {onEditButtonClicked} from '/scripts/success/success.js';
     import {onDeleteButtonClicked} from '/scripts/success/success.js';
-    import {onAddAgendaButtonClicked} from '/scripts/success/success.js';
+    import {onAddButtonClicked} from '/scripts/success/success.js';
     import {onSearchButtonClicked} from '/scripts/success/success.js';
     import {onAdminBanButtonClicked} from '/scripts/success/success.js';
     import {onAdminUnbanButtonClicked} from '/scripts/success/success.js';
 
+    //todo ПРО $(this) - это вообще че, не пойму
     window.onEditButtonClicked = function (agendaId, editButton) {
         onEditButtonClicked(agendaId, editButton);
     };
@@ -80,23 +85,20 @@
         onDeleteButtonClicked(agendaId, deleteButton);
     };
 
-    window.onAddAgendaButtonClicked = function () {
-        onAddAgendaButtonClicked([[${username}]]);
+    window.onAddButtonClicked = function () {
+        onAddButtonClicked([[${username}]]);
     };
 
-    window.onSearchButtonClicked = function (username) {
-        onSearchButtonClicked(username);
+    window.onSearchButtonClicked = function () {
+        onSearchButtonClicked();
     };
 
-    window.onAdminBanButtonClicked = function (username) {
-        onAdminBanButtonClicked(username);
+    window.onAdminBanButtonClicked = function () {
+        onAdminBanButtonClicked();
     };
 
-    window.onAdminUnbanButtonClicked = function (username) {
-        onAdminUnbanButtonClicked(username);
+    window.onAdminUnbanButtonClicked = function () {
+        onAdminUnbanButtonClicked();
     }
 </script>
-
-<!-- 'Cleave' formatter for <input/> elements -->
-<script type="text/javascript" src="/scripts/cleave.js"></script>
 </html>

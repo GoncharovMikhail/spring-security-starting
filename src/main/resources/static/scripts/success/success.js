@@ -15,20 +15,20 @@ export function onDeleteButtonClicked(agendaId, deleteButton) {
     successPageManager.onDeleteButtonClicked(agendaId, deleteButton);
 }
 
-export function onAddAgendaButtonClicked(username) {
-    successPageManager.onAddAgendaButtonClicked(username);
+export function onAddButtonClicked(username) {
+    successPageManager.onAddButtonClicked(username);
 }
 
-export function onSearchButtonClicked(username) {
-    successPageManager.onSearchButtonClicked(username);
+export function onSearchButtonClicked() {
+    successPageManager.onSearchButtonClicked();
 }
 
-export function onAdminBanButtonClicked(username) {
-    successPageManager.onAdminBanButtonClicked(username);
+export function onAdminBanButtonClicked() {
+    successPageManager.onAdminBanButtonClicked();
 }
 
-export function onAdminUnbanButtonClicked(username) {
-    successPageManager.onAdminUnbanButtonClicked(username)
+export function onAdminUnbanButtonClicked() {
+    successPageManager.onAdminUnbanButtonClicked()
 }
 
 
