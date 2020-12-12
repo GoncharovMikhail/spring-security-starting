@@ -47,6 +47,14 @@ export default class RowData {
         return this.#accessible;
     }
 
+    /**
+     * This method is analogue to <pre> equals <pre> method in java
+     *
+     * @see SuccessPageManager#onEditButtonClicked.
+     * @param otherData - other data to compare with.
+     * @returns {boolean} - <pre> true </pre>, if one data is equal to
+     * <pre> otherData </pre>, else <pre> false </pre>.
+     */
     equals(otherData) {
         if (!(otherData instanceof RowData)) {
             return false;

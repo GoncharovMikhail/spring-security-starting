@@ -1,5 +1,8 @@
 import RowData from "../entity/RowData.js";
 
+/**
+ * A class for resolving data on <pre> success </pre> page.
+ */
 export default class SuccessPageDataResolver {
 
     resolveDataFromContentEditableRowCorrespondingToSpecificButton(specificButton) {
@@ -12,15 +15,16 @@ export default class SuccessPageDataResolver {
             .each((column, cell) => {
 
                     if ($(cell).attr('name') === 'day') {
-                        /* <pre>... .find('input:first') ...</pre> finds selected option from
-                         * <pre><select...></select></pre> element. */
+                        /* <pre> ... .find('input:first') ... </pre> finds selected option from
+                         * <pre> <select...></select> </pre> element. */
                         day = $(cell).find(':selected').text();
                     }
 
                     if ($(cell).attr('name') === 'time') {
-                        /* NOTE: in this cell we placed <pre>Cleave</pre> formatted input, so we need
-                         * to get <strong>it's</strong> value, therefore, we write:
-                         * <pre>...$(cell).find('input:first').val();</pre>*/
+                        /* NOTE: in this cell we placed <pre> Cleave </pre> formatted input,
+                         * so we need  to get <strong>it's</strong> value, therefore,
+                         * we write:
+                         * <pre> ...$(cell).find('input:first').val(); </pre>*/
                         time = $(cell).find('input:first').val();
                     }
 
@@ -29,7 +33,7 @@ export default class SuccessPageDataResolver {
                     }
 
                     if ($(cell).attr('name') === 'accessible') {
-                        /* <pre>... .find('input:first') ...</pre> finds selected option from
+                        /* <pre> ... .find('input:first') ... </pre> finds selected option from
                          * <pre> <select...></select> </pre> element.
                          * NOTE: convert it to lower case to avoid
                          * cast(too <pre> boolean </pre>) exception on server. */
@@ -74,10 +78,12 @@ export default class SuccessPageDataResolver {
     }
 
     resolveUsernameForSearchingAgendas() {
-        return $('#search-someones-agenda-input').val().toLowerCase();
+        return $('#search-someones-agenda-input').val()
+            .toLowerCase();
     }
 
     resolveUsernameForBanningOrUnbanning() {
-        return $('#admin-input').val().toLowerCase();
+        return $('#admin-input').val()
+            .toLowerCase();
     }
 }

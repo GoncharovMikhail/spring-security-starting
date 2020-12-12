@@ -2,7 +2,9 @@ import SignUpPagePostRequestsExecutor from "./SignUpPagePostRequestsExecutor.js"
 import SignUpPageDataResolver from "./SignUpPageDataResolver.js";
 import Verifier from "../../common/Verifier.js";
 
-
+/**
+ * A manager for <pre> signup </pre> page.
+ */
 export default class SignUpPageManager {
 
     signUpPagePostRequestsExecutor;
@@ -14,9 +16,11 @@ export default class SignUpPageManager {
     }
 
     onSignUpButtonClicked() {
+        /* Resolve username for signing up... */
         const registrationData = this.signUpPageDataResolver
             .resolveRegistrationData();
 
+        /* ...try to verify it ...*/
         try {
             Verifier.verifyRegistrationData(registrationData)
         } catch (e) {
@@ -24,6 +28,9 @@ export default class SignUpPageManager {
             return;
         }
 
+        /* ...if everything is fine,
+         * execute a <pre> '/registration' </pre>
+         * <pre> POST </pre> request. */
         this.signUpPagePostRequestsExecutor
             .executeRegistrationPostRequest(registrationData);
     }

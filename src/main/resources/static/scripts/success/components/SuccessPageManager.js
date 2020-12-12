@@ -6,6 +6,9 @@ import SuccessPageAdminPostRequestsExecutor from "./SuccessPageAdminPostRequests
 import Verifier from "../../common/Verifier.js";
 import {ALERT_WRONG_USERNAME_INPUT} from "../../common/Constants.js";
 
+/**
+ * A manager for <pre> success </pre> page.
+ */
 export default class SuccessPageManager {
 
     successPageConfigurer;

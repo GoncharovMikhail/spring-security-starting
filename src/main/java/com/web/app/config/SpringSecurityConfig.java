@@ -108,9 +108,19 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         httpSecurity
 
                 /* We can configure 3 types of user's authentication:
-                 *  1. Basic authentication.
-                 *  2. Form-based authentication
-                 *  3. Token authentication(for example, JWT)
+                 * <pre>
+                 *  <ul>
+                 *      <li>
+                 *          Basic authentication
+                 *      </li>
+                 *      <li>
+                 *          Form-based authentication
+                 *      </li>
+                 *      <li>
+                 *          Token authentication(for example, JWT)
+                 *      </li>
+                 *  </ul>
+                 * </pre>
                  * We'll use Form-based authentication because it's easy enough and most-commonly used. */
                 .httpBasic().disable()
 
@@ -118,7 +128,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                  * https://docs.spring.io/spring-security/site/docs/4.1.x/reference/html/csrf.html */
                 .csrf().disable()
 
-                /* Allows restricting access based upon the requests via URL patterns*/
+                /* Allows restricting access based upon the requests via URL patterns */
                 .authorizeRequests()
 
                 /* Allow resources for everyone */
@@ -127,17 +137,21 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/scripts/**"
                 ).permitAll()
 
-                /* @POST api, available only to admins */
+                /* POST api, available only to admins */
                 .antMatchers(
                         "/ban",
                         "/unban"
                 ).hasRole("ADMIN")
 
-
-                /* @GET api */
+                /* GET api, allowed only to anonymous users
+                 * https://docs.spring.io/spring-security/site/docs/3.0.x/reference/anonymous.html */
                 .antMatchers(
                         "/welcome",
-                        "/signup",
+                        "/signup"
+                ).permitAll()
+
+                /* @GET api, allowed to all users */
+                .antMatchers(
                         "/search"
                 ).permitAll()
 

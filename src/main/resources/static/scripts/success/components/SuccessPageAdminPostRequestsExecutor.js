@@ -1,3 +1,8 @@
+/**
+ * A <pre> POST </pre> requests executor for
+ * <pre> success </pre> page.
+ * For admins <strong>ONLY</strong>.
+ */
 export default class SuccessPageAdminPostRequestsExecutor {
 
     executeBanUserPostRequest(username) {

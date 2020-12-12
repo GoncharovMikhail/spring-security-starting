@@ -1,3 +1,7 @@
+/**
+ * A <pre> POST </pre> requests executor for
+ * <pre> success </pre> page.
+ */
 export default class SuccessPagePostRequestsExecutor {
 
     executeUpdateAgendaByItsIdPostRequest(agendaId, verifiedRowDataToUpdate) {

@@ -15,6 +15,10 @@ export const BOOLEANS = [
 
 const CLEAVE_INPUT_CLASS_NAME = 'cleave-formatted-input';
 
+/**
+ * A class for configuring <pre> DOM </pre> elements of the
+ * <pre> success </pre> page.
+ */
 export default class SuccessPageConfigurer {
 
     configureOnEditButtonClicked(editButton) {
@@ -94,7 +98,8 @@ export default class SuccessPageConfigurer {
 
             /* Cleave formats the input.
              * NOTE: we format input AFTER setting created <pre> <input...></input> </pre>
-             * to html document. Cleave works ONLY AFTER ALL DOM ELEMENTS WERE LOADED.
+             * to html document.
+             * Cleave works <strong>ONLY AFTER ALL ALERT_WRONG_USERNAME_INPUT ELEMENTS WERE LOADED</strong>.
              *
              * Also, set '.' before className - thus we indicate that we select
              * an element by it's class name */

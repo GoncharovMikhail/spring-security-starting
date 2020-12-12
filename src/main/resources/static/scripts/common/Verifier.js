@@ -1,3 +1,6 @@
+/**
+ * A class for verifying various data.
+ */
 export default class Verifier {
 
     constructor() {
@@ -5,20 +8,21 @@ export default class Verifier {
     }
 
     static verifyEmail(emailToVerify) {
+        /* See https://emailregex.com/ */
         const EMAIL_REG_EXP = /^(([^<>()\[\]\.,;:\s@"]+(\.[^<>()\[\]\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        if (EMAIL_REG_EXP.test(String(emailToVerify).toLowerCase())) {
+        if (EMAIL_REG_EXP.test(emailToVerify)) {
             return emailToVerify;
         } else {
-            throw new Error('Incorrect email input')
+            throw new Error('Incorrect email input');
         }
     }
 
     static verifyUsername(usernameToVerify) {
-        const usernameRegExp = /^\w{6,32}$/i;
-        if (usernameRegExp.test(usernameToVerify)) {
+        const USERNAME_REG_EXP = /^\w{6,32}$/i;
+        if (USERNAME_REG_EXP.test(usernameToVerify)) {
             return usernameToVerify;
         } else {
-            throw new Error('Incorrect username input')
+            throw new Error('Incorrect username input');
         }
     }
 
