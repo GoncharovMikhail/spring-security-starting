@@ -8,13 +8,16 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import java.util.ListIterator;
 import java.util.Properties;
+import java.util.RandomAccess;
 
 /**
  * Configuration class for connection to the PostgreSQL database and further interaction with it.
@@ -187,7 +190,8 @@ public class SpringDataPostgresConfig {
      * In {@link HibernateJpaVendorAdapter} the default {@code PersistenceProvider} is
      * {@link org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider},
      * it's almost the same to the one I use ({@link HibernatePersistenceProvider}),
-     * but I'd like to use {@code HibernatePersistenceProvider}.
+     * but I'd like to use {@code HibernatePersistenceProvider},
+     * as I saw in Eugeniy Borisov's talk about {@code Spring Data}.
      * <p>
      * Also, we specify Hibernate(JPA) properties
      * and packages, which contains all classes, annotated with {@link javax.persistence.Entity}.

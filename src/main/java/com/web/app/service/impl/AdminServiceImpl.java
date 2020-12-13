@@ -1,10 +1,9 @@
 package com.web.app.service.impl;
 
 import com.web.app.entity.UsersEntity;
-import com.web.app.repository.UsersRepository;
 import com.web.app.service.AdminService;
 import com.web.app.service.UsersService;
-import com.web.app.service.exceptions.WrongUsernameException;
+import com.web.app.exceptions.WrongUsernameException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

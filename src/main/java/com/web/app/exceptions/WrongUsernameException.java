@@ -1,4 +1,4 @@
-package com.web.app.service.exceptions;
+package com.web.app.exceptions;
 
 /**
  * WrongUsernameException is used to indicate that there is no user in database, having specified username.
@@ -9,6 +9,7 @@ package com.web.app.service.exceptions;
  *
  * @see com.web.app.service.AdminService
  * @see com.web.app.service.impl.AdminServiceImpl
+ * @see com.web.app.rest.AdminController
  */
 public class WrongUsernameException extends Exception {
 

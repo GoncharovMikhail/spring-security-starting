@@ -1,6 +1,6 @@
 package com.web.app.service;
 
-import com.web.app.service.exceptions.WrongUsernameException;
+import com.web.app.exceptions.WrongUsernameException;
 
 /**
  * An interface, representing all necessary methods for admins

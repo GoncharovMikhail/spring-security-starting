@@ -2,8 +2,9 @@ package com.web.app.rest;
 
 import com.web.app.entity.AgendaEntity;
 import com.web.app.entity.UsersEntity;
+import com.web.app.rest.util.AgendaUtil;
 import com.web.app.service.UsersService;
-import com.web.app.service.exceptions.WrongUsernameException;
+import com.web.app.exceptions.WrongUsernameException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,7 +38,6 @@ public class CommonTemplatesController {
         return "signup";
     }
 
-    //todo мне не нравится
     @GetMapping("/login")
     public ModelAndView login(@RequestParam(value = "error", required = false) String error) {
         ModelAndView modelAndView = new ModelAndView("login");
@@ -69,7 +69,7 @@ public class CommonTemplatesController {
                 .collect(Collectors.toSet());
 
         modelAndView.addObject("username", username);
-        modelAndView.addObject("accessibleAgendas", accessibleAgendas);
+        modelAndView.addObject("accessibleAgendas", AgendaUtil.sortAgendas(accessibleAgendas));
 
         return modelAndView;
     }

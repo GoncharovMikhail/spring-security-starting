@@ -230,9 +230,6 @@ export default class SuccessPageConfigurer {
 
     afterSuccessfullySavingNewAgenda(saveButtonInLastRow, justSavedRowDataInTheDatabase) {
         this.setRowData(saveButtonInLastRow, justSavedRowDataInTheDatabase);
-        //todo Чето сложно - агенда теперь менеджится сервером (ей присваивается айдишник и тд и тп
-        // + у меня таблица должна быть отсортирована - а сортировать джаваскритом как-то не в кайф),
-        // да и onDelete должен быть переопределен. Сложна
         location.reload();
         return false;
     }

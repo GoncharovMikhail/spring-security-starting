@@ -1,12 +1,10 @@
 package com.web.app.rest;
 
 import com.web.app.entity.AgendaEntity;
-import com.web.app.entity.UsersEntity;
 import com.web.app.rest.util.AgendaUtil;
 import com.web.app.model.SignUpRequestDTO;
 import com.web.app.service.UsersService;
 import com.web.app.service.exceptions.UserAlreadyExistsException;
-import com.web.app.service.exceptions.WrongUsernameException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Controller
 @Slf4j

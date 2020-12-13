@@ -33,7 +33,7 @@ export default class WelcomePageManager {
          * execute a <pre> '/search' </pre>
          * <pre> GET </pre> request. */
         //todo а гет реквест может быть дан и фейл?
-        this.commonGetRequestsExecutor
-            .executeSearchSomeOnesAgendaGetRequest(username);
+
+
     }
 }

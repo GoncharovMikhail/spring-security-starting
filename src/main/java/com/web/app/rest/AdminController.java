@@ -1,7 +1,7 @@
 package com.web.app.rest;
 
 import com.web.app.service.AdminService;
-import com.web.app.service.exceptions.WrongUsernameException;
+import com.web.app.exceptions.WrongUsernameException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

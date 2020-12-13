@@ -16,6 +16,12 @@
 <div class="container-table">
     <h1 th:text="'Hello, ' + ${username}"></h1>
 
+    <!--
+    <strong>
+        ONLY ADMINS CAN SEE <pre> DOM </pre> ELEMENTS, HAVING
+        <pre> sec:authorize="hasRole('ROLE_ADMIN')" </pre> ATTRIBUTE.
+    </strong>
+    -->
     <input sec:authorize="hasRole('ROLE_ADMIN')" class="admin-secured-input" placeholder="Manage a user" id="admin-input"/>
     <button sec:authorize="hasRole('ROLE_ADMIN')" onclick="onAdminBanButtonClicked()">Ban</button>
     <button sec:authorize="hasRole('ROLE_ADMIN')" onclick="onAdminUnbanButtonClicked()">Unban</button>
@@ -60,7 +66,7 @@
 <!-- jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-<!-- 'Cleave' formatter for <input/> elements -->
+<!-- 'Cleave' formatter for <pre> <input...></input> </pre> elements -->
 <script type="text/javascript" src="/scripts/success/additional/cleave.js"></script>
 
 <!--
