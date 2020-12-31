@@ -12,6 +12,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
+/**
+ * A service for managing agendas.
+ *
+ * @see com.web.app.service.AgendaService
+ */
 @Service
 public class AgendaServiceImpl implements AgendaService {
 
@@ -27,6 +32,12 @@ public class AgendaServiceImpl implements AgendaService {
 
     /**
      * This method saves new agenda to the database.
+     * <p>
+     * <strong>Note:</strong> the <strong>id</strong>
+     * will be assigned to this agenda automatically:
+     * see {@link AgendaEntity#id} - it is annotated with
+     * {@code @GeneratedValue(strategy = GenerationType.IDENTITY)},
+     * but any other attributes we should assign manually.
      *
      * @see AgendaService#saveNewAgenda(SaveNewAgendaRequestDTO) for additional details.
      */
@@ -36,16 +47,20 @@ public class AgendaServiceImpl implements AgendaService {
 
         UsersEntity usersid = usersService.loadUserByUsername(saveNewAgendaRequest.getUsername());
 
+        /* Set user, that owns this agenda. */
+        agendaToSave.setUsersid(usersid);
+
         agendaToSave.setCreated(new Date());
         agendaToSave.setUpdated(new Date());
-        agendaToSave.setUsersid(usersid);
+
         agendaToSave.setDay(saveNewAgendaRequest.getDay());
         agendaToSave.setTime(saveNewAgendaRequest.getTime());
+        agendaToSave.setAccessible(saveNewAgendaRequest.isAccessible());
         agendaToSave.setNote(saveNewAgendaRequest.getNote());
 
         agendaRepository.save(agendaToSave);
     }
-    
+
     /**
      * This method updates agenda by specified id.
      *

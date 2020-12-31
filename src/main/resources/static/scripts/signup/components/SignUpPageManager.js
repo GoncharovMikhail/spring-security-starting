@@ -32,6 +32,15 @@ export default class SignUpPageManager {
          * execute a <pre> '/registration' </pre>
          * <pre> POST </pre> request. */
         this.signUpPagePostRequestsExecutor
-            .executeRegistrationPostRequest(registrationData);
+            .executeRegistrationPostRequest(registrationData)
+            .done((jqXHR) => {
+                    alert('You\'ve been successfully signed up');
+                    window.location.href = '/login';
+                }
+            )
+            .fail(() => {
+                    alert('An error occurred');
+                }
+            );
     }
 }

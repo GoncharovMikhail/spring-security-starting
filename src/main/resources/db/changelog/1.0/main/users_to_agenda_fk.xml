@@ -5,6 +5,9 @@
                    objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
 
     <changeSet id="1.0.0" author="LShubina">
+        <!-- This foreign key defines the <pre> MANY-TO-ONE </pre> relationship
+             between agendas and users and <pre> ONE-TO-MANY </pre> relationship
+             users and agendas. -->
         <addForeignKeyConstraint baseTableName="agenda"
                                  baseColumnNames="usersid"
                                  constraintName="fk_agenda_user"

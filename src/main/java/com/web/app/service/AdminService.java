@@ -3,12 +3,12 @@ package com.web.app.service;
 import com.web.app.exceptions.WrongUsernameException;
 
 /**
- * An interface, representing all necessary methods for admins
- * (only admins are allowed to invoke these methods).
+ * An interface, representing all necessary methods for <strong>admins</strong>
+ * (only admins are allowed to execute these methods).
  * <p>
- * <strong>NOTE:</strong> in methods, altering user's data, I pass <i>username</i> as a parameter,
+ * <strong>NOTE:</strong> in methods, altering user's data, I pass <strong>username</strong> as a parameter,
  * because on a website, users usually see other's usernames - they, most likely, know nothing about
- * other users ids emails or any other data.
+ * other users ids, emails or any other data.
  */
 public interface AdminService {
 

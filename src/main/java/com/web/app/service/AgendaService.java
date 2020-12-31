@@ -5,7 +5,21 @@ import com.web.app.model.UpdateAgendaByItsIdRequestDTO;
 
 /**
  * An interface, representing agenda-management operations,
- * like save, update, delete...
+ * like:
+ * <ul>
+ *     <li>
+ *         Save,
+ *     </li>
+ *     <li>
+ *         Update,
+ *     </li>
+ *     <li>
+ *         Delete,
+ *     </li>
+ *     <li>
+ *         ...
+ *     </li>
+ * </ul>
  */
 public interface AgendaService {
 
@@ -17,14 +31,14 @@ public interface AgendaService {
     void saveNewAgenda(SaveNewAgendaRequestDTO saveNewAgendaRequest);
 
     /**
-     * This method updates user's agenda by specified agenda's id.
+     * This method updates user's agenda by specified <strong>agenda's id</strong>.
      *
      * @param updateAgendaRequest wrapper for data, like day, time, note, ...
      */
     void updateAgendaByItsId(UpdateAgendaByItsIdRequestDTO updateAgendaRequest);
 
     /**
-     * This method deletes user's agenda by specified agenda's id.
+     * This method deletes user's agenda by specified <strong>agenda's id</strong>.
      *
      * @param agendaId agenda's id.
      */

@@ -1,23 +1,23 @@
 package com.web.app.security;
 
 import lombok.AllArgsConstructor;
-import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Set;
 
 /**
- * An implementation of {@link UserDetails}, containing <strong>only</strong> Spring Security info,
+ * An implementation of {@link UserDetails}, containing <strong>only</strong> {@code Spring Security} info,
  * thus I follow the <strong>SINGLE-RESPONSIBILITY PRINCIPLE</strong>
+ * <p>
+ * {@link AllArgsConstructor} generates constructor for all class's fields.
  *
  * @see org.springframework.security.core.userdetails.UserDetails
  * @see org.springframework.security.core.userdetails.UserDetailsService#loadUserByUsername(String)
  * and also, an implementation of {@code UserDetailsService}:
- * @see com.web.app.security.UsersDetailsService
+ * {@link com.web.app.security.UsersDetailsService}
  */
 @AllArgsConstructor
-@Setter
 public class UsersDetails implements UserDetails {
 
     private boolean enabled;

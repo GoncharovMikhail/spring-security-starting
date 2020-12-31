@@ -8,15 +8,15 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 /**
- * A {@link Repository} component, to interact with data in the "agenda" table.
+ * A {@link Repository} component, to interact with data in the "roles" table.
  * <p>
  * <strong>NOTE:</strong> no implementation for this interface needed, a proxy over
  * {@link org.springframework.data.jpa.repository.support.SimpleJpaRepository} will be created,
  * including automatically generation of implementations of methods we wrote in this interface
- * (Spring Data understand what kind of HQL query is needed by method's name)
+ * ({@code Spring Data} "understands" what kind of {@code SQL/HQL/JPQL} query is needed by method's name)
  * <p>
  * Also note, that, by default, all methods in this interface and methods in
- * {@code SimpleJpaRepository} will be transactional, so, no need to annotate them with {@link Transactional}.
+ * {@code SimpleJpaRepository} will be {@code transactional}, so, no need to annotate them with {@link Transactional}.
  *
  * @see org.springframework.data.jpa.repository.JpaRepository
  */
@@ -32,9 +32,9 @@ public interface RolesRepository extends JpaRepository<RolesEntity, String> {
     RolesEntity findByRole(String role);
 
     /**
-     * This method finds all roles.
+     * This method finds <strong>all</strong> {@code RolesEntities}.
      *
-     * @return list, containing all {@code RolesEntity} instances.
+     * @return list, containing all {@code RolesEntities}.
      */
     List<RolesEntity> findAll();
 }

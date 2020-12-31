@@ -28,12 +28,14 @@
 </div>
 </body>
 
-<!-- .js -->
 <script th:inline="javascript">
+    /* If some error occurred (<pre> UsernameNotFoundException </pre>,
+     * <pre> BadCredentialsException </pre> occurred on the backend), an <pre> alert </pre>
+     * will be displayed an page will be reloaded. */
     window.addEventListener('DOMContentLoaded', function (e) {
         e.preventDefault();
             if ([[${error}]] === true) {
-                alert('Wrong username or password');
+                alert('Wrong username or password, or blocked account');
             }
         }
     );

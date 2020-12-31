@@ -10,14 +10,14 @@ import javax.persistence.MappedSuperclass;
 import java.util.Date;
 
 /**
- * An abstract class, containing fields "created" and "updated".
+ * An abstract class, containing fields {@link #created} and {@link #updated}.
  * <p>
  * Any class, inherited from {@code BaseEntity} will also have these fields.
  * <p>
  * The {@link MappedSuperclass} annotation indicates that this entity class
  * has no corresponding table in the database.
  * <p>
- * I use {@link Getter} and {@link Setter} in most entity classes.
+ * I use {@link Getter} and {@link Setter} in most {@code entity} classes.
  *
  * @see AgendaEntity
  * @see RolesEntity

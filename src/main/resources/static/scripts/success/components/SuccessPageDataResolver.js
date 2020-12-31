@@ -24,7 +24,7 @@ export default class SuccessPageDataResolver {
                         /* NOTE: in this cell we placed <pre> Cleave </pre> formatted input,
                          * so we need  to get <strong>it's</strong> value, therefore,
                          * we write:
-                         * <pre> ...$(cell).find('input:first').val(); </pre>*/
+                         * <pre> ...$(cell).find('input:first').val(); </pre> */
                         time = $(cell).find('input:first').val();
                     }
 

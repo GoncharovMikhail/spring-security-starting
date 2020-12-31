@@ -8,23 +8,20 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import java.util.ListIterator;
 import java.util.Properties;
-import java.util.RandomAccess;
 
 /**
- * Configuration class for connection to the PostgreSQL database and further interaction with it.
+ * Configuration class for connection to the {@code PostgreSQL} database and further interaction with it.
  * <p>
- * Also, provides {@link javax.persistence.EntityManager} bean to use - it will manage my entities.
+ * Also, provides {@link javax.persistence.EntityManager} bean to use - it will manage {@code entities}.
  * It will be created under the hood, see
- * {@link #localContainerEntityManagerFactoryBean(DriverManagerDataSource, Properties)}).
+ * {@link #localContainerEntityManagerFactoryBean(DriverManagerDataSource, Properties)}.
  * <p>
  * {@link org.springframework.transaction.TransactionManager} bean is also created and configured in this class.
  * <p>
@@ -34,28 +31,28 @@ import java.util.RandomAccess;
 @Configuration
 /* @EnableJpaRepositories enables JPA repositories. Basically, makes Spring data work. */
 @EnableJpaRepositories(
-        /* Specify a package where JpaRepositories may be used (maybe?).
+        /* Specify a package where JpaRepositories may be used (maybe ?).
          * Set the root package name not to restrict the availability zone. */
         basePackages = "com.web.app",
-        /* Specify bean definition name for EntityManagerFactory
-         * Basically, name of the method, where EntityManagerFactory will be created, configured
-         *  and returned afterwards. */
+        /* Specify bean definition name for <pre> EntityManagerFactory </pre>
+         * Basically, name of the method, where <pre> EntityManagerFactory </pre> will be created, configured
+         * and returned afterwards. */
         entityManagerFactoryRef = "localContainerEntityManagerFactoryBean",
-        /* Specify bean definition name for TransactionManager.
-         * Basically, name of the method, where TransactionManager will be created, configured
+        /* Specify bean definition name for <pre> TransactionManager </pre>.
+         * Basically, name of the method, where <pre> TransactionManager </pre> will be created, configured
          * and returned afterwards. */
         transactionManagerRef = "jpaTransactionManager"
 )
 /* @EnableTransactionManagement enables Spring's annotation-driven transaction management capability. */
 @EnableTransactionManagement
-/* The @PropertySource("...") gets a relative path (to the "resources" folder)
+/* The <pre> @PropertySource("...") </pre> gets a relative path (to the <pre> "resources" </pre> folder)
  * to a property-file to read properties from it.
  *
- * In combination with @Value("${...}"), declared above a field,
+ * In combination with <pre> @Value("${...}") </pre>, declared above a field,
  * we can inject a value into the annotated field, which was read
  * from the specified property-file.
- * NOTE: write name of a property (in the @Value("...") annotation) in ${...} -
- * otherwise, property won't be injected to the field. */
+ * <strong>Note:</strong>: write the name of a property (in the <pre> @Value("...") </pre> annotation)
+ * in <pre> ${...} </pre> - otherwise, property won't be injected to the annotated field. */
 @PropertySource("properties/db/springdata.properties")
 public class SpringDataPostgresConfig {
 
@@ -88,7 +85,8 @@ public class SpringDataPostgresConfig {
      * a Spring's implementation of {@link javax.sql.DataSource}.
      * <p>
      * {@code DataSource} may provide {@link java.sql.Connection} to database,
-     * then we can create different statements (SQL(HQL/JPQL) queries, mostly) on this connection:
+     * then we may create different {@code statements} ({@code SQL(HQL/JPQL)} queries, mostly)
+     * on this connection:
      * <ul>
      *     <li>
      *         {@link java.sql.Statement}
@@ -100,15 +98,19 @@ public class SpringDataPostgresConfig {
      *         {@link java.sql.CallableStatement}
      *     </li>
      * </ul>
-     * You may see some of the differences between these types of statements here:
+     * and execute them.
+     * <p>
+     * You may see some of the differences between these types of {@code statements} here:
      * https://way2java.com/jdbc/difference-between-statement-preparedstatement-callablestatement/
-     * Each of these statements has it's own features and purposes, but we can execute SQL queries on each of them.
+     * Each of these {@code statements} has it's own features and purposes,
+     * but we can execute {@code SQL} queries on each of them.
      * <p>
      * We need to specify:
      * <ul>
      *     <li>
      *         {@link java.sql.Driver} class name for the database.
-     *         In my case, it is {@link org.postgresql.Driver} (as a string) because I use the PostreSQL database.
+     *         In my case, it is {@link org.postgresql.Driver} (as a {@link String}),
+     *         because I use the {@code PostreSQL} database.
      *     </li>
      *     <li>
      *         {@code URL} (path) to my database.
@@ -133,7 +135,9 @@ public class SpringDataPostgresConfig {
     }
 
     /**
-     * Here I configure some of Hibernate settings and make a {@link Properties} {@link Bean} out of it.
+     * Here I configure some of {@code Hibernate} settings and make a
+     * {@link Properties} {@link Bean} out of it.
+     * <p>
      * You can see more settings to configure here:
      * <ul>
      *     <li>
@@ -145,18 +149,18 @@ public class SpringDataPostgresConfig {
      *     </li>
      * </ul>
      * <p>
-     * I set Hibernate's dialect. An article about Hibernate dialects:
+     * I set {@code Hibernate's dialect}. A nice article about {@code Hibernate dialects}:
      * https://javabydeveloper.com/what-is-dialect-in-hibernate-and-list-of-dialects/
      * <p>
-     * The {@code hibernate.show_sql} defines that SQL(HQL) queries, generated automatically by Hibernate,
-     * will be displayed in the console.
+     * The {@code hibernate.show_sql} defines that {@code SQL(HQL/JPQL)} queries,
+     * generated automatically by {@code Hibernate}, will be displayed in the console.
      * <p>
-     * The {@code hibernate.hbm2ddl.auto} property automatically validates or exports schema DDL
+     * The {@code hibernate.hbm2ddl.auto} property automatically validates or exports {@code schema DDL}
      * to the database when the {@code SessionFactory} is created.
      * See documentation for available values of this property and their meanings:
      * https://docs.jboss.org/hibernate/orm/5.2/userguide/html_single/Hibernate_User_Guide.html#configurations-hbmddl
      *
-     * @return configured Hibernate properties.
+     * @return configured {@code Hibernate} properties.
      */
     @Bean
     public Properties properties() {
@@ -170,15 +174,15 @@ public class SpringDataPostgresConfig {
     }
 
     /**
-     * Define and configure the {@link LocalContainerEntityManagerFactoryBean} - the factory bean of
+     * Define and configure the {@link LocalContainerEntityManagerFactoryBean} - the {@code FactoryBean} of
      * {@link javax.persistence.EntityManagerFactory}, see {@link org.springframework.beans.factory.FactoryBean}
      * for more details.
-     * {@code EntityManagerFactory} internally creates
-     * {@link javax.persistence.EntityManager}, which manages entities.
+     * {@code EntityManagerFactory} internally creates {@link javax.persistence.EntityManager},
+     * which manages {@code entities}.
      * <p>
      *
      * <strong>NOTE:</strong> the {@link Autowired} above methods makes required params of a method
-     * come from the IOC-container.
+     * come from the {@code IOC container}.
      * <p>
      *
      * <strong>NOTE:</strong> It's not necessary to specify
@@ -193,13 +197,14 @@ public class SpringDataPostgresConfig {
      * but I'd like to use {@code HibernatePersistenceProvider},
      * as I saw in Eugeniy Borisov's talk about {@code Spring Data}.
      * <p>
-     * Also, we specify Hibernate(JPA) properties
-     * and packages, which contains all classes, annotated with {@link javax.persistence.Entity}.
+     * Also, we specify {@code Hibernate} (JPA) properties
+     * and packages, which contains all classes, annotated with the
+     * {@link javax.persistence.Entity} annotation.
      *
      * @param dataSource the {@code DataSource}, used by {@code EntityManagers}.
-     * @param properties Hibernate properties.
+     * @param properties {@code Hibernate} properties.
      * @return configured {@code LocalContainerEntityManagerFactoryBean}, but then, under the hood,
-     * an {@code EntityManager} will be created and used to manage entities.
+     * an {@code EntityManager} will be created and used to manage {@code entities}.
      */
     @Bean
     @Autowired
@@ -219,19 +224,19 @@ public class SpringDataPostgresConfig {
     }
 
     /**
-     * A transaction is a unit of work that is performed against a database.
-     * Transactions are units or sequences of work accomplished in a logical order,
+     * A {@code transaction} is a unit of work that is performed against a database.
+     * Meaning, {@code transactions} are units or sequences of work accomplished in a logical order,
      * whether in a manual fashion by a user.
-     * In other words, transaction is a group of sequential commands that can be either executed in order
-     * and as a whole, or not executed at all. Transactions are <strong><highly/strong> recommended to use.
+     * In other words, {@code transaction} is a group of sequential commands that can be either executed in order
+     * and as a whole, or not executed at all. {@code Transactions} are <strong>highly</strong> recommended to use.
      * <p>
-     * To manage transactions, we should define a {@code TransactionManager}.
+     * To manage {@code transactions}, we should define a {@code TransactionManager}.
      * {@link EnableTransactionManagement} enables annotation-driven transaction management with
      * {@link org.springframework.transaction.annotation.Transactional}.
      * <p>
      *
      * <strong>NOTE:</strong> the {@link Autowired} above methods makes required params of a method
-     * come from the IOC-container.
+     * come from the {@code IOC container}.
      *
      * @param localContainerEntityManagerFactoryBean a wrapper for {@link javax.persistence.EntityManagerFactory},
      *                                               needed for {@code TransactionManager}.

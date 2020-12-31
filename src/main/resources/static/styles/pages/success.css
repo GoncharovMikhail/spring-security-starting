@@ -5,7 +5,6 @@
     text-align: center;
 }
 
-/* каво */
 select {
     width: 100%;
     height: 100%;
@@ -15,12 +14,11 @@ select {
     font: 800 220%/220% 'Montserrat', sans-serif;
 }
 
-/* каво */
 option {
+    color: black;
     background-color: transparent;
 }
 
-/* каво */
 input {
     width: 100%;
     height: 100%;
@@ -162,4 +160,27 @@ button:hover:after {
 .search-someones-agenda-input:focus, .admin-secured-input:focus {
     color: white;
     font: 800 20px/20px'Montserrat', sans-serif;
+}
+
+a {
+    /* For a nice hover */
+    position: relative;
+    font: 800 120%/120% 'Montserrat', sans-serif;
+    color: #fff;
+    text-decoration: none;
+    font-size: 100%;
+}
+
+a:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    border-bottom: 3px solid white;
+    transition: 0.4s;
+}
+
+a:hover:after {
+    width: 100%;
 }

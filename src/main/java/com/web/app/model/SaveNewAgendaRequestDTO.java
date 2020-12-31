@@ -13,11 +13,11 @@ import java.util.Map;
  * <p>
  * A JSON object will be mapped to this class automatically,
  * after adding the {@link org.springframework.web.bind.annotation.RequestBody} annotation, particularly,
- * by writing {@code @RequestBody SaveNewAgendaRequestDTO saveNewAgendaRequest} (see this here:
+ * by writing {@code @RequestBody SaveNewAgendaRequestDTO saveNewAgendaRequest} (see it here:
  * {@link com.web.app.rest.AgendaManagementController#saveNewAgenda(SaveNewAgendaRequestDTO)}).
- * But the requirement is that fields from POST request and the DTO class are equal.
+ * But the requirement is that <strong>all</strong> fields from <pre> POST </pre> request and the DTO class are equal.
  * <p>
- * Also, we can get all POST request's params by writing {@code @RequestBody Map<String, String> json},
+ * Also, we can get all <pre> POST </pre> request's params by writing {@code @RequestBody Map<String, String> json},
  * and get needed fields like: {@code String neededFieldValue = json.get("neededField")},
  * like I did it here: {@link com.web.app.rest.AgendaManagementController#deleteAgendaByItsId(Map)}.
  * It is convenient, when we have a few fields to read, otherwise, it's smarter to create
@@ -26,11 +26,11 @@ import java.util.Map;
  * Moreover, in a DTO class there may be some necessary casts from a {@link String} to a needed class.
  * For example, I cast to {@link DayOfWeek} - the {@link #day} field, {@code boolean} - the {@link #accessible} field.
  * <p>
- * {@link NoArgsConstructor} generates an empty constructor. It is used to deserialize a JSON.
+ * {@link NoArgsConstructor} generates an empty constructor. It is used to deserialize a {@code JSON}.
  * <p>
  * {@link AllArgsConstructor} generates a constructor for all fields of a class. Its just convenient.
  * <p>
- * I use {@link Getter} and {@link Setter} in most POJO classes this annotations generates
+ * I use {@link Getter} and {@link Setter} in most {@code POJO} classes this annotations generates
  * getters and setters for all annotated class's fields respectively.
  *
  * @see com.web.app.rest.AgendaManagementController#saveNewAgenda(SaveNewAgendaRequestDTO)

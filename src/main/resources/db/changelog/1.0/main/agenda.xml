@@ -5,10 +5,13 @@
                    objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
 
     <changeSet id="1.0.0" author="LShubina">
+        <!-- Create an "agenda" table -->
         <createTable tableName="agenda">
-            <!-- I LITERALLY HAVE NO IDEA WHY SHOULD I WRITE autoIncrement="true"
-                 WHEN I WROTE type="BIGSERIAL", IT SHOULD BE AUTOINCREMENTING BY DEFAULT.
-                 -->
+            <!--
+             -   An agenda's <pre> id </pre>.
+             -   I LITERALLY HAVE NO IDEA WHY SHOULD I WRITE <pre> autoIncrement="true" </pre>
+             -   WHEN I WROTE type="BIGSERIAL", IT SHOULD BE AUTOINCREMENTING BY DEFAULT.
+             -->
             <column name="id" type="BIGSERIAL" autoIncrement="true">
                 <constraints primaryKey="true"/>
             </column>
@@ -21,22 +24,28 @@
                 <constraints nullable="false"/>
             </column>
 
+            <!-- A foreign-key column to define, which users possesses this agenda. -->
             <column name="usersid" type="SERIAL">
                 <constraints nullable="false"/>
             </column>
 
+            <!-- wednesday - has 9 letters, the most letter-containing day. -->
             <column name="day" type="VARCHAR(9)">
                 <constraints nullable="false"/>
             </column>
 
+            <!-- Time is in a form of HH:MM. -->
             <column name="time" type="VARCHAR(5)">
                 <constraints nullable="false"/>
             </column>
 
+            <!-- This field defines weather agenda is accessible to <strong>all</strong> users,
+                 or only to it's creator. -->
             <column name="accessible" type="BOOLEAN" defaultValue="FALSE">
                 <constraints nullable="false"/>
             </column>
 
+            <!-- The agenda(note) itself. -->
             <column name="note" type="VARCHAR(256)">
                 <constraints nullable="false"/>
             </column>

@@ -39,7 +39,7 @@ export function onAdminBanButtonClicked() {
 }
 
 export function onAdminUnbanButtonClicked() {
-    successPageManager.onAdminUnbanButtonClicked()
+    successPageManager.onAdminUnbanButtonClicked();
 }
 
 

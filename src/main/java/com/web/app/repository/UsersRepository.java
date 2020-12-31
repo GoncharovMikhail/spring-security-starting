@@ -12,15 +12,15 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 /**
- * A {@link Repository} component, to interact with data in the "agenda" table.
+ * A {@link Repository} component, to interact with data in the "users" table.
  * <p>
  * <strong>NOTE:</strong> no implementation for this interface needed, a proxy over
  * {@link org.springframework.data.jpa.repository.support.SimpleJpaRepository} will be created,
  * including automatically generation of implementations of methods we wrote in this interface
- * (Spring Data understand what kind of HQL query is needed by method's name)
+ * ({@code Spring Data} "understands" what kind of {@code SQL/HQL/JPQL} query is needed by method's name)
  * <p>
  * Also note, that, by default, all methods in this interface and methods in
- * {@code SimpleJpaRepository} will be transactional, so, no need to annotate them with {@link Transactional}.
+ * {@code SimpleJpaRepository} will be {@code transactional}, so, no need to annotate them with {@link Transactional}.
  *
  * @see org.springframework.data.jpa.repository.JpaRepository
  */
@@ -36,7 +36,7 @@ public interface UsersRepository extends JpaRepository<UsersEntity, Integer> {
     Optional<UsersEntity> findById(Integer id);
 
     /**
-     * Finds a {@link UsersEntity} by the specified username.
+     * Finds a {@code UsersEntity} by the specified username.
      *
      * @param username specified username.
      * @return user.
@@ -46,7 +46,7 @@ public interface UsersRepository extends JpaRepository<UsersEntity, Integer> {
     UsersEntity findByUsername(String username);
 
     /**
-     * This method finds a user, having specified username and email.
+     * This method finds a {@code UsersEntity} instance, having specified username and email.
      *
      * @param email    specified email.
      * @param username specified username.
@@ -58,8 +58,9 @@ public interface UsersRepository extends JpaRepository<UsersEntity, Integer> {
     /**
      * This method enables or disables a user, having specified username.
      * <p>
-     * <strong>NOTE!</strong> it's good practice to make methods, annotated with {@link Modifying} annotation
-     * transactional. See 6.7.1: https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#transactions
+     * <strong>NOTE:</strong> it's good practice to annotate methods, annotated with {@link Modifying} annotation
+     * with {@link Transactional} as well.
+     * See 6.7.1: https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#transactions
      *
      * @param toEnable specifies, should we enable or disable user.
      * @param username specified username.
@@ -67,7 +68,12 @@ public interface UsersRepository extends JpaRepository<UsersEntity, Integer> {
      * @see com.web.app.service.impl.AdminServiceImpl#unBanUserByUsername(String)
      */
     @Modifying
-    @Query("UPDATE UsersEntity u SET enabled = ?1 WHERE u.username = ?2")
+    @Query(
+            "UPDATE UsersEntity u SET enabled = ?1 WHERE u.username = ?2"
+    )
     @Transactional
-    void enableOrDisableUser(@Param("enabled") boolean toEnable, @Param("username") String username);
+    void enableOrDisableUser(
+            @Param("enabled") boolean toEnable,
+            @Param("username") String username
+    );
 }

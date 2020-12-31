@@ -2,11 +2,10 @@ package com.web.app.security;
 
 import com.web.app.config.SpringSecurityConfig;
 import com.web.app.entity.UsersEntity;
-import com.web.app.security.util.UsersStaticFactory;
+import com.web.app.security.util.UsersDetailsUtils;
 import com.web.app.service.UsersService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.dao.AbstractUserDetailsAuthenticationProvider;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -15,11 +14,12 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
  * An implementation of {@link UserDetailsService}.
  * <p>
  * The {@link UserDetailsService} contains only one method - {@link UserDetailsService#loadUserByUsername(String)}
- * to be implemented. As far as we store all users in database, we should load them from the database.
- * Particularly, in this method we should load load user from the database by username.
+ * to be implemented. As far as we store all user's data in the database, we should load them from that database.
+ * Particularly, in this method we should load user from the database by username.
  * <p>
- * Whenever user logs in with a username and a password, spring security loads this user(by specified username)
- * to server, then maps it to some of UserDetails implementing class, and only then checks (somewhere under the hood)
+ * Whenever user logs in by providing <pre> username </pre> and a <pre> password </pre>,
+ * {@code Spring Security} loads this user(by specified username) to server, then maps it to some of
+ * {@code UserDetails} implementing class, and only then checks (somewhere under the hood)
  * if entered password and the one from database matches.
  *
  * @see SpringSecurityConfig#passwordEncoder() documentation - there are some additional details there.
@@ -60,6 +60,6 @@ public class UsersDetailsService implements UserDetailsService {
 
         /* Map usersEntity instance to user details, before returning it, hence the return-type of this method is some
          * implementation of the UserDetails interface. Overall, spring security works with UserDetails. */
-        return UsersStaticFactory.mapEntityToUsersDetails(usersEntity);
+        return UsersDetailsUtils.mapEntityToUsersDetails(usersEntity);
     }
 }

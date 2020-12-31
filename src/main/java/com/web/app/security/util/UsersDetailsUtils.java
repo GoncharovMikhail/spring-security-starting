@@ -10,12 +10,12 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * An util class, used to convert(map) {@link UsersEntity} to {@link UsersDetails}
+ * An util class, used to convert(in other words, map) {@link UsersEntity} to {@link UsersDetails}
  * with the {@link #mapEntityToUsersDetails(UsersEntity)}
  */
-public final class UsersStaticFactory {
+public final class UsersDetailsUtils {
 
-    private UsersStaticFactory() {
+    private UsersDetailsUtils() {
         throw new AssertionError(this.getClass() + "can't be instantiated");
     }
 

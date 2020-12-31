@@ -28,7 +28,6 @@ export default class SuccessPageManager {
     WRONG_ROW_DATA_INPUT = 'Something inputted wrong - time should be type of HH:MM and agenda should not be empty';
 
     /* A row's state before editing it(before clicking <pre> "edit" </pre> button). */
-    //todo а как ее внести в функцию? (в onEditButtonClicked)
     rowDataBeforeUpdate;
 
     onEditButtonClicked(agendaId, editButton) {
@@ -69,16 +68,14 @@ export default class SuccessPageManager {
                 /* If POST request proceeded normally, then...
                  * <pre> jqXHR </pre> is an analogue to ResponseEntity. */
                 .done((jqXHR) => {
-                        //todo че мы тут писали чтоб выводилось сообщения с бека?
-                        alert(jqXHR.responseText);
+                        alert('Your agenda has been successfully updated.');
                         this.successPageConfigurer.setRowData(editButton, newRowData);
                     }
                 )
                 /* If POST request fails, then...
                  * <pre> jqXHR </pre> is an analogue to ResponseEntity. */
                 .fail((jqXHR) => {
-                        //todo че мы тут писали чтоб выводилось сообщения с бека?
-                        alert(jqXHR.responseText);
+                        alert('An error occurred while updating your agenda.');
                         this.successPageConfigurer.setRowData(editButton, this.rowDataBeforeUpdate);
                     }
                 );
@@ -91,15 +88,14 @@ export default class SuccessPageManager {
             /* If POST request proceeded normally, then...
              * <pre> jqXHR </pre> is an analogue to ResponseEntity. */
             .done((jqXHR) => {
-                    //todo че мы тут писали чтоб выводилось сообщения с бека?
-                    alert(jqXHR.responseText);
+                    alert('Your agenda has successfully been deleted.');
                     this.successPageConfigurer.deleteRowFromTable(deleteButton);
                 }
             )
             /* If POST request fails, then...
              * <pre> jqXHR </pre> is an analogue to ResponseEntity. */
             .fail((jqXHR) => {
-                    alert(jqXHR.responseText);
+                    alert('An error occurred while deleting your agenda.');
                 }
             )
     }
@@ -114,8 +110,6 @@ export default class SuccessPageManager {
                 /* Resolve row data from last row... */
                 const rowData = this.successPageDataResolver
                     .resolveDataFromContentEditableRowCorrespondingToSpecificButton(saveButtonInLastRow);
-
-                alert(rowData.getDay() + '' + rowData.getTime()+ '' +rowData.getNote()+ '' +rowData.isAccessible())
 
                 /* ...verify it... */
                 try {
@@ -132,7 +126,7 @@ export default class SuccessPageManager {
                     /* If POST request proceeded normally, then...
                      * <pre> jqXHR </pre> is an analogue to ResponseEntity. */
                     .done((jqXHR) => {
-                            alert(jqXHR.responseText);
+                            alert('Your agenda has been successfully saved.');
                             this.successPageConfigurer
                                 .afterSuccessfullySavingNewAgenda(saveButtonInLastRow, rowData);
                         }
@@ -140,7 +134,7 @@ export default class SuccessPageManager {
                     /* If POST request fails, then...
                      * <pre> jqXHR </pre> is an analogue to ResponseEntity. */
                     .fail((jqXHR) => {
-                            alert(jqXHR.responseText);
+                            alert('An error occurred while saving your agenda.');
                         }
                     );
             }
@@ -161,10 +155,8 @@ export default class SuccessPageManager {
         }
 
         /* ...if username is verified, the execute <pre>'/search'</pre> GET request. */
-        //todo про гет реквест - дан и фейл?
         this.commonGetRequestsExecutor
             .executeSearchSomeOnesAgendaGetRequest(usernameForSearchingAgenda);
-
     }
 
     onAdminBanButtonClicked() {
@@ -180,17 +172,19 @@ export default class SuccessPageManager {
             return;
         }
 
-        /* ...if username is verified, the execute <pre> '/ban' </pre> GET request. */
+        /* ...if username is verified, the execute <pre> '/ban' </pre> <pre> POST </pre> request. */
         this.successPageAdminPostRequestExecutor
             .executeBanUserPostRequest(usernameForBanning)
-            /* We will always receive a message from server and I want to display it */
-            .always((jqXHR) => {
-                    alert(jqXHR.responseText);
+            .done((jqXHR) => {
+                    alert('User, having username: ' + usernameForBanning + ' has been successfully banned.');
+                }
+            )
+            .fail((jqXHR) => {
+                alert('An error occurred while banning a user.');
                 }
             );
 
     }
-
 
     onAdminUnbanButtonClicked() {
         /* Resolve username for unbanning... */
@@ -208,9 +202,12 @@ export default class SuccessPageManager {
         /* ...if username is verified, the execute <pre> '/unban' </pre> GET request. */
         this.successPageAdminPostRequestExecutor
             .executeUnbanUserPostRequest(usernameForUnbanning)
-            /* We will always receive a message from server and I want to display it */
-            .always((jqXHR) => {
-                    alert(jqXHR.responseText);
+            .done((jqXHR) => {
+                    alert('User, having username: ' + usernameForUnbanning + ' has been successfully unbanned.');
+                }
+            )
+            .fail((jqXHR) => {
+                    alert('An error occurred while unbanning a user.');
                 }
             );
     }

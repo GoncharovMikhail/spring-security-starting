@@ -19,12 +19,19 @@ import java.util.Set;
 
 /**
  * A {@link UsersService} implementation. Basically, all methods of this service can be invoked by all users
- * (some of them only by authenticated users).
+ * (some of them only by authenticated ones).
  *
  * @see UsersService
  */
 @org.springframework.stereotype.Service
-/* @PropertySource("...") is used to specify property-file, which contains necessary properties.*/
+/* The <pre> @PropertySource("...") </pre> gets a relative path (to the <pre> "resources" </pre> folder)
+ * to a property-file to read properties from it.
+ *
+ * In combination with <pre> @Value("${...}") </pre>, declared above a field,
+ * we can inject a value into the annotated field, which was read
+ * from the specified property-file.
+ * <strong>Note:</strong>: write the name of a property (in the <pre> @Value("...") </pre> annotation)
+ * in <pre> ${...} </pre> - otherwise, property won't be injected to the annotated field. */
 @PropertySource("properties/service/service.properties")
 /* @Slf4j is used for logging */
 @Slf4j
@@ -46,9 +53,9 @@ public class UsersServiceImpl implements UsersService {
     }
 
     /**
-     * Method for checking if a user can be saved in the database(in the 'users' table).
-     * As far as columns 'username' ane 'email' has the 'unique' constraints, we can't save user,
-     * if he{she} provided email or username already existing in database.
+     * Method for checking if a user can be saved in the database(in the "users" table).
+     * As far as columns "username" ane "email" has the {@code unique} constraint,
+     * we can't save user, if he/she provided email or username, already existing in database.
      *
      * @param signUpRequest wrapper for email, username and password.
      * @return {@code true}, if user is valid for saving, else {@code false}.
@@ -59,9 +66,9 @@ public class UsersServiceImpl implements UsersService {
     }
 
     /**
-     * Each signed up user gets a default role (we save a {@code UsersEntity} instance),
-     * but to save it correctly, we need to set this entity a role (represented as {@code RolesEntity}).
-     * This method takes a default role name(defaultRoleName) and returns corresponding rolesEntity
+     * Each signed up user gets a default role (we save a {@link UsersEntity} instance),
+     * but to save it correctly, we need to set this {@code entity} a role (represented as {@code RolesEntity}).
+     * This method takes a default role name(defaultRoleName) and returns corresponding {@code RolesEntity} instance.
      *
      * @return a Set<RolesEntity>, containing default role.
      * @see UsersEntity#setRoles(Set rolesEntities) - note, that this method takes a Set<RolesEntity> as a parametr
@@ -75,18 +82,16 @@ public class UsersServiceImpl implements UsersService {
         return defaultUserRoles;
     }
 
-    /* A default role as a string, got from a property-file (properties/service/service.properties) */
+    /* A default role (as a string), got from a property-file (classpath:properties/service/service.properties). */
     @Value("${user.role.default}")
     private String defaultRoleName;
-
-    //todo как пофиксить джавадок, чтоб он видел приватные поля?
 
     /**
      * Method saves user in database by email, username and password.
      * Other params are assigned implicitly:
      * {@link UsersEntity#id} is assigned by database:
      * {@link UsersEntity#id} is annotated with {@code @GeneratedValue(strategy = GenerationType.IDENTITY)},
-     * meaning, that the persistence provider must assign primary keys for the entity using database's identity column.
+     * meaning, that the persistence provider must assign primary keys for the {@code entity} using database's identity column.
      * {@link UsersEntity#created} and {@link UsersEntity#updated} are assigned for a real-time date.
      * {@link UsersEntity#enabled} assigned to {@code true}.
      * {@link UsersEntity#email} and {@link UsersEntity#username} are assigned simply.
@@ -128,7 +133,8 @@ public class UsersServiceImpl implements UsersService {
                             + " - user '{}' couldn't be saved",
                     username
             );
-            /* If there is the same username/password/username and password in database, we throw an Exception. */
+            /* If there are the same email/username in the database,
+             * we throw an <pre> Exception. </pre> */
             throw new UserAlreadyExistsException(
                     "User, having username: '"
                             + username
@@ -139,11 +145,27 @@ public class UsersServiceImpl implements UsersService {
         }
     }
 
+    /**
+     * This method loads user by specified username.
+     *
+     * @param username the specified username.
+     * @return a {@link UsersEntity} instance.
+     * @see UsersRepository#findByUsername(String)
+     * @see org.springframework.security.core.userdetails.UserDetailsService#loadUserByUsername(String),
+     * and my implementation of this interface:
+     * {@link com.web.app.security.UsersDetailsService#loadUserByUsername(String)}
+     */
     @Override
     public UsersEntity loadUserByUsername(String username) {
         return usersRepository.findByUsername(username);
     }
 
+    /**
+     * This method enables or disables a user, depending on the 'toEnable' parameter's value.
+     * @param toEnable a specified parameter.
+     * @param username username.
+     * @see UsersRepository#enableOrDisableUser(boolean, String)
+     */
     @Override
     public void enableOrDisableUser(boolean toEnable, String username) {
         usersRepository.enableOrDisableUser(toEnable, username);

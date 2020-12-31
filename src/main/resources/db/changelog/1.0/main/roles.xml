@@ -5,7 +5,12 @@
                    objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
 
     <changeSet id="1.0.0" author="LShubina">
+        <!-- Create a "roles" table -->
         <createTable tableName="roles">
+            <!-- Role's <pre> id </pre>
+             -   I LITERALLY HAVE NO IDEA WHY SHOULD I WRITE <pre> autoIncrement="true" </pre>
+             -   WHEN I WROTE type="BIGSERIAL", IT SHOULD BE AUTOINCREMENTING BY DEFAULT.
+             -->
             <column name="id" type="SERIAL" autoIncrement="true">
                 <constraints primaryKey="true"/>
             </column>
@@ -18,6 +23,7 @@
                 <constraints nullable="false"/>
             </column>
 
+            <!-- A role's name - the role itself. -->
             <column name="role" type="VARCHAR(32)">
                 <constraints unique="true" nullable="false"/>
             </column>

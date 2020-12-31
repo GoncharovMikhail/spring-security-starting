@@ -12,6 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 
+/**
+ * A {@link org.springframework.stereotype.Controller} to handle <strong>admin's</strong>
+ * requests <strong>only</strong>.
+ */
 @RestController
 @Slf4j
 public class AdminController {
@@ -23,24 +27,40 @@ public class AdminController {
         this.adminService = adminService;
     }
 
+    /**
+     * This method bans a user by specified username.
+     *
+     * @param json a {@code JSON} object, coming from frontend.
+     * @return response status, wrapped in {@link ResponseEntity}.
+     */
     @PostMapping("/ban")
     public ResponseEntity<?> ban(@RequestBody Map<String, String> json) {
         try {
-            final String username = json.get("username");
+            String username = json.get("username");
             adminService.banUserByUsername(username);
         } catch (WrongUsernameException e) {
             e.printStackTrace();
+            log.info("In " + this.getClass() + ", ban(@RequestBody Map<String, String> json) method - " +
+                    "couldn't ban user. An error occurred");
         }
         return new ResponseEntity(HttpStatus.OK);
     }
 
+    /**
+     * This method unbans a user by specified username.
+     *
+     * @param json a {@code JSON} object, coming from frontend.
+     * @return response status, wrapped in {@link ResponseEntity}.
+     */
     @PostMapping("/unban")
     public ResponseEntity<?> unBan(@RequestBody Map<String, String> json) {
         try {
-            final String username = json.get("username");
+            String username = json.get("username");
             adminService.unBanUserByUsername(username);
         } catch (WrongUsernameException e) {
             e.printStackTrace();
+            log.info("In " + this.getClass() + ", unBan(@RequestBody Map<String, String> json) method - " +
+                    "couldn't ban user. An error occurred");
         }
         return new ResponseEntity(HttpStatus.OK);
     }

@@ -16,11 +16,14 @@
 <div class="container-table">
     <h1 th:text="'Hello, ' + ${username}"></h1>
 
+    <a href="/logout">Log out</a>
+    <br>
+
     <!--
-    <strong>
-        ONLY ADMINS CAN SEE <pre> DOM </pre> ELEMENTS, HAVING
-        <pre> sec:authorize="hasRole('ROLE_ADMIN')" </pre> ATTRIBUTE.
-    </strong>
+     - <strong>
+     -     ONLY ADMINS CAN SEE <pre> DOM </pre> ELEMENTS, HAVING
+     -     <pre> sec:authorize="hasRole('ROLE_ADMIN')" </pre> ATTRIBUTE.
+     - </strong>
     -->
     <input sec:authorize="hasRole('ROLE_ADMIN')" class="admin-secured-input" placeholder="Manage a user" id="admin-input"/>
     <button sec:authorize="hasRole('ROLE_ADMIN')" onclick="onAdminBanButtonClicked()">Ban</button>
@@ -82,7 +85,6 @@
     import {onAdminBanButtonClicked} from '/scripts/success/success.js';
     import {onAdminUnbanButtonClicked} from '/scripts/success/success.js';
 
-    //todo ПРО $(this) - это вообще че, не пойму
     window.onEditButtonClicked = function (agendaId, editButton) {
         onEditButtonClicked(agendaId, editButton);
     };

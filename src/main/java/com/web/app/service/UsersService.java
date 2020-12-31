@@ -7,12 +7,23 @@ import org.springframework.data.repository.query.Param;
 
 /**
  * An interface, representing users data management operations,
- * like save new user in the database, load user by username...
+ * like
+ * <ul>
+ *     <li>
+ *         Saving new user in the database,
+ *     </li>
+ *     <li>
+ *         Loading user by username
+ *     </li>
+ *     <li>
+ *         ...
+ *     </li>
+ * </ul>
  */
 public interface UsersService {
 
     /**
-     * This Method saves user in database by email, username and password, which are wrapped by signUpRequest.
+     * This method saves user in database by email, username and password, which are wrapped in signUpRequest.
      *
      * @param signUpRequest the wrapper for email, username and password.
      * @throws UserAlreadyExistsException iff there is the same email/username in database.
@@ -20,11 +31,11 @@ public interface UsersService {
     void saveUserInDatabase(SignUpRequestDTO signUpRequest) throws UserAlreadyExistsException;
 
     /**
-     * This Method loads all user's(like his email, roles, agendas e.t.c.) data by username.
+     * This method loads all user's(like his email, roles, agendas e.t.c.) data by username.
      * {@link UsersEntity} wraps all this data.
      *
      * @param username the specified username.
-     * @return all user's data, represented as entity.
+     * @return all user's data, represented as {@code entity}.
      * @see com.web.app.repository.UsersRepository#findByUsername(String)
      * @see com.web.app.security.UsersDetailsService#loadUserByUsername(String)
      */

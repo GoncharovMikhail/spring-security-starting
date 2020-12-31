@@ -13,6 +13,7 @@
             </column>
         </createTable>
 
+        <!-- Two following foreign keys defines <pre> MANY-TO-MAY </pre> relationship between users and roles. -->
         <addForeignKeyConstraint baseTableName="users_to_roles"
                                  baseColumnNames="usersid"
                                  constraintName="fk_users_to_roles_usersid"

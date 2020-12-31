@@ -5,7 +5,12 @@
                    objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
 
     <changeSet id="1.0.0" author="LShubina">
+        <!-- Create a "users" table -->
         <createTable tableName="users">
+            <!-- User's <pre> id </pre>
+             -   I LITERALLY HAVE NO IDEA WHY SHOULD I WRITE <pre> autoIncrement="true" </pre>
+             -   WHEN I WROTE type="BIGSERIAL", IT SHOULD BE AUTOINCREMENTING BY DEFAULT.
+             -->
             <column name="id" type="SERIAL" autoIncrement="true">
                 <constraints primaryKey="true"/>
             </column>
@@ -18,18 +23,22 @@
                 <constraints nullable="false"/>
             </column>
 
+            <!-- This field defines weather usr is banned or not. By default, he{she} isn't banned. -->
             <column name="enabled" type="BOOLEAN" defaultValue="TRUE">
                 <constraints nullable="false"/>
             </column>
 
+            <!-- User's email. -->
             <column name="email" type="VARCHAR(256)">
                 <constraints unique="true" nullable="false"/>
             </column>
 
+            <!-- Username. -->
             <column name="username" type="VARCHAR(32)">
                 <constraints unique="true" nullable="false"/>
             </column>
 
+            <!-- Password. -->
             <column name="password" type="VARCHAR(60)">
                 <constraints nullable="false"/>
             </column>
