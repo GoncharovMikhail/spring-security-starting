@@ -1,9 +1,9 @@
 package com.web.app.service.impl;
 
 import com.web.app.entity.UsersEntity;
+import com.web.app.exceptions.WrongUsernameException;
 import com.web.app.service.AdminService;
 import com.web.app.service.UsersService;
-import com.web.app.exceptions.WrongUsernameException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,6 +37,18 @@ public class AdminServiceImpl implements AdminService {
         /* Admin entered wrong username. */
         if (userToBan == null) {
             throw new WrongUsernameException("There is no user, having username: " + username);
+        }
+
+        /* Admins can't ban each other */
+        boolean isUserToBanAnAdmin = userToBan
+                .getRoles().stream()
+                .anyMatch(rolesEntity -> rolesEntity.getRole().equals("ROLE_ADMIN"));
+        if (isUserToBanAnAdmin) {
+            log.info("IN " + this.getClass()
+                            + ", banUserByUsername(String username) method"
+                            + " - user '{}' is an admin - unable to ban",
+                    username);
+            return;
         }
 
         /* User, having specified name, was banned before. */

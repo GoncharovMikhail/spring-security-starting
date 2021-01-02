@@ -147,7 +147,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                  * https://docs.spring.io/spring-security/site/docs/3.0.x/reference/anonymous.html */
                 .antMatchers(
                         "/welcome",
-                        "/signup"
+                        "/signup",
+                        "/wrongusername"
                 ).permitAll()
 
                 /* Define <pre> GET </pre> api, available to <strong>all</strong> users. */

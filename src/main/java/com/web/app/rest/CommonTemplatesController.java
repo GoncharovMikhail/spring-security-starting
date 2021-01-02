@@ -118,10 +118,9 @@ public class CommonTemplatesController {
 
         return modelAndView;
     }
-//todo
     @ExceptionHandler(WrongUsernameException.class)
     public ModelAndView handleWrongUsernameException(WrongUsernameException wrongUsernameException) {
-        return new ModelAndView();
+        return new ModelAndView("wrongusername");
     }
 }
 

@@ -11,6 +11,7 @@ select {
     color: white;
     border: none;
     background: transparent;
+    display: table-cell;
     font: 800 220%/220% 'Montserrat', sans-serif;
 }
 

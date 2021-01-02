@@ -25,13 +25,15 @@
      -     <pre> sec:authorize="hasRole('ROLE_ADMIN')" </pre> ATTRIBUTE.
      - </strong>
     -->
-    <input sec:authorize="hasRole('ROLE_ADMIN')" class="admin-secured-input" placeholder="Manage a user" id="admin-input"/>
+    <input sec:authorize="hasRole('ROLE_ADMIN')" class="admin-secured-input" placeholder="Manage a user"
+           id="admin-input"/>
     <button sec:authorize="hasRole('ROLE_ADMIN')" onclick="onAdminBanButtonClicked()">Ban</button>
     <button sec:authorize="hasRole('ROLE_ADMIN')" onclick="onAdminUnbanButtonClicked()">Unban</button>
     <br sec:authorize="hasRole('ROLE_ADMIN')"/>
     <br sec:authorize="hasRole('ROLE_ADMIN')"/>
 
-    <input class="search-someones-agenda-input" id="search-someones-agenda-input" placeholder="Search for someone's agenda"/>
+    <input class="search-someones-agenda-input" id="search-someones-agenda-input"
+           placeholder="Search for someone's agenda"/>
     <button onclick="onSearchButtonClicked()">Search!</button>
 
     <h1>Your agendas:</h1>
