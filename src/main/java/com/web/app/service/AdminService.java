@@ -1,6 +1,7 @@
 package com.web.app.service;
 
 import com.web.app.exceptions.WrongUsernameException;
+import com.web.app.service.exceptions.CantBanAdminException;
 
 /**
  * An interface, representing all necessary methods for <strong>admins</strong>
@@ -18,7 +19,7 @@ public interface AdminService {
      * @param username the specified username.
      * @throws WrongUsernameException if no user with a specified name found.
      */
-    void banUserByUsername(String username) throws WrongUsernameException;
+    void banUserByUsername(String username) throws WrongUsernameException, CantBanAdminException;
 
     /**
      * This method unbans user by specified username.

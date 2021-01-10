@@ -195,7 +195,7 @@ public class SpringDataPostgresConfig {
      * {@link org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider},
      * it's almost the same to the one I use ({@link HibernatePersistenceProvider}),
      * but I'd like to use {@code HibernatePersistenceProvider},
-     * as I saw in Eugeniy Borisov's talk about {@code Spring Data}.
+     * as I saw in <i>Eugeniy Borisov's</i> talk about {@code Spring Data}.
      * <p>
      * Also, we specify {@code Hibernate} (JPA) properties
      * and packages, which contains all classes, annotated with the

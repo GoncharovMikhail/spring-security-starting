@@ -73,11 +73,13 @@ public class CommonTemplatesController {
     @GetMapping("/login")
     public ModelAndView login(@RequestParam(value = "error", required = false) String error) {
         ModelAndView modelAndView = new ModelAndView("login");
+
         if (error != null) {
             modelAndView.addObject("error", true);
             return modelAndView;
         }
         modelAndView.addObject("error", false);
+
         return modelAndView;
     }
 
@@ -117,10 +119,6 @@ public class CommonTemplatesController {
         modelAndView.addObject("accessibleAgendas", AgendaUtil.sortAgendas(accessibleAgendas));
 
         return modelAndView;
-    }
-    @ExceptionHandler(WrongUsernameException.class)
-    public ModelAndView handleWrongUsernameException(WrongUsernameException wrongUsernameException) {
-        return new ModelAndView("wrongusername");
     }
 }
 

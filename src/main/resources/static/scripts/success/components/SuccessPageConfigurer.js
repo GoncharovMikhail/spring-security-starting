@@ -23,7 +23,7 @@ export default class SuccessPageConfigurer {
 
     configureOnEditButtonClicked(editButton) {
         this.#configureRow(editButton);
-        /* Set <pre> "save" </pre> text to specified button */
+        /* Set <pre> "save" </pre> text to the specified button */
         $(editButton).html('save');
     }
 
@@ -60,7 +60,7 @@ export default class SuccessPageConfigurer {
                     option.text = DAY.toUpperCase();
 
                     /* Set default option selected to the one which was set before,
-                     * NOTE: if we add a new row to the table, there is no value,
+                     * <strong>NOTE:</strong> if we add a new row to the table, there is no value,
                      * which ws set before, so, we should it's nullability first */
                     if (dayBeforeUpdate !== null) {
                         if (option.text === dayBeforeUpdate) {
@@ -97,7 +97,7 @@ export default class SuccessPageConfigurer {
             editableElement.innerHTML = cleaveFormattedInput.outerHTML;
 
             /* Cleave formats the input.
-             * NOTE: we format input AFTER setting created <pre> <input...></input> </pre>
+             * <strong>NOTE:</strong> we format input AFTER setting created <pre> <input...></input> </pre>
              * to html document.
              * Cleave works <strong>ONLY AFTER ALL ALERT_WRONG_USERNAME_INPUT ELEMENTS WERE LOADED</strong>.
              *
@@ -136,7 +136,7 @@ export default class SuccessPageConfigurer {
                     option.text = boolean.toUpperCase();
 
                     /* Set default option selected to the one which was set before,
-                     * NOTE: if we add a new row to the table, there is no value,
+                     * <strong>NOTE:</strong> if we add a new row to the table, there is no value,
                      * which ws set before, so, we should it's nullability first */
                     if (accessibleBeforeUpdate !== null) {
                         if (option.text === accessibleBeforeUpdate.toUpperCase()) {

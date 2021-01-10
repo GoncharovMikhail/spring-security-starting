@@ -10,7 +10,7 @@ export default class WelcomePageDataResolver {
          *
          * <strong>NOTE:</strong>: convert in to lower case,
          * because all username are stored in lower case
-         * and we wanna avoid possible silly exceptions */
+         * and we wanna avoid possible silly exceptions. */
         return $('input[name=search-someones-agenda]').val()
             .toLowerCase();
     }

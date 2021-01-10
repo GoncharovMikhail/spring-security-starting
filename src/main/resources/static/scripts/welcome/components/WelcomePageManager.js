@@ -33,7 +33,6 @@ export default class WelcomePageManager {
          * execute a <pre> '/search' </pre>
          * <pre> GET </pre> request. */
         this.commonGetRequestsExecutor
-            .executeSearchSomeOnesAgendaGetRequest(username)
-
+            .executeSearchSomeOnesAgendaGetRequest(username);
     }
 }

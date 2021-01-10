@@ -25,6 +25,7 @@ export default class SuccessPageManager {
         this.successPageAdminPostRequestExecutor = new SuccessPageAdminPostRequestsExecutor();
     }
 
+    /* A constant, which will be displayed in case of wrong row data input. */
     WRONG_ROW_DATA_INPUT = 'Something inputted wrong - time should be type of HH:MM and agenda should not be empty';
 
     /* A row's state before editing it(before clicking <pre> "edit" </pre> button). */
@@ -36,7 +37,7 @@ export default class SuccessPageManager {
             this.rowDataBeforeUpdate = this.successPageDataResolver
                 .resolveDataFromNonContentEditableRowCorrespondingToSpecificButton(editButton);
 
-            /* Do some page configurations after clicking <pre> "edit" </pre> button. */
+            /* Do some <pre> DOM </pre> elements configurations after clicking <pre> "edit" </pre> button. */
             this.successPageConfigurer
                 .configureOnEditButtonClicked(editButton);
         } else {
@@ -49,13 +50,14 @@ export default class SuccessPageManager {
                 Verifier.verifyRowData(newRowData);
             } catch (e) {
                 alert(this.WRONG_ROW_DATA_INPUT);
-                /* set old data to row */
+                /* If an error occurred during verification - set old data to this row. */
                 this.successPageConfigurer.setRowData(editButton, this.rowDataBeforeUpdate);
                 return;
             }
 
-            /* In order to reduce the load on the server, we check, if a POST request really needed to be executed.
-             * Of course, there is no need to execute a POST request if we didn't change agenda. */
+            /* In order to reduce the load on the server, we check, if a <pre> POST </pre> request
+             * really needed to be executed.
+             * Of course, there is no need to execute a POST request if we didn't anything. */
             if (this.rowDataBeforeUpdate.equals(newRowData)) {
                 alert('No update needed - you changed nothing!');
                 this.successPageConfigurer.setRowData(editButton, newRowData);
@@ -65,17 +67,17 @@ export default class SuccessPageManager {
             /* if everything is fine, execute an update POST request. */
             this.successPagePostRequestExecutor
                 .executeUpdateAgendaByItsIdPostRequest(agendaId, newRowData)
-                /* If POST request proceeded normally, then...
-                 * <pre> jqXHR </pre> is an analogue to ResponseEntity. */
-                .done((jqXHR) => {
-                        alert('Your agenda has been successfully updated.');
+                /* If the <pre> POST </pre> request proceeded normally, then... */
+                .done((response) => {
+                        /* ...alert the response message and set just inputted data to the row. */
+                        alert(response);
                         this.successPageConfigurer.setRowData(editButton, newRowData);
                     }
                 )
-                /* If POST request fails, then...
-                 * <pre> jqXHR </pre> is an analogue to ResponseEntity. */
-                .fail((jqXHR) => {
-                        alert('An error occurred while updating your agenda.');
+                /* If the <pre> POST </pre> request fails, then... */
+                .fail((response) => {
+                        /* ...alert the response message and set just inputted data to the row. */
+                        alert(response.responseText);
                         this.successPageConfigurer.setRowData(editButton, this.rowDataBeforeUpdate);
                     }
                 );
@@ -85,19 +87,20 @@ export default class SuccessPageManager {
     onDeleteButtonClicked(agendaId, deleteButton) {
         this.successPagePostRequestExecutor
             .executeDeleteAgendaByItsIdPostRequest(agendaId, deleteButton)
-            /* If POST request proceeded normally, then...
-             * <pre> jqXHR </pre> is an analogue to ResponseEntity. */
-            .done((jqXHR) => {
-                    alert('Your agenda has successfully been deleted.');
+            /* If the <pre> POST </pre> request proceeded normally, then... */
+            .done((response) => {
+                    /* ...alert the response message and delete the row. */
+                    alert(response);
                     this.successPageConfigurer.deleteRowFromTable(deleteButton);
                 }
             )
-            /* If POST request fails, then...
-             * <pre> jqXHR </pre> is an analogue to ResponseEntity. */
-            .fail((jqXHR) => {
-                    alert('An error occurred while deleting your agenda.');
+            /* If the <pre> POST </pre> request fails, then... */
+            .fail((response) => {
+                /* ...else, <pre> response </pre> gets wrapped into the <pre> jqHXR </pre> object,
+                 * and we just alert the <pre> responseText </pre>. */
+                    alert(response.responseText);
                 }
-            )
+            );
     }
 
     onAddButtonClicked(username) {
@@ -115,26 +118,27 @@ export default class SuccessPageManager {
                 try {
                     Verifier.verifyRowData(rowData);
                 } catch (e) {
+                    /* If an error occurred during verification, alert a message and return. */
                     alert(this.WRONG_ROW_DATA_INPUT);
                     return;
                 }
 
                 /* ...if row data is verified, we can save it, so, we execute a
-                 * <pre> '/saveNewAgenda' </pre> POST request. */
+                 * <pre> '/saveNewAgenda' </pre> <pre> POST </pre> request. */
                 this.successPagePostRequestExecutor
                     .executeSaveNewAgendaPostRequest(username, rowData)
-                    /* If POST request proceeded normally, then...
-                     * <pre> jqXHR </pre> is an analogue to ResponseEntity. */
-                    .done((jqXHR) => {
-                            alert('Your agenda has been successfully saved.');
+                    /* If the <pre> POST </pre> request proceeded normally, then... */
+                    .done((response) => {
+                            /* ...alert the response message and save new row to the table. */
+                            alert(response);
                             this.successPageConfigurer
                                 .afterSuccessfullySavingNewAgenda(saveButtonInLastRow, rowData);
                         }
                     )
-                    /* If POST request fails, then...
-                     * <pre> jqXHR </pre> is an analogue to ResponseEntity. */
-                    .fail((jqXHR) => {
-                            alert('An error occurred while saving your agenda.');
+                    /* ...else, <pre> response </pre> gets wrapped into the <pre> jqHXR </pre> object,
+                     * and we just alert the <pre> responseText </pre>. */
+                    .fail(function (response) {
+                            alert(response.responseText);
                         }
                     );
             }
@@ -150,11 +154,12 @@ export default class SuccessPageManager {
         try {
             Verifier.verifyUsername(usernameForSearchingAgenda);
         } catch (e) {
+            /* If an error occurred during verification, alert a message and return. */
             alert(ALERT_WRONG_USERNAME_INPUT);
             return;
         }
 
-        /* ...if username is verified, the execute <pre>'/search'</pre> GET request. */
+        /* ...if username is verified, the execute <pre>'/search'</pre> <pre> GET </pre> request. */
         this.commonGetRequestsExecutor
             .executeSearchSomeOnesAgendaGetRequest(usernameForSearchingAgenda);
     }
@@ -168,6 +173,7 @@ export default class SuccessPageManager {
         try {
             Verifier.verifyUsername(usernameForBanning);
         } catch (e) {
+            /* If an error occurred during verification, alert a message and return. */
             alert(ALERT_WRONG_USERNAME_INPUT);
             return;
         }
@@ -175,12 +181,15 @@ export default class SuccessPageManager {
         /* ...if username is verified, the execute <pre> '/ban' </pre> <pre> POST </pre> request. */
         this.successPageAdminPostRequestExecutor
             .executeBanUserPostRequest(usernameForBanning)
-            .done((jqXHR) => {
-                    alert('User, having username: ' + usernameForBanning + ' has been successfully banned.');
+            /* If this request was processed, then we just alert <pre> response </pre>,... */
+            .done(function (response) {
+                    alert(response);
                 }
             )
-            .fail((jqXHR) => {
-                alert('An error occurred while banning a user.');
+            /* ...else, <pre> response </pre> gets wrapped into the <pre> jqHXR </pre> object,
+             * and we just alert the <pre> responseText </pre>. */
+            .fail(function (response) {
+                    alert(response.responseText);
                 }
             );
 
@@ -199,15 +208,18 @@ export default class SuccessPageManager {
             return;
         }
 
-        /* ...if username is verified, the execute <pre> '/unban' </pre> GET request. */
+        /* ...if username is verified, the execute <pre> '/unban' </pre> <pre> POST </pre> request. */
         this.successPageAdminPostRequestExecutor
             .executeUnbanUserPostRequest(usernameForUnbanning)
-            .done((jqXHR) => {
-                    alert('User, having username: ' + usernameForUnbanning + ' has been successfully unbanned.');
+            /* If this request was processed, then we just alert <pre> response </pre>,... */
+            .done(function (response) {
+                    alert(response);
                 }
             )
-            .fail((jqXHR) => {
-                    alert('An error occurred while unbanning a user.');
+            /* ...else, <pre> response </pre> gets wrapped into the <pre> jqHXR </pre> object,
+             * and we just alert the <pre> responseText </pre>. */
+            .fail(function (response) {
+                    alert(response.responseText);
                 }
             );
     }

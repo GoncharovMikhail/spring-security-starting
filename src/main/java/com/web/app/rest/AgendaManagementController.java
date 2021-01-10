@@ -31,7 +31,7 @@ public class AgendaManagementController {
      * This method saves new {@code AgendaEntity}.
      *
      * @param saveNewAgendaRequest - better see it' javaDoc - {@link com.web.app.model.SignUpRequestDTO}
-     * @return response status, wrapped in {@link ResponseEntity}
+     * @return response message and status code, wrapped in {@link ResponseEntity<String>}.
      */
     @PostMapping("/saveNewAgenda")
     public ResponseEntity<String> saveNewAgenda(@RequestBody SaveNewAgendaRequestDTO saveNewAgendaRequest) {
@@ -44,7 +44,7 @@ public class AgendaManagementController {
      * This method updates an {@code AgendaEntity} by <strong>it's</strong> {@code id}.
      *
      * @param updateAgendaRequest - better see it' javaDoc - {@link com.web.app.model.SignUpRequestDTO}
-     * @return response status, wrapped in {@link ResponseEntity}
+     * @return response message and status code, wrapped in {@link ResponseEntity<String>}.
      */
     @PostMapping("/updateAgendaByItsId")
     public ResponseEntity<String> updateAgendaById(@RequestBody UpdateAgendaByItsIdRequestDTO updateAgendaRequest) {
@@ -63,7 +63,7 @@ public class AgendaManagementController {
      *             }
      *             }
      *             , it will be casted to the {@code Map<String, String>}.
-     * @return response status, wrapped in {@link ResponseEntity}
+     * @return response message and status code, wrapped in {@link ResponseEntity<String>}.
      */
     @PostMapping(value = "/deleteAgendaByItsId")
     public ResponseEntity<String> deleteAgendaByItsId(@RequestBody Map<String, String> json) {

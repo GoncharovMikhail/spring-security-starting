@@ -33,13 +33,13 @@ export default class SignUpPageManager {
          * <pre> POST </pre> request. */
         this.signUpPagePostRequestsExecutor
             .executeRegistrationPostRequest(registrationData)
-            .done((jqXHR) => {
-                    alert('You\'ve been successfully signed up');
+            .done((response) => {
+                    alert(response);
                     window.location.href = '/login';
                 }
             )
-            .fail(() => {
-                    alert('An error occurred');
+            .fail((response) => {
+                    alert(response.responseText);
                 }
             );
     }

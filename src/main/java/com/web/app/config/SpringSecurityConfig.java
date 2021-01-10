@@ -148,7 +148,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(
                         "/welcome",
                         "/signup",
-                        "/wrongusername"
+                        "/exception"
                 ).permitAll()
 
                 /* Define <pre> GET </pre> api, available to <strong>all</strong> users. */
@@ -178,7 +178,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 /* Invalidate current <pre> http session </pre>. */
                 .invalidateHttpSession(true)
 
-                /* Invalidate all <pre> cookies </pre>, storing user's data. */
+                /* Invalidate a <pre> cookie </pre>, storing user's data. */
                 .deleteCookies("JSESSIONID")
 
                 /* Define the url right after logging out. */

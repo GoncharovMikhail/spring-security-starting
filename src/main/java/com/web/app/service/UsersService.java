@@ -13,7 +13,7 @@ import org.springframework.data.repository.query.Param;
  *         Saving new user in the database,
  *     </li>
  *     <li>
- *         Loading user by username
+ *         Loading user by username,
  *     </li>
  *     <li>
  *         ...

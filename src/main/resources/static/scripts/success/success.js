@@ -6,13 +6,13 @@ import SuccessPageManager from "./components/SuccessPageManager.js";
  * @type {SuccessPageManager} - an operation manager. It manages:
  * <ul>
  *     <li>
- *         <pre> DOM </pre> elements
+ *         <pre> DOM </pre> elements,
  *     </li>
  *     <li>
- *         <pre> GET </pre> requests on this page
+ *         <pre> GET </pre> requests on this page,
  *     </li>
  *     <li>
- *         <pre> POST </pre> requests on this page
+ *         <pre> POST </pre> requests on this page.
  *     </li>
  * </ul>
  */

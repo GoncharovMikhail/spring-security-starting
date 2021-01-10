@@ -24,7 +24,7 @@ import com.web.app.model.UpdateAgendaByItsIdRequestDTO;
 public interface AgendaService {
 
     /**
-     * This method saves new agenda to the database
+     * This method saves new agenda to the database.
      *
      * @param saveNewAgendaRequest wrapper for data, like day, time, note, ...
      */

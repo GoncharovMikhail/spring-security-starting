@@ -67,18 +67,22 @@ public class UsersManagementController {
      * This method registers a new user.
      *
      * @param signUpRequest - better see it's javaDoc - {@link SignUpRequestDTO}.
-     * @return response status, wrapped in {@link ResponseEntity}.
+     * @return response message and status code, wrapped in {@link ResponseEntity<String>}.
      */
     @PostMapping("/registration")
-    public ResponseEntity<?> registration(@RequestBody SignUpRequestDTO signUpRequest) {
+    public ResponseEntity<String> registration(@RequestBody SignUpRequestDTO signUpRequest) {
         try {
             usersService.saveUserInDatabase(signUpRequest);
-            return new ResponseEntity(HttpStatus.OK);
+
+            return new ResponseEntity<>("You have been successfully registered", HttpStatus.OK);
         } catch (UserAlreadyExistsException e) {
             e.printStackTrace();
             log.info("IN {}, registration(@RequestBody SignUpRequestDTO signUpRequest) method," +
                     " a UserAlreadyExistsException occurred", this.getClass());
-            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+
+            return new ResponseEntity<>("Couldn't register your account - " +
+                    "user having such email and username already exists",
+                    HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

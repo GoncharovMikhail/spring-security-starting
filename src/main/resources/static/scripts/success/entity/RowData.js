@@ -1,16 +1,16 @@
 /** A wrapper class, containing private fields:
  * <ul>
  *     <li>
- *         day
+ *         day,
  *     </li>
  *     <li>
- *         time
+ *         time,
  *     </li>
  *     <li>
- *         note
+ *         note,
  *     </li>
  *     <li>
- *         accessible
+ *         accessible.
  *     </li>
  * </ul>
  */
@@ -56,6 +56,9 @@ export default class RowData {
      * <pre> otherData </pre>, else <pre> false </pre>.
      */
     equals(otherData) {
+        if (otherData == null) {
+            return false;
+        }
         if (!(otherData instanceof RowData)) {
             return false;
         } else {
