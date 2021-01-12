@@ -19,6 +19,12 @@ public final class UsersDetailsUtils {
         throw new AssertionError(this.getClass() + "can't be instantiated");
     }
 
+    /**
+     * This method converts(maps) an {@code Entity} to {@link UsersDetails}.
+     *
+     * @param usersEntity entity to map.
+     * @return {@code UsersDetails} instance
+     */
     public static UsersDetails mapEntityToUsersDetails(UsersEntity usersEntity) {
         return new UsersDetails(
                 usersEntity.isEnabled(),
@@ -28,6 +34,12 @@ public final class UsersDetailsUtils {
         );
     }
 
+    /**
+     * This method converts(maps) {@link Set<RolesEntity>} to {@link Set<GrantedAuthority>}.
+     *
+     * @param rolesEntities set to map.
+     * @return {@link Set<GrantedAuthority>}.
+     */
     private static Set<GrantedAuthority> mapRolesToGrantedAuthorities(Set<RolesEntity> rolesEntities) {
         return rolesEntities.stream()
                 .map(rolesEntity -> new SimpleGrantedAuthority(rolesEntity.getRole()))

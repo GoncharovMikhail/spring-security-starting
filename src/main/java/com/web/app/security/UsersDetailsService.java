@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
 /**
  * An implementation of {@link UserDetailsService}.
@@ -24,12 +25,13 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
  *
  * @see SpringSecurityConfig#passwordEncoder() documentation - there are some additional details there.
  */
-@org.springframework.stereotype.Service
+@Service
 /* @Slf4j generates a logger field(via lombok). */
 @Slf4j
 public class UsersDetailsService implements UserDetailsService {
 
-    /** A service, which will load user from the database
+    /**
+     * A service, which will load user from the database
      *
      * @see UsersService#loadUserByUsername(String)
      */

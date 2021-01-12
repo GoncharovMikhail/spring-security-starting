@@ -1,10 +1,8 @@
 package com.web.app.entity;
 
 import lombok.*;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.time.DayOfWeek;
 
 //todo лучше бы перечитать документации ко всем энтити-классасм - переписывал по многу раз, так и не пришел к единому выводу
