@@ -1,7 +1,7 @@
 package com.web.app.service;
 
 import com.web.app.exceptions.WrongUsernameException;
-import com.web.app.service.exceptions.CantBanAdminException;
+import com.web.app.exceptions.CantBanAdminException;
 
 /**
  * An interface, representing all necessary methods for <strong>admins</strong>

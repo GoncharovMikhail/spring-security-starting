@@ -29,9 +29,10 @@ import java.util.Properties;
  * https://docs.spring.io/spring-framework/docs/4.0.4.RELEASE/javadoc-api/org/springframework/context/annotation/Configuration.html
  */
 @Configuration
-/* @EnableJpaRepositories enables JPA repositories. Basically, makes Spring data work. */
+/* @EnableJpaRepositories enables JPA repositories. Basically, makes Spring data work.
+ * You can see more details in AgendaRepository, RolesRepository and UsersRepository classes documentations. */
 @EnableJpaRepositories(
-        /* Specify a package where JpaRepositories may be used (maybe ?).
+        /* Specify base package to scan for annotated components (annotated with <pre> @Repository </pre>).
          * Set the root package name not to restrict the availability zone. */
         basePackages = "com.web.app",
         /* Specify bean definition name for <pre> EntityManagerFactory </pre>

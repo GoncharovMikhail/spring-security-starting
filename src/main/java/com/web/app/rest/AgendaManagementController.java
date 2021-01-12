@@ -7,16 +7,21 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 
+//todo мне не нравится документация ни к одному из контроллеров. Я нигде не написал про диспатчерсервлет,
+// что вообще такое сервлет, что такое контейнер сервлетов(томкат) и как оно работает изнутри.
+// но расписывать все это дело слишком долго + с ума сойти можно. Как быть?
+
 /**
- * A {@link org.springframework.stereotype.Controller} to handle requests for managing agendas.
+ * A {@link RestController} to handle requests for managing agendas.
  */
-@Controller
+@RestController
+/* @Slf4j generates a logger field(via lombok). */
 @Slf4j
 public class AgendaManagementController {
 

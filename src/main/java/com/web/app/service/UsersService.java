@@ -2,8 +2,7 @@ package com.web.app.service;
 
 import com.web.app.entity.UsersEntity;
 import com.web.app.model.SignUpRequestDTO;
-import com.web.app.service.exceptions.UserAlreadyExistsException;
-import org.springframework.data.repository.query.Param;
+import com.web.app.exceptions.UserAlreadyExistsException;
 
 /**
  * An interface, representing users data management operations,

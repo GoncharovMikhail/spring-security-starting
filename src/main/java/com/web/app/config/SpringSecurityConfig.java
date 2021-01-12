@@ -98,8 +98,12 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder(passwordEncoderStrength);
     }
 
+    //todo мне не нарвится тут документация. А более детально я и сам не знаю.
+
     /**
      * This method does lots of security stuff. Better explain step-by-step in the code.
+     * Also, you can find out many interesting things about {@code Spring Security} here:
+     * https://www.youtube.com/watch?v=her_7pa0vrg&t=1552s
      *
      * @param httpSecurity http to configure.
      */

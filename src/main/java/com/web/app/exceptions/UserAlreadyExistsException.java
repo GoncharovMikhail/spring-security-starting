@@ -1,4 +1,4 @@
-package com.web.app.service.exceptions;
+package com.web.app.exceptions;
 
 import com.web.app.service.UsersService;
 

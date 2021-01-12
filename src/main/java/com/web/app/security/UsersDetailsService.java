@@ -25,6 +25,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
  * @see SpringSecurityConfig#passwordEncoder() documentation - there are some additional details there.
  */
 @org.springframework.stereotype.Service
+/* @Slf4j generates a logger field(via lombok). */
 @Slf4j
 public class UsersDetailsService implements UserDetailsService {
 

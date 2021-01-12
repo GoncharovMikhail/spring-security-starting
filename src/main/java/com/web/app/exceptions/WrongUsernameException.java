@@ -10,6 +10,7 @@ package com.web.app.exceptions;
  * @see com.web.app.service.AdminService
  * @see com.web.app.service.impl.AdminServiceImpl
  * @see com.web.app.rest.AdminController
+ * @see com.web.app.rest.CommonTemplatesController#search(String)
  */
 public class WrongUsernameException extends Exception {
 

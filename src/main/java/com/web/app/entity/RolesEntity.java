@@ -8,6 +8,8 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.Set;
 
+//todo лучше бы перечитать документации ко всем энтити-классасм - переписывал по многу раз, так и не пришел к единому выводу
+
 /**
  * An entity class, representing roles (the "roles" table).
  * <p>

@@ -28,6 +28,8 @@ export default class SignUpPageManager {
             return;
         }
 
+        //todo тут проблема. Как фиксить?
+
         /* ...if everything is fine,
          * execute a <pre> '/registration' </pre>
          * <pre> POST </pre> request. */

@@ -6,7 +6,7 @@ import com.web.app.model.SignUpRequestDTO;
 import com.web.app.repository.RolesRepository;
 import com.web.app.repository.UsersRepository;
 import com.web.app.service.UsersService;
-import com.web.app.service.exceptions.UserAlreadyExistsException;
+import com.web.app.exceptions.UserAlreadyExistsException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -33,7 +33,7 @@ import java.util.Set;
  * <strong>Note:</strong>: write the name of a property (in the <pre> @Value("...") </pre> annotation)
  * in <pre> ${...} </pre> - otherwise, property won't be injected to the annotated field. */
 @PropertySource("properties/service/service.properties")
-/* @Slf4j is used for logging */
+/* @Slf4j generates a logger field(via lombok). */
 @Slf4j
 public class UsersServiceImpl implements UsersService {
 

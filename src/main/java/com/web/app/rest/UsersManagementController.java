@@ -1,30 +1,35 @@
 package com.web.app.rest;
 
 import com.web.app.entity.AgendaEntity;
+import com.web.app.exceptions.UserAlreadyExistsException;
 import com.web.app.model.SignUpRequestDTO;
 import com.web.app.rest.util.AgendaUtil;
 import com.web.app.service.UsersService;
-import com.web.app.service.exceptions.UserAlreadyExistsException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashSet;
 import java.util.Set;
 
+//todo мне не нравится документация ни к одному из контроллеров. Я нигде не написал про диспатчерсервлет,
+// что вообще такое сервлет, что такое контейнер сервлетов(томкат) и как оно работает изнутри.
+// но расписывать все это дело слишком долго + с ума сойти можно. Как быть?
+
 /**
- * A {@link Controller} class, to handle <pre> GET </pre> and <pre> POST </pre> requests,
+ * A {@link RestController} class, to handle <pre> GET </pre> and <pre> POST </pre> requests,
  * permitted to <strong>all</strong> users. Mostly for handling requests, related to users.
  */
-@Controller
+@RestController
+/* @Slf4j generates a logger field(via lombok). */
 @Slf4j
 public class UsersManagementController {
 
@@ -74,7 +79,8 @@ public class UsersManagementController {
         try {
             usersService.saveUserInDatabase(signUpRequest);
 
-            return new ResponseEntity<>("You have been successfully registered", HttpStatus.OK);
+            return new ResponseEntity<>("You have been successfully registered",
+                    HttpStatus.OK);
         } catch (UserAlreadyExistsException e) {
             e.printStackTrace();
             log.info("IN {}, registration(@RequestBody SignUpRequestDTO signUpRequest) method," +

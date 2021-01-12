@@ -1,8 +1,8 @@
 package com.web.app.rest;
 
-import com.web.app.service.AdminService;
+import com.web.app.exceptions.CantBanAdminException;
 import com.web.app.exceptions.WrongUsernameException;
-import com.web.app.service.exceptions.CantBanAdminException;
+import com.web.app.service.AdminService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,11 +13,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 
+//todo мне не нравится документация ни к одному из контроллеров. Я нигде не написал про диспатчерсервлет,
+// что вообще такое сервлет, что такое контейнер сервлетов(томкат) и как оно работает изнутри.
+// но расписывать все это дело слишком долго + с ума сойти можно. Как быть?
+
 /**
- * A {@link org.springframework.stereotype.Controller} to handle <strong>admin's</strong>
+ * A {@link RestController} to handle <strong>admin's</strong>
  * requests <strong>only</strong>.
  */
 @RestController
+/* @Slf4j generates a logger field(via lombok). */
 @Slf4j
 public class AdminController {
 
@@ -36,7 +41,8 @@ public class AdminController {
      */
     @PostMapping("/ban")
     public ResponseEntity<String> ban(@RequestBody Map<String, String> json) {
-        String username = json.get("username");
+        final String username = json.get("username");
+
         try {
             adminService.banUserByUsername(username);
 
@@ -46,7 +52,8 @@ public class AdminController {
             log.info("In " + this.getClass() + ", ban(@RequestBody Map<String, String> json) method - " +
                     "couldn't ban user. WrongUsernameException occurred");
 
-            return new ResponseEntity<>("There is no user having specified username", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("There is no user having specified username",
+                    HttpStatus.INTERNAL_SERVER_ERROR);
         } catch (CantBanAdminException e) {
             e.printStackTrace();
             log.info("In " + this.getClass() + ", ban(@RequestBody Map<String, String> json) method - " +
@@ -65,7 +72,8 @@ public class AdminController {
      */
     @PostMapping("/unban")
     public ResponseEntity<String> unBan(@RequestBody Map<String, String> json) {
-        String username = json.get("username");
+        final String username = json.get("username");
+
         try {
             adminService.unBanUserByUsername(username);
 
@@ -76,8 +84,8 @@ public class AdminController {
             log.info("In " + this.getClass() + ", unBan(@RequestBody Map<String, String> json) method - " +
                     "couldn't ban user. WrongUsernameException occurred");
 
-            return new ResponseEntity<>("There is no user having specified username", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("There is no user having specified username",
+                    HttpStatus.INTERNAL_SERVER_ERROR);
         }
-
     }
 }

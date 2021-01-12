@@ -7,6 +7,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+//todo к спрингдате тоже такая себе документация(лично мне не особо нравится) - слишком поверхностная.
+// или все-таки пойдет?
+
 /**
  * A {@link Repository} component, to interact with data in the "roles" table.
  * <p>
