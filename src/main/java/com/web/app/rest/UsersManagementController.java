@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,8 +34,45 @@ import java.util.Set;
 @Slf4j
 public class UsersManagementController {
 
+    /**
+     * A service, which will be handle user's requests.
+     */
     private final UsersService usersService;
 
+    /**
+     * Autowire this service.
+     * <p>
+     * An instance of a class, annotated with
+     * <ul>
+     *     <li>
+     *         {@link Service},
+     *     </li>
+     *     <li>
+     *         {@link org.springframework.stereotype.Repository},
+     *     </li>
+     * </ul>
+     * or any other annotation,
+     * which contains a {@link org.springframework.stereotype.Component} inside itself,
+     * will be created and stored in so-called "IOC-container", meaning,
+     * {@code Spring} will create an instance of a class,
+     * configuring it how by the way (for example, inject another component
+     * or inject a field value with the {@link org.springframework.context.annotation.PropertySource} and
+     * {@link org.springframework.beans.factory.annotation.Value} annotations) -
+     * {@link org.springframework.beans.factory.config.BeanPostProcessor} magic going under the hood
+     * (well, not quite magic. If you want to learn more about {@code Spring} internals - better
+     * watch some of <i>Eugeniy Borisov's</i> talks on youtube).
+     * <strong>only once</strong>,
+     * i.e., that instance will be a <strong>singleton</strong> by default,
+     * but we can configure this if needed.
+     * <p>
+     * {@link Autowired} above a method(a constructor as well) means that all method's parameters
+     * will be injected from the "IOC-container".
+     * <p>
+     * <strong>NOTE:</strong> we can also {@code Autowire} components by putting {@link Autowired} above
+     * the field we want to {@code Autowire}, but constructor injection is preferred.
+     * <p>
+     * <strong>NOTE:</strong> prefer inject by interface, not an implementation-class.
+     */
     @Autowired
     public UsersManagementController(UsersService usersService) {
         this.usersService = usersService;
