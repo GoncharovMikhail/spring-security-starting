@@ -51,7 +51,7 @@ public class UsersDetailsService implements UserDetailsService {
      *     </li>
      * </ul>
      * or any other annotation,
-     * which contains a {@link org.springframework.stereotype.Component} inside itself,
+     * which contains a {@link org.springframework.stereotype.Component} inside itself, or even beans from class, annotated with {@link org.springframework.stereotype.Component}
      * will be created and stored in so-called "IOC-container", meaning,
      * {@code Spring} will create an instance of a class,
      * configuring it how by the way (for example, inject another component

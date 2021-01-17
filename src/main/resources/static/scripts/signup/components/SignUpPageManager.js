@@ -22,7 +22,7 @@ export default class SignUpPageManager {
 
         /* ...try to verify it ...*/
         try {
-            Verifier.verifyRegistrationData(registrationData)
+            Verifier.verifyRegistrationData(registrationData);
         } catch (e) {
             alert('Wrong input');
             return;

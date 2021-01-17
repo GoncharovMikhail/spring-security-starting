@@ -25,7 +25,7 @@ import java.util.Properties;
  * <p>
  * {@link org.springframework.transaction.TransactionManager} bean is also created and configured in this class.
  * <p>
- * A documentation of {@link Configuration} annotation:
+ * A documentation of {@link org.springframework.stereotype.Component} annotation:
  * https://docs.spring.io/spring-framework/docs/4.0.4.RELEASE/javadoc-api/org/springframework/context/annotation/Configuration.html
  */
 @Configuration
