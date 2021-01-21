@@ -48,13 +48,13 @@ public class AdminServiceImpl implements AdminService {
      * watch some of <i>Eugeniy Borisov's</i> talks on youtube).
      * <strong>only once</strong>,
      * i.e., that instance will be a <strong>singleton</strong> by default,
-     * but we can configure this if needed.
+     * but I can configure this if needed.
      * <p>
      * {@link Autowired} above a method(a constructor as well) means that all method's parameters
      * will be injected from the "IOC-container".
      * <p>
-     * <strong>NOTE:</strong> we can also {@code Autowire} components by putting {@link Autowired} above
-     * the field we want to {@code Autowire}, but constructor injection is preferred.
+     * <strong>NOTE:</strong> I can also {@code Autowire} components by putting {@link Autowired} above
+     * the field I want to {@code Autowire}, but constructor injection is preferred.
      * <p>
      * <strong>NOTE:</strong> prefer inject by interface, not an implementation-class.
      */
@@ -101,8 +101,8 @@ public class AdminServiceImpl implements AdminService {
             /* Nothing to do then - just exit. */
             return;
         }
-        /* Now we are sure, that user, having specified username, exists and he{she} wasn't banned before,
-         * then, we just ban this user. */
+        /* Now I are sure, that user, having specified username, exists and he{she} wasn't banned before,
+         * then, I just ban this user. */
         usersService.enableOrDisableUser(false, username);
 
         log.info("IN " + this.getClass()
@@ -135,8 +135,8 @@ public class AdminServiceImpl implements AdminService {
             /* Nothing to do then. */
             return;
         }
-        /* Now we are sure, that user, having specified username, exists and this user is banned,
-         * then we just unban this user. */
+        /* Now I are sure, that user, having specified username, exists and this user is banned,
+         * then I just unban this user. */
         usersService.enableOrDisableUser(true, username);
 
         log.info("IN " + this.getClass()

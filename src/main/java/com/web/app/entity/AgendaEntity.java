@@ -5,12 +5,10 @@ import lombok.*;
 import javax.persistence.*;
 import java.time.DayOfWeek;
 
-//todo лучше бы перечитать документации ко всем энтити-классасм - переписывал по многу раз, так и не пришел к единому выводу
-
 /**
  * An entity class, representing user's agenda (the "agenda" table).
  * <p>
- * The following annotations just makes this class an {@code entity} - see entity-class requirements here:
+ * The following annotations just makes this class an {@code entity} - I learned about entity-class requirements here:
  * https://docs.oracle.com/cd/E19798-01/821-1841/bnbqb/index.html
  * <p>
  * {@link Getter} and {@link Setter} are used for creating getters and setters for all class's fields
@@ -24,7 +22,7 @@ import java.time.DayOfWeek;
  * <pre> @NoArgsConstructor </pre> generates an empty constructor.
  * It is used to for creating a new instance of a class using reflection (<pre> Class<T>.newInstance() </pre>)
  * by persistence provider(<pre> Hibernate </pre>). Also used for deserialization of a <pre> JSON </pre>.
- * Few more details here:
+ * I learned about empty constructors for <pre> entity </pre> classes here:
  * https://stackoverflow.com/questions/2935826/why-does-hibernate-require-no-argument-constructor */
 @NoArgsConstructor
 @AllArgsConstructor
@@ -63,7 +61,7 @@ public class AgendaEntity extends BaseEntity {
      * <p>
      * {@link JoinColumn} annotation specifies a column's name for joining an entity.
      * <p>
-     * Type of this field is {@link UsersEntity} - thus we specify relationship between <strong>entities</strong>.
+     * Type of this field is {@link UsersEntity} - thus I specify relationship between <strong>entities</strong>.
      */
     @ManyToOne
     @JoinColumn(name = "usersid")

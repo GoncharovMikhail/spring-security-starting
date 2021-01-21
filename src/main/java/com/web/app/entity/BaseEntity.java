@@ -9,8 +9,6 @@ import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import java.util.Date;
 
-//todo лучше бы перечитать документации ко всем энтити-классасм - переписывал по многу раз, так и не пришел к единому выводу
-
 /**
  * An abstract class, containing fields {@link #created} and {@link #updated}.
  * <p>

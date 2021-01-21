@@ -51,13 +51,13 @@ public class AgendaServiceImpl implements AgendaService {
      * watch some of <i>Eugeniy Borisov's</i> talks on youtube).
      * <strong>only once</strong>,
      * i.e., that instance will be a <strong>singleton</strong> by default,
-     * but we can configure this if needed.
+     * but I can configure this if needed.
      * <p>
      * {@link Autowired} above a method(a constructor as well) means that all method's parameters
      * will be injected from the "IOC-container".
      * <p>
-     * <strong>NOTE:</strong> we can also {@code Autowire} components by putting {@link Autowired} above
-     * the field we want to {@code Autowire}, but constructor injection is preferred.
+     * <strong>NOTE:</strong> I can also {@code Autowire} components by putting {@link Autowired} above
+     * the field I want to {@code Autowire}, but constructor injection is preferred.
      * <p>
      * <strong>NOTE:</strong> prefer inject by interface, not an implementation-class.
      */
@@ -74,7 +74,7 @@ public class AgendaServiceImpl implements AgendaService {
      * will be assigned to this agenda automatically:
      * see {@link AgendaEntity#id} - it is annotated with
      * {@code @GeneratedValue(strategy = GenerationType.IDENTITY)},
-     * but any other attributes we should assign manually.
+     * but any other attributes I should assign manually.
      *
      * @see AgendaService#saveNewAgenda(SaveNewAgendaRequestDTO) for additional details.
      */

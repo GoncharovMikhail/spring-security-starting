@@ -11,12 +11,13 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.Map;
 
 
-//todo мне не нравится документация ни к одному из контроллеров. Я нигде не написал про диспатчерсервлет,
-// что вообще такое сервлет, что такое контейнер сервлетов(томкат) и как оно работает изнутри.
-// но расписывать все это дело слишком долго + с ума сойти можно. Как быть?
-
 /**
  * This controller handles exceptions, which occurred in other controller's methods.
+ * <p>
+ * A {@code Controller} is a {@code component}, handling user's requests.
+ * <p>
+ * I learned about {@code Controllers} here:
+ * https://www.baeldung.com/spring-controllers
  */
 @ControllerAdvice
 /* @Slf4j generates a logger field(via lombok). */

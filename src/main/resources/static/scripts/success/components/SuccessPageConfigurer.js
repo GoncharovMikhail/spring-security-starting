@@ -45,7 +45,7 @@ export default class SuccessPageConfigurer {
 
     #configureEditableElement(editableElement) {
         if ($(editableElement).attr('name') === 'day') {
-            /* Read the 'DAY OF WEEK' cell's text, it may be null, if we read it from a new-added row */
+            /* Read the 'DAY OF WEEK' cell's text, it may be null, if I read it from a new-added row */
             let dayBeforeUpdate = $(editableElement).text();
 
             /* Create an <pre> <select...></select> </pre> element */
@@ -60,8 +60,8 @@ export default class SuccessPageConfigurer {
                     option.text = DAY.toUpperCase();
 
                     /* Set default option selected to the one which was set before,
-                     * <strong>NOTE:</strong> if we add a new row to the table, there is no value,
-                     * which ws set before, so, we should it's nullability first */
+                     * <strong>NOTE:</strong> if I add a new row to the table, there is no value,
+                     * which ws set before, so, I should it's nullability first */
                     if (dayBeforeUpdate !== null) {
                         if (option.text === dayBeforeUpdate) {
                             $(option).attr('selected', 'selected');
@@ -82,7 +82,7 @@ export default class SuccessPageConfigurer {
         }
 
         if ($(editableElement).attr('name') === 'time') {
-            /* Read the 'TIME' cell's text, it may be null, if we read it from a new-added row */
+            /* Read the 'TIME' cell's text, it may be null, if I read it from a new-added row */
             let timeBeforeUpdate = $(editableElement).text();
 
             /* Create an <pre> <input...></input> </pre> element and set it the
@@ -97,11 +97,11 @@ export default class SuccessPageConfigurer {
             editableElement.innerHTML = cleaveFormattedInput.outerHTML;
 
             /* Cleave formats the input.
-             * <strong>NOTE:</strong> we format input AFTER setting created <pre> <input...></input> </pre>
+             * <strong>NOTE:</strong> I format input AFTER setting created <pre> <input...></input> </pre>
              * to html document.
              * Cleave works <strong>ONLY AFTER ALL ALERT_WRONG_USERNAME_INPUT ELEMENTS WERE LOADED</strong>.
              *
-             * Also, set '.' before className - thus we indicate that we select
+             * Also, set '.' before className - thus I indicate that I select
              * an element by it's class name */
             new Cleave('.' + CLEAVE_INPUT_CLASS_NAME,
                 {
@@ -121,7 +121,7 @@ export default class SuccessPageConfigurer {
 
         if ($(editableElement).attr('name') === 'accessible') {
             /* Read the <pre> "accessible" </pre> cell's text.
-             * It may be null, if we read it from a new-added row */
+             * It may be null, if I read it from a new-added row */
             let accessibleBeforeUpdate = $(editableElement).text();
 
             /* Create a <pre> <select...></select> </pre> element */
@@ -136,8 +136,8 @@ export default class SuccessPageConfigurer {
                     option.text = boolean.toUpperCase();
 
                     /* Set default option selected to the one which was set before,
-                     * <strong>NOTE:</strong> if we add a new row to the table, there is no value,
-                     * which ws set before, so, we should it's nullability first */
+                     * <strong>NOTE:</strong> if I add a new row to the table, there is no value,
+                     * which ws set before, so, I should it's nullability first */
                     if (accessibleBeforeUpdate !== null) {
                         if (option.text === accessibleBeforeUpdate.toUpperCase()) {
                             $(option).attr('selected', 'selected');

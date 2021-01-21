@@ -325,7 +325,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        // numeral formatter
 	        if (pps.numeral) {
 	            // Do not show prefix when noImmediatePrefix is specified
-	            // This mostly because we need to show user the native input placeholder
+	            // This mostly because I need to show user the native input placeholder
 	            if (pps.prefix && pps.noImmediatePrefix && value.length === 0) {
 	                pps.result = '';
 	            } else {

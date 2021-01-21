@@ -17,10 +17,10 @@ import java.util.Map;
  * {@link com.web.app.rest.AgendaManagementController#saveNewAgenda(SaveNewAgendaRequestDTO)}).
  * But the requirement is that <strong>all</strong> fields from <pre> POST </pre> request and the DTO class are equal.
  * <p>
- * Also, we can get all <pre> POST </pre> request's params by writing {@code @RequestBody Map<String, String> json},
+ * Also, I can get all <pre> POST </pre> request's params by writing {@code @RequestBody Map<String, String> json},
  * and get needed fields like: {@code String neededFieldValue = json.get("neededField")},
  * like I did it here: {@link com.web.app.rest.AgendaManagementController#deleteAgendaByItsId(Map)}.
- * It is convenient, when we have a few fields to read, otherwise, it's smarter to create
+ * It is convenient, when I have a few fields to read, otherwise, it's smarter to create
  * a DTO wrapper class.
  * <p>
  * Moreover, in a DTO class there may be some necessary casts from a {@link String} to a needed class.

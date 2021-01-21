@@ -55,9 +55,9 @@ export default class SuccessPageManager {
                 return;
             }
 
-            /* In order to reduce the load on the server, we check, if a <pre> POST </pre> request
+            /* In order to reduce the load on the server, I check, if a <pre> POST </pre> request
              * really needed to be executed.
-             * Of course, there is no need to execute a POST request if we didn't anything. */
+             * Of course, there is no need to execute a POST request if I didn't anything. */
             if (this.rowDataBeforeUpdate.equals(newRowData)) {
                 alert('No update needed - you changed nothing!');
                 this.successPageConfigurer.setRowData(editButton, newRowData);
@@ -97,7 +97,7 @@ export default class SuccessPageManager {
             /* If the <pre> POST </pre> request fails, then... */
             .fail((response) => {
                 /* ...else, <pre> response </pre> gets wrapped into the <pre> jqHXR </pre> object,
-                 * and we just alert the <pre> responseText </pre>. */
+                 * and I just alert the <pre> responseText </pre>. */
                     alert(response.responseText);
                 }
             );
@@ -123,7 +123,7 @@ export default class SuccessPageManager {
                     return;
                 }
 
-                /* ...if row data is verified, we can save it, so, we execute a
+                /* ...if row data is verified, I can save it, so, I execute a
                  * <pre> '/saveNewAgenda' </pre> <pre> POST </pre> request. */
                 this.successPagePostRequestExecutor
                     .executeSaveNewAgendaPostRequest(username, rowData)
@@ -136,7 +136,7 @@ export default class SuccessPageManager {
                         }
                     )
                     /* ...else, <pre> response </pre> gets wrapped into the <pre> jqHXR </pre> object,
-                     * and we just alert the <pre> responseText </pre>. */
+                     * and I just alert the <pre> responseText </pre>. */
                     .fail(function (response) {
                             alert(response.responseText);
                         }
@@ -181,13 +181,13 @@ export default class SuccessPageManager {
         /* ...if username is verified, the execute <pre> '/ban' </pre> <pre> POST </pre> request. */
         this.successPageAdminPostRequestExecutor
             .executeBanUserPostRequest(usernameForBanning)
-            /* If this request was processed, then we just alert <pre> response </pre>,... */
+            /* If this request was processed, then I just alert <pre> response </pre>,... */
             .done(function (response) {
                     alert(response);
                 }
             )
             /* ...else, <pre> response </pre> gets wrapped into the <pre> jqHXR </pre> object,
-             * and we just alert the <pre> responseText </pre>. */
+             * and I just alert the <pre> responseText </pre>. */
             .fail(function (response) {
                     alert(response.responseText);
                 }
@@ -211,13 +211,13 @@ export default class SuccessPageManager {
         /* ...if username is verified, the execute <pre> '/unban' </pre> <pre> POST </pre> request. */
         this.successPageAdminPostRequestExecutor
             .executeUnbanUserPostRequest(usernameForUnbanning)
-            /* If this request was processed, then we just alert <pre> response </pre>,... */
+            /* If this request was processed, then I just alert <pre> response </pre>,... */
             .done(function (response) {
                     alert(response);
                 }
             )
             /* ...else, <pre> response </pre> gets wrapped into the <pre> jqHXR </pre> object,
-             * and we just alert the <pre> responseText </pre>. */
+             * and I just alert the <pre> responseText </pre>. */
             .fail(function (response) {
                     alert(response.responseText);
                 }

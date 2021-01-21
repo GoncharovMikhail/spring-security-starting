@@ -24,7 +24,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  * to a property-file to read properties from it.
  *
  * In combination with <pre> @Value("${...}") </pre>, declared above a field,
- * we can inject a value into the annotated field, which was read
+ * I can inject a value into the annotated field, which was read
  * from the specified property-file. */
 @PropertySource("properties/security/passwordencoder.properties")
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -32,7 +32,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     /* <pre> Value("${...}") </pre> gets a property's name as a parameter, then finds it in the property-file
      * (specified in <pre> @PropertySource("...") </pre> annotation), and sets it to the annotated field.
      * If there is no property, having specified name, then nothing will be injected in the field.
-     * In this case, we inject number of rounds of encoding(the log rounds to use, between 4 and 31).
+     * In this case, I inject number of rounds of encoding(the log rounds to use, between 4 and 31).
      *
      * <strong>Note:</strong>: write name of a property in <pre> ${...} </pre> - otherwise,
      * property won't be injected to the annotated field. */
@@ -111,7 +111,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
 
-                /* We can configure 3 types of user's <pre> authentication </pre>:
+                /* I can configure 3 types of user's <pre> authentication </pre>:
                  * <pre>
                  *  <ul>
                  *      <li>
@@ -125,7 +125,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                  *      </li>
                  *  </ul>
                  * </pre>
-                 * We'll use <pre> Form-based authentication </pre> because it's easy enough and most-commonly used. */
+                 * I'll use <pre> Form-based authentication </pre> because it's easy enough and most-commonly used. */
                 .httpBasic().disable()
 
                 /* Disable <pre> csrf </pre>:

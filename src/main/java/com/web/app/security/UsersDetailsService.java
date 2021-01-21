@@ -15,8 +15,8 @@ import org.springframework.stereotype.Service;
  * An implementation of {@link UserDetailsService}.
  * <p>
  * The {@link UserDetailsService} contains only one method - {@link UserDetailsService#loadUserByUsername(String)}
- * to be implemented. As far as we store all user's data in the database, we should load them from that database.
- * Particularly, in this method we should load user from the database by username.
+ * to be implemented. As far as I store all user's data in the database, I should load them from that database.
+ * Particularly, in this method I should load user from the database by username.
  * <p>
  * Whenever user logs in by providing <pre> username </pre> and a <pre> password </pre>,
  * {@code Spring Security} loads this user(by specified username) to server, then maps it to some of
@@ -62,13 +62,13 @@ public class UsersDetailsService implements UserDetailsService {
      * watch some of <i>Eugeniy Borisov's</i> talks on youtube).
      * <strong>only once</strong>,
      * i.e., that instance will be a <strong>singleton</strong> by default,
-     * but we can configure this if needed.
+     * but I can configure this if needed.
      * <p>
      * {@link Autowired} above a method(a constructor as well) means that all method's parameters
      * will be injected from the "IOC-container"
      * <p>
-     * <strong>NOTE:</strong> we can also {@code Autowire} components by putting {@link Autowired} above
-     * the field we want to {@code Autowire}, but constructor injection is preferred.
+     * <strong>NOTE:</strong> I can also {@code Autowire} components by putting {@link Autowired} above
+     * the field I want to {@code Autowire}, but constructor injection is preferred.
      */
     @Autowired
     public UsersDetailsService(UsersService usersService) {
@@ -81,7 +81,7 @@ public class UsersDetailsService implements UserDetailsService {
         UsersEntity usersEntity = usersService.loadUserByUsername(username);
 
         /* Checking, if a user, having specified name, exists.
-         * At this stage we don't care if users is banned or not.
+         * At this stage I don't care if users is banned or not.
          * Just check if he/she exists. */
         if (usersEntity == null) {
             log.info("IN " + this.getClass() +

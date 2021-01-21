@@ -20,7 +20,7 @@ import java.util.Optional;
  * <p>
  * <strong>NOTE:</strong> no implementation for this interface needed, a proxy over
  * {@link org.springframework.data.jpa.repository.support.SimpleJpaRepository} will be created,
- * including automatically generation of implementations of methods we wrote in this interface
+ * including automatically generation of implementations of methods I wrote in this interface
  * ({@code Spring Data} "understands" what kind of {@code SQL/HQL/JPQL} query is needed by method's name)
  * <p>
  * Also note, that, by default, all methods in this interface and methods in
@@ -53,7 +53,7 @@ public interface AgendaRepository extends JpaRepository<AgendaEntity, Long> {
      * with {@link Transactional} as well.
      * See 6.7.1: https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#transactions
      *
-     * @param updated    when agenda was lastly updated(at the moment we evoked this method)
+     * @param updated    when agenda was lastly updated(at the moment I evoked this method)
      * @param dayOfWeek  day
      * @param time       time
      * @param accessible accessible

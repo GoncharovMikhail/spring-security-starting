@@ -11,15 +11,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
-//todo к спрингдате тоже такая себе документация(лично мне не особо нравится) - слишком поверхностная.
-// или все-таки пойдет?
-
 /**
  * A {@link Repository} component, to interact with data in the "users" table.
  * <p>
  * <strong>NOTE:</strong> no implementation for this interface needed, a proxy over
  * {@link org.springframework.data.jpa.repository.support.SimpleJpaRepository} will be created,
- * including automatically generation of implementations of methods we wrote in this interface
+ * including automatically generation of implementations of methods I wrote in this interface
  * ({@code Spring Data} "understands" what kind of {@code SQL/HQL/JPQL} query is needed by method's name)
  * <p>
  * Also note, that, by default, all methods in this interface and methods in
@@ -34,7 +31,8 @@ public interface UsersRepository extends JpaRepository<UsersEntity, Integer> {
      * Finds a {@link UsersEntity} by the specified id.
      *
      * @param id specified id.
-     * @return an {@link Optional<UsersEntity>} - a non-null wrapper of agenda.
+     * @return an {@link Optional<UsersEntity>} - a non-null wrapper of agenda
+     * ({@code Spring Data} just requires this return-type).
      */
     Optional<UsersEntity> findById(Integer id);
 
@@ -65,7 +63,7 @@ public interface UsersRepository extends JpaRepository<UsersEntity, Integer> {
      * with {@link Transactional} as well.
      * See 6.7.1: https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#transactions
      *
-     * @param toEnable specifies, should we enable or disable user.
+     * @param toEnable specifies, should I enable or disable user.
      * @param username specified username.
      * @see com.web.app.service.impl.AdminServiceImpl#banUserByUsername(String)
      * @see com.web.app.service.impl.AdminServiceImpl#unBanUserByUsername(String)

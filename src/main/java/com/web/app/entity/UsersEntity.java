@@ -9,12 +9,10 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.Set;
 
-//todo лучше бы перечитать документации ко всем энтити-классасм - переписывал по многу раз, так и не пришел к единому выводу
-
 /**
  * An entity class, representing user (the "users" table).
  * <p>
- * The following annotations just makes this class an {@code entity} - see entity-class requirements here:
+ * The following annotations just makes this class an {@code entity} - I took entity-class requirements here:
  * https://docs.oracle.com/cd/E19798-01/821-1841/bnbqb/index.html
  * <p>
  * {@link Getter} and {@link Setter} are used for creating getters and setters for all class's fields
@@ -28,7 +26,7 @@ import java.util.Set;
  * <pre> @NoArgsConstructor </pre> generates an empty constructor.
  * It is used to for creating a new instance of a class using reflection (<pre> Class<T>.newInstance() </pre>)
  * by persistence provider(<pre> Hibernate </pre>). Also used for deserialization of a <pre> JSON </pre>.
- * Few more details here:
+ * I learned about empty constructors for <pre> entity </pre> classes here:
  * https://stackoverflow.com/questions/2935826/why-does-hibernate-require-no-argument-constructor */
 @NoArgsConstructor
 @AllArgsConstructor
@@ -148,20 +146,20 @@ public class UsersEntity extends BaseEntity {
      * For a nice explanation of what is {@code fetch}, particularly, what {@code fetch = FetchType.EAGER} means, see:
      * https://stackoverflow.com/questions/2990799/difference-between-fetchtype-lazy-and-eager-in-java-persistence-api
      * <p>
-     * In the {@link JoinTable} annotation we specify:
+     * In the {@link JoinTable} annotation I specify:
      * <ul>
      *     <li>
      *         {@code name  = "users_to_roles"} - name of the mapping(joining) table.
      *     </li>
      *     <li>
      *         {@code joinColumns}:
-     *         In the {@link JoinColumn} we specify the first column's name of the mapping table by setting
+     *         In the {@link JoinColumn} I specify the first column's name of the mapping table by setting
      *         {@code name = "usersid"}, then, which column it refers in the <strong>"users"</strong> table:
      *         {@code referencedColumnName = "id"}.
      *     </li>
      *     <li>
      *         {@code inverseJoinColumns}:
-     *         In the {@link JoinColumn} we specify the second column's name of the mapping table by setting
+     *         In the {@link JoinColumn} I specify the second column's name of the mapping table by setting
      *         {@code name = "rolesid"}, then, which column it refers in the <strong>"roles"</strong> table:
      *         {@code referencedColumnName = "id"}.
      *     </li>
@@ -186,7 +184,7 @@ public class UsersEntity extends BaseEntity {
      * https://stackoverflow.com/questions/2990799/difference-between-fetchtype-lazy-and-eager-in-java-persistence-api
      * <p>
      * Type of this field is {@link Set<AgendaEntity>} -
-     * thus we specify relationship between <strong>entities</strong>.
+     * thus I specify relationship between <strong>entities</strong>.
      */
     @OneToMany(mappedBy = "usersid", fetch = FetchType.EAGER)
     private Set<AgendaEntity> agendas;

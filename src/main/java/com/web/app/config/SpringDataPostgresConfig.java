@@ -50,7 +50,7 @@ import java.util.Properties;
  * to a property-file to read properties from it.
  *
  * In combination with <pre> @Value("${...}") </pre>, declared above a field,
- * we can inject a value into the annotated field, which was read
+ * I can inject a value into the annotated field, which was read
  * from the specified property-file.
  * <strong>Note:</strong>: write the name of a property (in the <pre> @Value("...") </pre> annotation)
  * in <pre> ${...} </pre> - otherwise, property won't be injected to the annotated field. */
@@ -86,7 +86,7 @@ public class SpringDataPostgresConfig {
      * a Spring's implementation of {@link javax.sql.DataSource}.
      * <p>
      * {@code DataSource} may provide {@link java.sql.Connection} to database,
-     * then we may create different {@code statements} ({@code SQL(HQL/JPQL)} queries, mostly)
+     * then I may create different {@code statements} ({@code SQL(HQL/JPQL)} queries, mostly)
      * on this connection:
      * <ul>
      *     <li>
@@ -104,9 +104,9 @@ public class SpringDataPostgresConfig {
      * You may see some of the differences between these types of {@code statements} here:
      * https://way2java.com/jdbc/difference-between-statement-preparedstatement-callablestatement/
      * Each of these {@code statements} has it's own features and purposes,
-     * but we can execute {@code SQL} queries on each of them.
+     * but I can execute {@code SQL} queries on each of them.
      * <p>
-     * We need to specify:
+     * I need to specify:
      * <ul>
      *     <li>
      *         {@link java.sql.Driver} class name for the database.
@@ -198,7 +198,7 @@ public class SpringDataPostgresConfig {
      * but I'd like to use {@code HibernatePersistenceProvider},
      * as I saw in <i>Eugeniy Borisov's</i> talk about {@code Spring Data}.
      * <p>
-     * Also, we specify {@code Hibernate} (JPA) properties
+     * Also, I specify {@code Hibernate} (JPA) properties
      * and packages, which contains all classes, annotated with the
      * {@link javax.persistence.Entity} annotation.
      *
@@ -231,7 +231,7 @@ public class SpringDataPostgresConfig {
      * In other words, {@code transaction} is a group of sequential commands that can be either executed in order
      * and as a whole, or not executed at all. {@code Transactions} are <strong>highly</strong> recommended to use.
      * <p>
-     * To manage {@code transactions}, we should define a {@code TransactionManager}.
+     * To manage {@code transactions}, I should define a {@code TransactionManager}.
      * {@link EnableTransactionManagement} enables annotation-driven transaction management with
      * {@link org.springframework.transaction.annotation.Transactional}.
      * <p>

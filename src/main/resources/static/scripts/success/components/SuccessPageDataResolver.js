@@ -21,9 +21,9 @@ export default class SuccessPageDataResolver {
                     }
 
                     if ($(cell).attr('name') === 'time') {
-                        /* <strong>NOTE:</strong> in this cell we placed <pre> Cleave </pre> formatted input,
-                         * so we need  to get <strong>it's</strong> value, therefore,
-                         * we write:
+                        /* <strong>NOTE:</strong> in this cell I placed <pre> Cleave </pre> formatted input,
+                         * so I need  to get <strong>it's</strong> value, therefore,
+                         * I write:
                          * <pre> ...$(cell).find('input:first').val(); </pre> */
                         time = $(cell).find('input:first').val();
                     }

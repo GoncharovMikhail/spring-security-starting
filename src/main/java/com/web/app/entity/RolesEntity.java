@@ -13,7 +13,7 @@ import java.util.Set;
 /**
  * An entity class, representing roles (the "roles" table).
  * <p>
- * The following annotations just makes this class an {@code entity} - see entity-class requirements here:
+ * The following annotations just makes this class an {@code entity} - I took entity-class requirements here:
  * https://docs.oracle.com/cd/E19798-01/821-1841/bnbqb/index.html
  * <p>
  * {@link Getter} and {@link Setter} are used for creating getters and setters for all class's fields
@@ -27,7 +27,7 @@ import java.util.Set;
  * <pre> @NoArgsConstructor </pre> generates an empty constructor.
  * It is used to for creating a new instance of a class using reflection (<pre> Class<T>.newInstance() </pre>)
  * by persistence provider(<pre> Hibernate </pre>). Also used for deserialization of a <pre> JSON </pre>.
- * Few more details here:
+ * I learned about empty constructors for <pre> entity </pre> classes here:
  * https://stackoverflow.com/questions/2935826/why-does-hibernate-require-no-argument-constructor */
 @NoArgsConstructor
 @AllArgsConstructor
@@ -78,7 +78,7 @@ public class RolesEntity extends BaseEntity {
     private String role;
 
     /**
-     * There is no field, corresponding to this field in the "roles" table, but instead, we use an additional
+     * There is no field, corresponding to this field in the "roles" table, but instead, I use an additional
      * table called "users_to_roles", as far as the relationship between the {@link RolesEntity} and the
      * {@link UsersEntity} is <strong>Many-to-many:</strong>
      * <ul>

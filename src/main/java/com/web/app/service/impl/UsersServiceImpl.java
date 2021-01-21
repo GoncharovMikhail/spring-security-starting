@@ -29,7 +29,7 @@ import java.util.Set;
  * to a property-file to read properties from it.
  *
  * In combination with <pre> @Value("${...}") </pre>, declared above a field,
- * we can inject a value into the annotated field, which was read
+ * I can inject a value into the annotated field, which was read
  * from the specified property-file.
  * <strong>Note:</strong>: write the name of a property (in the <pre> @Value("...") </pre> annotation)
  * in <pre> ${...} </pre> - otherwise, property won't be injected to the annotated field. */
@@ -71,13 +71,13 @@ public class UsersServiceImpl implements UsersService {
      * watch some of <i>Eugeniy Borisov's</i> talks on youtube).
      * <strong>only once</strong>,
      * i.e., that instance will be a <strong>singleton</strong> by default,
-     * but we can configure this if needed.
+     * but I can configure this if needed.
      * <p>
      * {@link Autowired} above a method(a constructor as well) means that all method's parameters
      * will be injected from the "IOC-container".
      * <p>
-     * <strong>NOTE:</strong> we can also {@code Autowire} components by putting {@link Autowired} above
-     * the field we want to {@code Autowire}, but constructor injection is preferred.
+     * <strong>NOTE:</strong> I can also {@code Autowire} components by putting {@link Autowired} above
+     * the field I want to {@code Autowire}, but constructor injection is preferred.
      * <p>
      * <strong>NOTE:</strong> prefer inject by interface, not an implementation-class.
      */
@@ -93,7 +93,7 @@ public class UsersServiceImpl implements UsersService {
     /**
      * Method for checking if a user can be saved in the database(in the "users" table).
      * As far as columns "username" ane "email" has the {@code unique} constraint,
-     * we can't save user, if he/she provided email or username, already existing in database.
+     * I can't save user, if he/she provided email or username, already existing in database.
      *
      * @param signUpRequest wrapper for email, username and password.
      * @return {@code true}, if user is valid for saving, else {@code false}.
@@ -104,8 +104,8 @@ public class UsersServiceImpl implements UsersService {
     }
 
     /**
-     * Each signed up user gets a default role (we save a {@link UsersEntity} instance),
-     * but to save it correctly, we need to set this {@code entity} a role (represented as {@code RolesEntity}).
+     * Each signed up user gets a default role (I save a {@link UsersEntity} instance),
+     * but to save it correctly, I need to set this {@code entity} a role (represented as {@code RolesEntity}).
      * This method takes a default role name(defaultRoleName) and returns corresponding {@code RolesEntity} instance.
      *
      * @return a Set<RolesEntity>, containing default role.
@@ -172,7 +172,7 @@ public class UsersServiceImpl implements UsersService {
                     username
             );
             /* If there are the same email/username in the database,
-             * we throw an <pre> Exception. </pre> */
+             * I throw an <pre> Exception. </pre> */
             throw new UserAlreadyExistsException(
                     "User, having username: '"
                             + username

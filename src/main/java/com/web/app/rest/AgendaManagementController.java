@@ -14,12 +14,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 
-//todo мне не нравится документация ни к одному из контроллеров. Я нигде не написал про диспатчерсервлет,
-// что вообще такое сервлет, что такое контейнер сервлетов(томкат) и как оно работает изнутри.
-// но расписывать все это дело слишком долго + с ума сойти можно. Как быть?
-
 /**
  * A {@link RestController} to handle requests for managing agendas.
+ * <p>
+ * A {@code Controller} is a {@code component}, handling user's requests.
+ * <p>
+ * I learned about {@code Controllers} here:
+ * https://www.baeldung.com/spring-controllers
  */
 @RestController
 /* @Slf4j generates a logger field(via lombok). */
@@ -52,13 +53,13 @@ public class AgendaManagementController {
      * watch some of <i>Eugeniy Borisov's</i> talks on youtube).
      * <strong>only once</strong>,
      * i.e., that instance will be a <strong>singleton</strong> by default,
-     * but we can configure this if needed.
+     * but I can configure this if needed.
      * <p>
      * {@link Autowired} above a method(a constructor as well) means that all method's parameters
      * will be injected from the "IOC-container".
      * <p>
-     * <strong>NOTE:</strong> we can also {@code Autowire} components by putting {@link Autowired} above
-     * the field we want to {@code Autowire}, but constructor injection is preferred.
+     * <strong>NOTE:</strong> I can also {@code Autowire} components by putting {@link Autowired} above
+     * the field I want to {@code Autowire}, but constructor injection is preferred.
      * <p>
      * <strong>NOTE:</strong> prefer inject by interface, not an implementation-class.
      */
