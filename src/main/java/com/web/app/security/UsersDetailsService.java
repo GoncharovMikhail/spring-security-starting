@@ -37,8 +37,6 @@ public class UsersDetailsService implements UserDetailsService {
      */
     private final UsersService usersService;
 
-    //todo мне кажется слишком неформально и заумно
-
     /** Autowire this service.
      * <p>
      * An instance of a class, annotated with

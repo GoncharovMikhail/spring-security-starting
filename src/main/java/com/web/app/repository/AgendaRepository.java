@@ -12,9 +12,6 @@ import java.time.DayOfWeek;
 import java.util.Date;
 import java.util.Optional;
 
-//todo к спрингдате тоже такая себе документация(лично мне не особо нравится) - слишком поверхностная.
-// или все-таки пойдет?
-
 /**
  * A {@link Repository} component, to interact with data in the "agenda" table.
  * <p>
