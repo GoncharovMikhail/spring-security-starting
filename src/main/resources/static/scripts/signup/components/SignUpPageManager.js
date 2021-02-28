@@ -27,9 +27,7 @@ export default class SignUpPageManager {
             alert('Wrong input');
             return;
         }
-
-        //todo тут проблема. Как фиксить?
-
+        
         /* ...if everything is fine,
          * execute a <pre> '/registration' </pre>
          * <pre> POST </pre> request. */
@@ -37,7 +35,6 @@ export default class SignUpPageManager {
             .executeRegistrationPostRequest(registrationData)
             .done((response) => {
                     alert(response);
-                    window.location.href = '/login';
                 }
             )
             .fail((response) => {
